@@ -1,19 +1,20 @@
-// import "./index.css";
 import { Route, Routes } from "react-router-dom";
-import Register from "../pages/register/register";
-// import About from "../pages/about/About";
+import Register from "../pages/register/Register";
+import Login from "../pages/login/login";
+import EnterPin from "../pages/enter-pin/EnterPin";
+import MainLayout from "../layouts/MainLayout";
 
 function MainRoutes() {
   return (
     <>
-      {/* <nav>
-        <h1 className="text-red-500">Home</h1>
-      </nav> */}
-
       {/* Routes */}
       <Routes>
+        <Route path="/landing" element={<MainLayout />}></Route>
+        {/* Auth Routes */}
+        <Route path="/" element={<Login />} />
+        <Route path="/login/enter-pin" element={<EnterPin />} />
         <Route path="/register" element={<Register />} />
-        {/* <Route path="/about" element={<About />} /> */}
+        {/* Auth Routes */}
       </Routes>
       {/* Routes */}
     </>
