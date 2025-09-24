@@ -59,7 +59,7 @@ const Login = () => {
   return (
     <div className="bg-[#2948FF]">
       <div className="flex min-h-screen">
-        <div className="left-container lg:w-[50%] flex justify-center items-center sm:rounded-tr-[30px] sm:rounded-br-[30px]">
+        <div className="left-container lg:w-[50%] flex justify-center items-center bg-[#ffffff] sm:rounded-tr-[30px] sm:rounded-br-[30px]">
           <div className="py-12 px-16 flex gap-3.5 flex-col">
             <div className="logo flex flecx-row  items-center gap-3.5">
               <img src="/Logo-Money-Wallet.png" alt="" />
