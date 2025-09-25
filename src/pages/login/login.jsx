@@ -1,8 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/authSlice";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isEmailInvalid, setIsEmailInvalid] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -44,7 +48,7 @@ const Login = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
-  const checkSignin = (e) => {
+  const checkSignin = async (e) => {
     e.preventDefault();
 
     const isEmailInputValid = email.trim() !== "" && emailPattern.test(email);
@@ -54,6 +58,21 @@ const Login = () => {
     setIsPasswordInvalid(!isPasswordInputValid);
 
     if (!isEmailInputValid || !isPasswordInputValid) return;
+
+    try {
+      await dispatch(login({ email, password }));
+      toast.success("Login Berhasil!", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+
+      setTimeout(() => navigate("/"), 1500);
+    } catch (error) {
+      toast.error(error || "Login gagal", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    }
   };
 
   return (
@@ -162,7 +181,7 @@ const Login = () => {
                 type="submit"
                 className=" flex justify-center items-center text-[#ffffff] rounded-[7px] bg-[#2948FF] w-full h-11 cursor-pointer"
               >
-                Register
+                Login
               </button>
             </form>
             <div className="text-center text-gray-500 ">
