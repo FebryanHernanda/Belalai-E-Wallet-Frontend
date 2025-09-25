@@ -9,7 +9,7 @@ const MainLayout = () => {
       <Navbar />
       <main className="min-h-screen flex">
         <Sidebar />
-        <div className="w-full">
+        <div className="w-full relative">
           <Outlet />
         </div>
       </main>
