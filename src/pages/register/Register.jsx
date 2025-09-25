@@ -1,7 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../../store/authSlice";
+import { toast } from "react-toastify";
 
 function Register() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [errorem, setErrorem] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,8 +36,9 @@ function Register() {
     setConfirmIsPasswordVisible(!isConfirmPasswordVisible);
   };
 
-  const submitHhandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+
     // validasi email
     if (email.trim() === "") {
       setErrorem("Email tidak boleh kosong");
@@ -43,6 +49,7 @@ function Register() {
     } else {
       setErrorem("");
     }
+
     // validasi password
     if (password.trim() === ``) {
       setErrorPass("Password tidak boleh kosong");
@@ -62,13 +69,29 @@ function Register() {
     } else {
       setErrorPass("");
     }
+
     // validasi confirm password
     if (password !== confirmPassword) {
       setErrorConfirmPass("Password dan konfirmasi password harus sama");
       valid = false;
     } else {
       setErrorConfirmPass("");
-      return valid;
+    }
+
+    if (valid) {
+      try {
+        await dispatch(register({ email, password }));
+        toast.success("Register Berhasil!", {
+          position: "top-center",
+          autoClose: 1000,
+        });
+        setTimeout(() => navigate("/login"), 1500);
+      } catch (error) {
+        toast.error(error || "Register gagal", {
+          position: "top-center",
+          autoClose: 1000,
+        });
+      }
     }
   };
   return (
@@ -124,7 +147,7 @@ function Register() {
                 </div>
 
                 {/* input user email and pass */}
-                <form onSubmit={submitHhandler} className="mt-3">
+                <form onSubmit={submitHandler} className="mt-3">
                   <div className="flex flex-col bg-[#ffffff] gap-1">
                     <label htmlFor="email" className="text-xl">
                       Email
