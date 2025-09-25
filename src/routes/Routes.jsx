@@ -5,18 +5,36 @@ import EnterPin from "../pages/enter-pin/EnterPin";
 import LandingLayout from "../layouts/LandingLayout";
 import { ToastContainer } from "react-toastify";
 import LandingPage from "../pages/landing-page/LandingPage";
+import MainLayout from "../layouts/MainLayout";
+import Profile from "../pages/profile/Profile";
+import Dashboard from "../pages/dashboard/Dashboard";
+import Transfer from "../pages/transfer/Transfer";
+import ChangePin from "../pages/changePin/ChangePin";
 
 function MainRoutes() {
   return (
     <>
       {/* Routes */}
       <Routes>
-        {/* Landing Routes */}
+        {/* Landing Layouts */}
         <Route element={<LandingLayout />}>
           <Route path="/" element={<LandingPage />} />
-          {/* Content */}
         </Route>
-        {/* Landing Routes */}
+        {/* Landing Layouts */}
+
+        {/* Main Layouts */}
+        <Route element={<MainLayout />}>
+          {/* Profile */}
+          <Route path="profile">
+            <Route index element={<Profile />} />
+            <Route path="change-pin" element={<ChangePin />} />
+          </Route>
+          {/* Profile */}
+
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/transfer" element={<Transfer />} />
+        </Route>
+        {/* Main Layouts */}
 
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
