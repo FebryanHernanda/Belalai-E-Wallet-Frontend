@@ -19,7 +19,7 @@ ChartJS.register(
   Legend
 );
 
-const FinancialChart = () => {
+const Dashboard = () => {
   const [filter, setFilter] = useState("All");
   const [range, setRange] = useState("7 Days");
   const [openFilter, setOpenFilter] = useState(false);
@@ -151,7 +151,7 @@ const FinancialChart = () => {
                 </button>
                 <div>TOP</div>
               </div>
-              <div iv className="flex flex-col items-center gap-2.5">
+              <div className="flex flex-col items-center gap-2.5">
                 <button
                   type="button"
                   className="bg-blue-500 h-12 w-12 rounded-full flex items-center justify-center shadow-md cursor-pointer"
@@ -296,4 +296,4 @@ const FinancialChart = () => {
   );
 };
 
-export default FinancialChart;
+export default Dashboard;
