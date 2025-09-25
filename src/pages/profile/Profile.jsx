@@ -1,5 +1,6 @@
 import { Mail, Phone, SquarePen, Trash, User, Users } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const [preview, setPreview] = useState(null);
@@ -146,9 +147,9 @@ const Profile = () => {
         {/* Change Password Field */}
         <div className="flex flex-col gap-3">
           <h1 className="text-xl">Pin</h1>
-          <a className="text-blue-400" href="#">
+          <Link className="text-blue-400" to="/profile/change-pin">
             Change Pin
-          </a>
+          </Link>
         </div>
         {/* Change Password Field */}
 
