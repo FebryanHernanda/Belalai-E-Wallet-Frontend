@@ -3,17 +3,22 @@ import avatarBase from "/src/assets/icon/avatar-base.png";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
 import NavbarDropdown from "./NavbarDropdown";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+const Navbar = (props) => {
+  const { isMenuOpen, setIsMenuOpen } = props;
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleMenuDropdown = () => {
-    setIsMenuOpen((prev) => !prev);
+  const handleMenuDropdown = (e) => {
+    e.stopPropagation();
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <nav className="text-red bg-blue-700 w-full h-full flex justify-between text-white p-5">
+    <nav
+      className="text-red z-10 bg-blue-700 w-full h-full flex justify-between text-white p-5"
+      onClick={() => setIsMenuOpen(false)}
+    >
       <div className="flex items-center justify-between gap-5">
         <img src={navbarIcon} alt="E-Wallet icon" className="w-10" />
         <h1 className="text-xl">E-Wallet</h1>
@@ -33,12 +38,18 @@ const Navbar = () => {
       ) : (
         //   {/* Not Login Nav */}
         <div className="hidden gap-5 justify-between lg:flex">
-          <button className="p-3 w-25 border-1 font-semibold rounded-lg cursor-pointer border-white hover:bg-white hover:text-blue-700 ">
+          <Link
+            className="p-3 border-1 font-semibold rounded-lg cursor-pointer border-white hover:bg-white hover:text-blue-700 "
+            to="/login"
+          >
             Sign In
-          </button>
-          <button className="p-3 w-25 border-1 font-semibold rounded-lg cursor-pointer bg-white text-blue-700 hover:bg-blue-700 hover:border-1 hover:border-white hover:text-white">
-            Sign Out
-          </button>
+          </Link>
+          <Link
+            className="p-3 border-1 font-semibold rounded-lg cursor-pointer bg-white text-blue-700 hover:bg-blue-700 hover:border-1 hover:border-white hover:text-white"
+            to="/register"
+          >
+            Sign Up
+          </Link>
         </div>
       )}
 
