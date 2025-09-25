@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-function register() {
+function Register() {
   const [errorem, setErrorem] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -8,8 +8,9 @@ function register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorConfirmpass, setErrorConfirmPass] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPasswordVisible, setConfirmIsPasswordVisible] = useState(false);
-  
+  const [isConfirmPasswordVisible, setConfirmIsPasswordVisible] =
+    useState(false);
+
   // regex untuk email
   const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$/;
   // regex untuk huruf kecil
@@ -20,7 +21,7 @@ function register() {
   const Spesial = /[!@#$%^&*/><]/;
   let valid = true;
 
-   // toogle password visibiliy
+  // toogle password visibiliy
   const togglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
@@ -240,4 +241,4 @@ function register() {
   );
 }
 
-export default register;
+export default Register;
