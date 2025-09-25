@@ -34,10 +34,6 @@ const Profile = () => {
         <div className="flex items-center gap-5">
           {/* Photo Preview */}
           <div className="w-40 h-40 flex items-center justify-center bg-gray-200">
-            {/* <User
-              size={100}
-              className="object-cover text-gray-400 items-center"
-            /> */}
             {preview ? (
               <img
                 src={preview}
@@ -84,7 +80,7 @@ const Profile = () => {
         {/* Name Field */}
         <div className="flex flex-col gap-3">
           <h1 className="text-xl">Full Name</h1>
-          <div className="group flex items-center gap-2 bg-gray-100 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
+          <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
             <User
               size={20}
               className="text-gray-400 group-focus-within:text-gray-700"
@@ -103,7 +99,7 @@ const Profile = () => {
         {/* Phone Field */}
         <div className="flex flex-col gap-3">
           <h1 className="text-xl">Phone</h1>
-          <div className="group flex items-center gap-2 bg-gray-100 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
+          <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
             <Phone
               size={20}
               className="text-gray-400 group-focus-within:text-gray-700"
@@ -122,7 +118,7 @@ const Profile = () => {
         {/* Email Field */}
         <div className="flex flex-col gap-3">
           <h1 className="text-xl">Email</h1>
-          <div className="group flex items-center gap-2 bg-gray-100 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
+          <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
             <Mail
               size={20}
               className="text-gray-400 group-focus-within:text-gray-700"
