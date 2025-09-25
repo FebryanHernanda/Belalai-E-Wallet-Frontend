@@ -58,33 +58,41 @@ const Login = () => {
 
   return (
     <div className="bg-[#2948FF]">
-      <div className="flex min-h-screen">
-        <div className="left-container lg:w-[50%] flex justify-center items-center bg-[#ffffff] sm:rounded-tr-[30px] sm:rounded-br-[30px]">
-          <div className="py-12 px-16 flex gap-3.5 flex-col">
+      <div className="flex min-h-screen ">
+        <div className="left-container lg:w-1/2 flex justify-center items-center bg-[#ffffff] sm:rounded-tr-[30px] sm:rounded-br-[30px]">
+          <div className="p-10 lg:py-12 lg:px-16 flex gap-3.5 flex-col lg:w-3xl">
             <div className="logo flex flecx-row  items-center gap-3.5">
-              <img src="/Logo-Money-Wallet.png" alt="" />
-              <div className="text-[#2948FF] font-medium">E-Wallet</div>
+              <img
+                src="/Logo-Money-Wallet.png"
+                alt="E-wallet icon"
+                className="max-w-8"
+              />
+              <div className="text-[#2948FF] text-2xl font-medium">
+                E-Wallet
+              </div>
             </div>
             <div className="flex flex-col gap-1.5">
-              <p className="text-[22px] font-medium">Hello Welcome Back👋 </p>
-              <div>
+              <p className="text-2xl lg:text-4xl font-medium">
+                Hello Welcome Back👋{" "}
+              </p>
+              <p className="text-gray-500 ">
                 Fill out the form correctly or you can login with several
                 option.
-              </div>
+              </p>
             </div>
             <div className="flex items-center justify-center flex-row md:flex-col gap-3.5">
               <button
                 type="button"
-                className="flex items-center justify-center gap-3.5 border border-gray-300 rounded-lg py-2.5 w-full"
+                className="flex items-center cursor-pointer justify-center gap-3.5 border border-gray-300 rounded-lg py-2.5 w-full"
               >
-                <img src="/Google.svg" alt="" />
+                <img src="/Google.svg" alt="Google Icon" />
                 <div className="hidden md:block"> Sign In With Google</div>
               </button>
               <button
                 type="button"
-                className="flex items-center justify-center gap-3.5 border border-gray-300 rounded-lg py-2.5 w-full"
+                className="flex items-center cursor-pointer  justify-center gap-3.5 border border-gray-300 rounded-lg py-2.5 w-full"
               >
-                <img src="/Facebook.svg" alt="" />
+                <img src="/Facebook.svg" alt="Facebook Icon" />
                 <div className="hidden md:block">Sign In With Facebook</div>
               </button>
             </div>
@@ -157,7 +165,7 @@ const Login = () => {
                 Register
               </button>
             </form>
-            <div className="text-center">
+            <div className="text-center text-gray-500 ">
               Not Have An Account?
               <Link to="/register" className="text-blue-500">
                 {" "}
