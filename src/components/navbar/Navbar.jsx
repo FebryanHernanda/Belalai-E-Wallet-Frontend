@@ -15,6 +15,8 @@ const Navbar = (props) => {
   useEffect(() => {
     if (isAuthenticated) {
       setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
     }
   }, [isAuthenticated]);
 
@@ -25,13 +27,16 @@ const Navbar = (props) => {
 
   return (
     <nav
-      className="text-red z-10 bg-blue-700 w-full h-full flex justify-between text-white p-5"
+      className="text-red  bg-blue-700 w-full h-full flex justify-between text-white p-5"
       onClick={() => setIsMenuOpen(false)}
     >
-      <div className="flex items-center justify-between gap-5">
+      <Link
+        className="flex items-center justify-between gap-5 cursor-pointer"
+        to="/"
+      >
         <img src={navbarIcon} alt="E-Wallet icon" className="w-10" />
         <h1 className="text-xl">E-Wallet</h1>
-      </div>
+      </Link>
 
       {isLoggedIn ? (
         //  {/* Login Nav */}
