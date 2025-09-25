@@ -60,7 +60,7 @@ const Login = () => {
     if (!isEmailInputValid || !isPasswordInputValid) return;
 
     try {
-      await dispatch(login({ email, password }));
+      await dispatch(login({ email, password })).unwrap();
       toast.success("Login Berhasil!", {
         position: "top-center",
         autoClose: 1000,
