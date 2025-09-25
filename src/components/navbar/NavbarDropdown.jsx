@@ -1,4 +1,5 @@
-import { Link, LogOut, User } from "lucide-react";
+import { IdCard, LogOut, User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const NavbarDropdown = (props) => {
   const { setIsMenuOpen, isLoggedIn } = props;
@@ -20,14 +21,20 @@ const NavbarDropdown = (props) => {
           </div>
         ) : (
           <div className="flex flex-col justify-between  gap-3">
-            <div className="flex p-2 text-blue-700 gap-5 cursor-pointer rounded-lg hover:bg-blue-700 hover:text-white ">
+            <Link
+              className="flex p-2 text-blue-700 gap-5 cursor-pointer rounded-lg hover:bg-blue-700 hover:text-white "
+              to="/login"
+            >
               <User />
               <h3>Sign In</h3>
-            </div>
-            <div className="flex p-2 text-red-700 gap-5 cursor-pointer  rounded-lg hover:bg-blue-700 hover:text-white ">
-              <LogOut className="rotate-180" />
+            </Link>
+            <Link
+              className="flex p-2 text-red-700 gap-5 cursor-pointer  rounded-lg hover:bg-blue-700 hover:text-white"
+              to="/register"
+            >
+              <IdCard />
               <h3>Sign Up</h3>
-            </div>
+            </Link>
           </div>
         )}
       </div>

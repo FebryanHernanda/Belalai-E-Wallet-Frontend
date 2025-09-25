@@ -1,12 +1,15 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/navbar/navbar";
 import Footer from "../components/footer/Footer";
+import { useState } from "react";
 
 const LandingLayout = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <>
-      <Navbar />
-      <main className="min-h-screen flex">
+      <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      <main className="min-h-screen flex" onClick={() => setIsMenuOpen(false)}>
         <Outlet />
       </main>
       <Footer />
