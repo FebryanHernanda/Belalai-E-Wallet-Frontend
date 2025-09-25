@@ -80,7 +80,7 @@ function Register() {
 
     if (valid) {
       try {
-        await dispatch(register({ email, password }));
+        await dispatch(register({ email, password })).unwrap();
         toast.success("Register Berhasil!", {
           position: "top-center",
           autoClose: 1000,
