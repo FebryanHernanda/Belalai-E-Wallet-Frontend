@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [errorem, setErrorem] = useState("");
@@ -72,7 +73,7 @@ function Register() {
   };
   return (
     <>
-      <main className="bg-[#2948FF] h-screen">
+      <section className="bg-[#2948FF] min-h-screen ">
         <div className="flex">
           <section className="lg:bg-cover lg:w-1/2 ">
             <section className="bg-white h-screen lg:rounded-r-3xl">
@@ -220,8 +221,10 @@ function Register() {
                     Register
                   </button>
                   <p className="text-center mt-5 text-gray-500">
-                    Have An Account?
-                    <span className="text-blue-600 cursor-pointer"> Login</span>
+                    Have An Account ?{" "}
+                    <Link className="text-blue-600 cursor-pointer" to="/login">
+                      Login
+                    </Link>
                   </p>
                 </form>
               </section>
@@ -231,12 +234,12 @@ function Register() {
           <section className="lg:w-1/2 flex justify-center items-center">
             <img
               src="./src/assets/icon/background.svg"
-              alt=""
+              alt="Background image"
               className="hidden md:block"
             />
           </section>
         </div>
-      </main>
+      </section>
     </>
   );
 }
