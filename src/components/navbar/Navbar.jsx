@@ -1,13 +1,22 @@
 import navbarIcon from "/src/assets/icon/wallet-icon.png";
 import avatarBase from "/src/assets/icon/avatar-base.png";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavbarDropdown from "./NavbarDropdown";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = (props) => {
   const { isMenuOpen, setIsMenuOpen } = props;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      setIsLoggedIn(true);
+    }
+  }, [isAuthenticated]);
 
   const handleMenuDropdown = (e) => {
     e.stopPropagation();
@@ -61,7 +70,7 @@ const Navbar = (props) => {
 
       {/* Navbar dropdown */}
       {isMenuOpen && (
-        <NavbarDropdown setIsMenuOpen={setIsMenuOpen} isLoggedIn={isLoggedIn} />
+        <NavbarDropdown setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
       )}
     </nav>
   );
