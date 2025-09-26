@@ -1,12 +1,13 @@
 import { IdCard, LogOut, User } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logout } from "../../store/authSlice";
 import { persistor } from "../../store/store";
 
 const NavbarDropdown = (props) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { setIsLoggedIn, isLoggedIn } = props;
 
   const handleLogout = (e) => {
@@ -19,6 +20,7 @@ const NavbarDropdown = (props) => {
     dispatch(logout());
     setIsLoggedIn(false);
     persistor.purge();
+    navigate("/");
   };
 
   return (
