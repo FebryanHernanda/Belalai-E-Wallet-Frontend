@@ -70,7 +70,7 @@ const Login = () => {
       dispatch(getProfile());
       setTimeout(() => navigate("/"), 1500);
     } catch (error) {
-      toast.error(error || "Login gagal", {
+      toast.error(error || "Login gagal (Username / Password Salah)", {
         position: "top-center",
         autoClose: 1000,
       });
