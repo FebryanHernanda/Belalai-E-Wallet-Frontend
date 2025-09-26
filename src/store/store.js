@@ -12,18 +12,19 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import authReducers from "./authSlice";
+import userReducers from "./userSlice";
 
 // combine all reducers
 const rootReducer = combineReducers({
   auth: authReducers,
-  // user
+  user: userReducers,
 });
 
 // persist configuration
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "user"],
 };
 
 // warp rootreducer with persist

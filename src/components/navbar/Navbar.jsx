@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import NavbarDropdown from "./NavbarDropdown";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { API_URL } from "../../utils";
 
 const Navbar = (props) => {
   const { isMenuOpen, setIsMenuOpen } = props;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const { userData } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -41,8 +43,16 @@ const Navbar = (props) => {
       {isLoggedIn ? (
         //  {/* Login Nav */}
         <div className="gap-5 hidden lg:flex items-center justify-between">
-          <h1>Ghaluh Wizzard</h1>
-          <img src={avatarBase} alt="Avatar Profile" className="w-13 h-13" />
+          <h1>{userData?.fullname ? `${userData?.fullname}` : "Hola !"}</h1>
+          <img
+            src={
+              userData?.profile_picture
+                ? `${API_URL}/img/${userData?.profile_picture}`
+                : avatarBase
+            }
+            alt="Avatar Profile"
+            className="w-13 h-13 object-cover rounded-full"
+          />
           <ChevronDown
             size={35}
             className="cursor-pointer b"
