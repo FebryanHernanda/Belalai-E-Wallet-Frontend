@@ -21,7 +21,7 @@ const Profile = () => {
   });
   const [errorMsg, setErrorMsg] = useState({});
 
-  const { userData } = useSelector((state) => state.user);
+  const { userData, error } = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getProfile());
@@ -93,7 +93,8 @@ const Profile = () => {
     if (!formData.phone) {
       newErrors.phone = "Kolom tidak boleh kosong!";
     } else if (!phoneNumberPattern.test(formData.phone)) {
-      newErrors.phone = "Format tidak valid! Maksimal 13 karakter.";
+      newErrors.phone =
+        "Format tidak valid! Minimal 10 Karater dan Maksimal 13 karakter.";
     }
 
     setErrorMsg(newErrors);
@@ -188,9 +189,14 @@ const Profile = () => {
             </button>
           </div>
         </div>
-        <span className="text-gray-600">
-          The profile picture must be 512 x 512 pixels or less
-        </span>
+        {error ? (
+          <span className="text-red-600">{error}</span>
+        ) : (
+          <span className="text-gray-600">
+            The profile picture must be 512 x 512 pixels or less
+          </span>
+        )}
+
         {/* Profile Picture */}
 
         {/* Name Field */}
@@ -266,9 +272,9 @@ const Profile = () => {
         {/* Change Password Field */}
         <div className="flex flex-col gap-3">
           <h1 className="text-xl">Password</h1>
-          <a className="text-blue-400" href="#">
+          <Link className="text-blue-400" to="/profile/change-password">
             Change Password
-          </a>
+          </Link>
         </div>
         {/* Change Password Field */}
 
