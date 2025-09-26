@@ -1,23 +1,132 @@
 import { Mail, Phone, SquarePen, Trash, User, Users } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import {
+  deleteAVAProfile,
+  getProfile,
+  updateProfile,
+} from "../../store/userSlice";
+import { API_URL, phoneNumberPattern } from "../../utils";
 
 const Profile = () => {
+  const dispatch = useDispatch();
   const [preview, setPreview] = useState(null);
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phone: "",
+    email: "",
+    profile_picture: "",
+  });
+  const [errorMsg, setErrorMsg] = useState({});
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result);
-      };
-      reader.readAsDataURL(file);
+  const { userData } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (userData) {
+      setFormData({
+        fullName: userData.fullname || "",
+        phone: userData.phone || "",
+        email: userData.email || "",
+        profile_picture: null,
+      });
+    }
+  }, [userData]);
+
+  const handleInput = (e) => {
+    const { name, value, type, files } = e.target;
+
+    if (type === "file") {
+      const file = files[0];
+      if (file) {
+        setFormData((prev) => ({ ...prev, [name]: file }));
+        setPreview(URL.createObjectURL(file));
+      }
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
-  const handleFileDelete = () => {
-    setPreview(null);
+  const handleFileDelete = async (e) => {
+    e.preventDefault();
+
+    if (preview && !userData?.profile_picture) {
+      setFormData((prev) => ({ ...prev, profile_picture: null }));
+      setPreview(null);
+      return;
+    }
+
+    if (userData?.profile_picture) {
+      try {
+        await dispatch(deleteAVAProfile()).unwrap();
+
+        toast.success("Delete foto profile berhasil!", {
+          position: "top-center",
+          autoClose: 1000,
+        });
+
+        setFormData((prev) => ({ ...prev, profile_picture: null }));
+        setPreview(null);
+      } catch (error) {
+        toast.error(error?.message || "Delete foto profile gagal", {
+          position: "top-center",
+          autoClose: 1000,
+        });
+      }
+    }
+  };
+
+  const validateInput = () => {
+    const newErrors = {};
+
+    /* Fullname */
+    if (!formData.fullName) {
+      newErrors.fullName = "Kolom tidak boleh kosong!";
+    }
+
+    /* Phone */
+    if (!formData.phone) {
+      newErrors.phone = "Kolom tidak boleh kosong!";
+    } else if (!phoneNumberPattern.test(formData.phone)) {
+      newErrors.phone = "Format tidak valid! Maksimal 13 karakter.";
+    }
+
+    setErrorMsg(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmitData = async (e) => {
+    e.preventDefault();
+
+    const profileData = new FormData();
+    profileData.append("fullname", formData.fullName);
+    profileData.append("phone", formData.phone);
+    profileData.append("profile_picture", formData.profile_picture);
+
+    const isValid = validateInput();
+    if (!isValid) return;
+
+    try {
+      await dispatch(updateProfile(profileData)).unwrap();
+      await dispatch(getProfile());
+      toast.success("Data profile berhasil diubah!", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+
+      setFormData((prev) => !prev);
+    } catch (error) {
+      toast.error(error.message || "update profile gagal", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    }
   };
 
   return (
@@ -41,6 +150,12 @@ const Profile = () => {
                 alt="Profile Preview"
                 className="w-full h-full object-cover"
               />
+            ) : userData?.profile_picture ? (
+              <img
+                src={`${API_URL}/img/${userData?.profile_picture}`}
+                alt="Profile Picture"
+                className="w-full h-full object-cover"
+              />
             ) : (
               <User size={100} className="text-gray-400" />
             )}
@@ -49,17 +164,17 @@ const Profile = () => {
 
           <div className="flex flex-col gap-3">
             <label
-              htmlFor="profile-picture"
+              htmlFor="profile_picture"
               className="flex items-center gap-2 bg-blue-600 cursor-pointer text-white p-3 rounded-lg"
             >
               <SquarePen size={20} />
               <input
                 type="file"
-                name="profile-picture"
-                id="profile-picture"
+                name="profile_picture"
+                id="profile_picture"
                 accept="image/*"
                 className="hidden"
-                onChange={handleFileChange}
+                onChange={handleInput}
               />
               Change Profile
             </label>
@@ -88,12 +203,17 @@ const Profile = () => {
             />
             <input
               type="text"
-              name="full-name"
-              id="full-name"
+              name="fullName"
+              id="fullName"
               placeholder="Enter Full Name"
               className="bg-transparent outline-none flex-1"
+              value={formData.fullName ?? ""}
+              onChange={handleInput}
             />
           </div>
+          {errorMsg.fullName && (
+            <p className="text-sm text-red-500">{errorMsg.fullName}</p>
+          )}
         </div>
         {/* Name Field */}
 
@@ -107,12 +227,17 @@ const Profile = () => {
             />
             <input
               type="tel"
-              name="phone-number"
-              id="phone-number"
+              name="phone"
+              id="phone"
               placeholder="Enter Your Number Phone"
               className="bg-transparent outline-none flex-1"
+              value={formData.phone ?? ""}
+              onChange={handleInput}
             />
           </div>
+          {errorMsg.phone && (
+            <p className="text-sm text-red-500">{errorMsg.phone}</p>
+          )}
         </div>
         {/* Phone Field */}
 
@@ -126,10 +251,13 @@ const Profile = () => {
             />
             <input
               type="text"
-              name="full-name"
-              id="full-name"
+              name="email"
+              id="email"
+              disabled
               placeholder="Enter Your Email"
-              className="bg-transparent outline-none flex-1"
+              className="bg-transparent outline-none flex-1 text-gray-500"
+              value={formData.email ?? ""}
+              onChange={handleInput}
             />
           </div>
         </div>
@@ -153,7 +281,10 @@ const Profile = () => {
         </div>
         {/* Change Password Field */}
 
-        <button className="bg-blue-700 p-2 text-white rounded-lg cursor-pointer">
+        <button
+          className="bg-blue-700 p-2 text-white rounded-lg cursor-pointer"
+          onClick={handleSubmitData}
+        >
           Submit
         </button>
       </form>
