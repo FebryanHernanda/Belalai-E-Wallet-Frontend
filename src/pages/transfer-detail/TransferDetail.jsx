@@ -1,46 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
+import ModalSucces from "../modal/ModalSucces";
+import ModalFailed from "../modal/ModalFailed";
 
 function TransferDetail() {
+  const [Active, SetActive] = useState(false);
   return (
     <>
       <main>
+        {/* Transfer Berhasil */}
+        {Active && <ModalSucces onClose={() => SetActive(false)} />}
+
+        {/* transfer Gagal */}
+        {/* {Active && <ModalFailed onClose={() => SetActive(false)} />} */}
+
+        {Active && <div className="absolute inset-0 backdrop-brightness-50" />}
         <header className="hidden md:block md:flex gap-5 my-5 ml-14">
           <img src="../src/assets/icon/send.svg" alt="" />
           <p className="font-semibold text-xl">Transfer Money</p>
         </header>
-          <section
-            className="hidden lg:block lg:flex lg:flex-col items-start ml-14"
+        <section className="hidden lg:block lg:flex lg:flex-col items-start ml-14">
+          {/* Stepper */}
+          <article
+            id="card-step"
+            className="flex justify-center items-center gap-4 flex-wrap"
           >
-            {/* Stepper */}
-            <article
-              id="card-step"
-              className="flex justify-center items-center gap-4 flex-wrap"
-            >
-              {/* Step 1 */}
-              <div className="text-center flex items-center gap-2">
-                <img src="../src/assets/icon/one.svg" alt="Step 1 icon" className="lg:w-8" />
-                <div className="text-md text-gray-800">Find People</div>
-              </div>
+            {/* Step 1 */}
+            <div className="text-center flex items-center gap-2">
+              <img
+                src="../src/assets/icon/one.svg"
+                alt="Step 1 icon"
+                className="lg:w-8"
+              />
+              <div className="text-md text-gray-800">Find People</div>
+            </div>
 
-              {/* Line 1 */}
-              <div className="w-[50px] border border-dashed border-gray-400"></div>
+            {/* Line 1 */}
+            <div className="w-[50px] border border-dashed border-gray-400"></div>
 
-              {/* Step 2 - Active */}
-              <div className="text-center flex items-center gap-2">
-                <img src="../src/assets/icon/two.svg" alt="" className="lg:w-8" />
-                <div className="text-md text-blue-700">Set Nominal</div>
-              </div>
+            {/* Step 2 - Active */}
+            <div className="text-center flex items-center gap-2">
+              <img src="../src/assets/icon/two.svg" alt="" className="lg:w-8" />
+              <div className="text-md text-blue-700">Set Nominal</div>
+            </div>
 
-              {/* Line 2 */}
-              <div className="w-[50px] border border-dashed border-gray-400"></div>
+            {/* Line 2 */}
+            <div className="w-[50px] border border-dashed border-gray-400"></div>
 
-              {/* Step 3 - Pending */}
-              <div className="text-center flex items-center gap-2">
-                <img src="../src/assets/icon/three.svg" alt="" className="lg:w-8" />
-                <div className="text-md text-gray-800">Payment</div>
-              </div>
-            </article>
-          </section>
+            {/* Step 3 - Pending */}
+            <div className="text-center flex items-center gap-2">
+              <img
+                src="../src/assets/icon/three.svg"
+                alt=""
+                className="lg:w-8"
+              />
+              <div className="text-md text-gray-800">Payment</div>
+            </div>
+          </article>
+        </section>
         <section className="mx-5 mt-8 md:border md:border-gray-300 md:p-10 md:mx-14">
           {/* title */}
           <h1 className="text-lg mb-5 lg:font-semibold">People Information</h1>
@@ -93,7 +109,10 @@ function TransferDetail() {
               placeholder="Enter Some Notes"
             ></textarea>
           </article>
-          <button className="bg-blue-700 text-white rounded-lg w-full mt-10 min-h-14">
+          <button
+            className="bg-blue-700 text-white rounded-lg w-full mt-10 min-h-14 cursor-pointer"
+            onClick={() => SetActive((prev) => !prev)}
+          >
             Submit & Transfer
           </button>
         </section>
