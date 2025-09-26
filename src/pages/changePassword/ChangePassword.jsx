@@ -84,7 +84,7 @@ const ChangePassword = () => {
           <div className="flex flex-col gap-2">
             <label htmlFor="oldpwd">Existing Password</label>
             <div className="flex items-center border rounded-md px-2.5 h-11 gap-3">
-              <img src="/Password.svg" alt="" className="w-4 h-3.5" />
+              <img src="/Logo-Password.svg" alt="" className="w-4 h-3.5" />
               <input
                 type={showOld ? "text" : "password"}
                 id="oldpwd"
@@ -94,7 +94,7 @@ const ChangePassword = () => {
                 className="w-full outline-none"
               />
               <img
-                src={showOld ? "/eyesOpen.svg" : "/EyeClose.svg"}
+                src={showOld ? "/Logo-Eye.svg" : "/Logo-Eye-Close.svg"}
                 alt="toggle"
                 className="w-5 h-5 cursor-pointer"
                 onClick={() => setShowOld(!showOld)}
@@ -106,7 +106,7 @@ const ChangePassword = () => {
           <div className="flex flex-col gap-2">
             <label htmlFor="newpwd">New Password</label>
             <div className="flex items-center border rounded-md px-2.5 h-11 gap-3">
-              <img src="/Password.svg" alt="" className="w-4 h-3.5" />
+              <img src="/Logo-Password.svg" alt="" className="w-4 h-3.5" />
               <input
                 type={showNew ? "text" : "password"}
                 id="newpwd"
@@ -116,7 +116,7 @@ const ChangePassword = () => {
                 className="w-full outline-none"
               />
               <img
-                src={showNew ? "/eyesOpen.svg" : "/EyeClose.svg"}
+                src={showNew ? "/Logo-Eye.svg" : "/Logo-Eye-Close.svg"}
                 alt="toggle"
                 className="w-5 h-5 cursor-pointer"
                 onClick={() => setShowNew(!showNew)}
@@ -131,7 +131,7 @@ const ChangePassword = () => {
           <div className="flex flex-col gap-2">
             <label htmlFor="confirmpwd">Confirm New Password</label>
             <div className="flex items-center border rounded-md px-2.5 h-11 gap-3">
-              <img src="/Password.svg" alt="" className="w-4 h-3.5" />
+              <img src="/Logo-Password.svg" alt="" className="w-4 h-3.5" />
               <input
                 type={showConfirm ? "text" : "password"}
                 id="confirmpwd"
@@ -141,7 +141,7 @@ const ChangePassword = () => {
                 className="w-full outline-none"
               />
               <img
-                src={showConfirm ? "/eyesOpen.svg" : "/EyeClose.svg"}
+                src={showConfirm ? "/Logo-Eye.svg" : "/Logo-Eye-Close.svg"}
                 alt="toggle"
                 className="w-5 h-5 cursor-pointer"
                 onClick={() => setShowConfirm(!showConfirm)}
