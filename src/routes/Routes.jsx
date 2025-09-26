@@ -10,6 +10,7 @@ import Profile from "../pages/profile/Profile";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Transfer from "../pages/transfer/Transfer";
 import ChangePin from "../pages/changePin/ChangePin";
+import History from "../pages/history/History";
 
 function MainRoutes() {
   return (
@@ -33,6 +34,7 @@ function MainRoutes() {
 
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/transfer" element={<Transfer />} />
+          <Route path="/history" element={<History />} />
         </Route>
         {/* Main Layouts */}
 
