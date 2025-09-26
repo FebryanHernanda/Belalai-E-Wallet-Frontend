@@ -32,10 +32,12 @@ export const login = createAsyncThunk(
         email,
         password,
       });
-
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Login Gagal");
+      return rejectWithValue(
+        error.response?.data?.message ||
+          "Login gagal (Username / Password Salah)"
+      );
     }
   }
 );
@@ -59,6 +61,28 @@ export const logout = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data?.error);
+    }
+  }
+);
+
+export const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async (changePasswordData, { getState, rejectWithValue }) => {
+    try {
+      const token = getState().auth.token;
+
+      const response = await axios.patch(
+        `${API_URL}/auth/change-password`,
+        changePasswordData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.error || "Update gagal");
     }
   }
 );
@@ -110,6 +134,18 @@ const authSlice = createSlice({
         state.token = null;
       })
       .addCase(logout.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      /* =========================================== Logout =========================================== */
+      .addCase(changePassword.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(changePassword.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
