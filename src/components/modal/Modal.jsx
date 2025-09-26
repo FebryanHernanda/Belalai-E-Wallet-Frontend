@@ -4,7 +4,7 @@ const Modal = (props) => {
 
   return (
     <>
-      <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+      <div className="absolute inset-0 p-5 bg-black/50 flex items-center justify-center">
         <div className="bg-white rounded-xl p-6 w-[500px] min-h-100 relative">
           <button
             onClick={onClose}

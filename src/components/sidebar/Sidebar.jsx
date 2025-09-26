@@ -56,8 +56,10 @@ const Sidebar = () => {
           <h1 className="font-light">Transfer</h1>
         </NavLink>
         <NavLink
-          className="flex gap-5 cursor-pointer items-center p-3 rounded-xl hover:bg-blue-500 hover:text-white"
-          href="#"
+          className={({ isActive }) =>
+            isActive ? `${baseClass} ${activeClass}` : baseClass
+          }
+          to="/history"
         >
           <History size={28} />
           <h1 className="font-light">History</h1>

@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Modal from "../../components/modal/Modal";
+import ModalHistory from "./ModalHistory";
 
 function History() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => setIsMobile(window.innerWidth < 768);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  const customers = [
+    { name: "Ghaluh 1", phone: "(239) 555-0108", amount: 50000, paid: true },
+    { name: "Ghaluh 2", phone: "(239) 555-0123", amount: 75000, paid: false },
+    { name: "Ghaluh 3", phone: "(239) 555-0456", amount: 100000, paid: true },
+    { name: "Ghaluh 4", phone: "(239) 555-0789", amount: 25000, paid: false },
+    { name: "Ghaluh 5", phone: "(239) 555-0789", amount: 25000, paid: true },
+  ];
+
+  const handleClick = (customer) => {
+    if (isMobile) {
+      setSelectedCustomer(customer);
+      setIsOpen(true);
+    }
+  };
+
   return (
     <>
       <main>
-        <div className="hidden md:block md:flex gap-5 ml-10 mt-10 cursor-pointer">
+        <div className="hidden  md:flex gap-5 ml-10 mt-10 cursor-pointer">
           <img src="../src/assets/icon/history.svg" alt="" />
           <p className="font-bold text-md">History Transaction</p>
         </div>
@@ -32,44 +61,13 @@ function History() {
           </section>
           {/* History user */}
           <section className="mx-5 md:mx-10 mt-5 space-y-4">
-            {/* Data pelanggan */}
-            {[
-              {
-                name: "Ghaluh 1",
-                phone: "(239) 555-0108",
-                amount: 50000,
-                paid: true,
-              },
-              {
-                name: "Ghaluh 2",
-                phone: "(239) 555-0123",
-                amount: 75000,
-                paid: false,
-              },
-              {
-                name: "Ghaluh 3",
-                phone: "(239) 555-0456",
-                amount: 100000,
-                paid: true,
-              },
-              {
-                name: "Ghaluh 4",
-                phone: "(239) 555-0789",
-                amount: 25000,
-                paid: false,
-              },
-              {
-                name: "Ghaluh 5",
-                phone: "(239) 555-0789",
-                amount: 25000,
-                paid: true,
-              },
-            ].map((customer, index) => (
+            {customers.map((customer, index) => (
               <div
                 key={index}
-                className={`flex items-center p-4 rounded ${
+                className={`flex items-center p-4 rounded cursor-pointer lg:cursor-default ${
                   customer.paid ? "bg-gray-100" : "bg-white"
                 }`}
+                onClick={() => handleClick(customer)}
               >
                 {/* foto */}
                 <img
@@ -78,7 +76,7 @@ function History() {
                   className="max-w-12"
                 />
                 {/* Konten */}
-                <div className="lg:flex-1 lg:grid lg:grid-cols-3 lg:gap-10 md:flex md:gap-20 px-4 cursor-pointer">
+                <div className="lg:flex-1 lg:grid lg:grid-cols-3 lg:gap-10 md:flex md:gap-20 px-4 ">
                   <p className="font-medium md:font-normal md:pl-10 lg:text-xl">
                     {customer.name}
                   </p>
@@ -103,7 +101,7 @@ function History() {
               </div>
             ))}
           </section>
-          <div className="hidden lg:block lg:mx-10 my-10 lg:flex justify-between">
+          <div className="hidden lg:mx-10 my-10 lg:flex justify-between">
             <div>
               <p>Show 5 History of 100 History</p>
             </div>
@@ -118,6 +116,11 @@ function History() {
             </div>
           </div>
         </div>
+        {isMobile && (
+          <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+            <ModalHistory customer={selectedCustomer} setIsOpen={setIsOpen} />
+          </Modal>
+        )}
       </main>
     </>
   );
