@@ -1,70 +1,55 @@
 import { IdCard, LogOut, User } from "lucide-react";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { logout } from "../../store/authSlice";
-import { persistor } from "../../store/store";
+import { Link } from "react-router-dom";
 
 const NavbarDropdown = (props) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { setIsLoggedIn, isLoggedIn } = props;
-
-  const handleLogout = (e) => {
-    e.preventDefault();
-    toast.success("Anda Telah berhasil keluar", {
-      position: "top-right",
-      autoClose: 1000,
-    });
-
-    dispatch(logout());
-    setIsLoggedIn(false);
-    persistor.purge();
-    navigate("/");
-  };
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  const { isLoggedIn, onLogoutClick } = props;
 
   return (
-    <div className="absolute z-10 right-5 top-20 w-60 rounded-xl border-1 border-gray-300 bg-white p-4 shadow-2xl lg:top-23 lg:right-10 2xl:right-5">
-      {/* Navigation */}
-      <div className="flex flex-col gap-4 border-b">
-        {isLoggedIn ? (
-          <div className="flex flex-col justify-between  gap-3">
-            <Link
-              className="flex p-2 text-blue-700 gap-5 cursor-pointer rounded-lg hover:bg-blue-700 hover:text-white "
-              to="/profile"
-            >
-              <User />
-              <h3>Profile</h3>
-            </Link>
-            <button
-              className="flex p-2 text-red-700 gap-5 cursor-pointer  rounded-lg hover:bg-blue-700 hover:text-white "
-              onClick={handleLogout}
-            >
-              <LogOut className="rotate-180" />
-              <h3>Keluar</h3>
-            </button>
-          </div>
-        ) : (
-          <div className="flex flex-col justify-between  gap-3">
-            <Link
-              className="flex p-2 text-blue-700 gap-5 cursor-pointer rounded-lg hover:bg-blue-700 hover:text-white "
-              to="/login"
-            >
-              <User />
-              <h3>Sign In</h3>
-            </Link>
-            <Link
-              className="flex p-2 text-red-700 gap-5 cursor-pointer  rounded-lg hover:bg-blue-700 hover:text-white"
-              to="/register"
-            >
-              <IdCard />
-              <h3>Sign Up</h3>
-            </Link>
-          </div>
-        )}
+    <>
+      <div className="absolute z-10 right-5 top-20 w-60 rounded-xl border-1 border-gray-300 bg-white p-4 shadow-2xl lg:top-23 lg:right-10 2xl:right-5">
+        {/* Navigation */}
+        <div className="flex flex-col gap-4 border-b">
+          {isLoggedIn ? (
+            <div className="flex flex-col justify-between  gap-3">
+              <Link
+                className="flex p-2 text-blue-700 gap-5 cursor-pointer rounded-lg hover:bg-blue-700 hover:text-white "
+                to="/profile"
+              >
+                <User />
+                <h3>Profile</h3>
+              </Link>
+              <button
+                className="flex p-2 text-red-700 gap-5 cursor-pointer  rounded-lg hover:bg-blue-700 hover:text-white "
+                onClick={onLogoutClick}
+              >
+                <LogOut className="rotate-180" />
+                <h3>Keluar</h3>
+              </button>
+            </div>
+          ) : (
+            <div className="flex flex-col justify-between  gap-3">
+              <Link
+                className="flex p-2 text-blue-700 gap-5 cursor-pointer rounded-lg hover:bg-blue-700 hover:text-white "
+                to="/login"
+              >
+                <User />
+                <h3>Sign In</h3>
+              </Link>
+              <Link
+                className="flex p-2 text-red-700 gap-5 cursor-pointer  rounded-lg hover:bg-blue-700 hover:text-white"
+                to="/register"
+              >
+                <IdCard />
+                <h3>Sign Up</h3>
+              </Link>
+            </div>
+          )}
+        </div>
+        {/* Navigation */}
       </div>
-      {/* Navigation */}
-    </div>
+    </>
   );
 };
 

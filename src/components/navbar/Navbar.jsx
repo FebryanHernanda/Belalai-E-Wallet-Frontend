@@ -3,11 +3,16 @@ import avatarBase from "/src/assets/icon/avatar-base.png";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import NavbarDropdown from "./NavbarDropdown";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { API_URL } from "../../utils";
+import { logout } from "../../store/authSlice";
+import { toast } from "react-toastify";
+import { persistor } from "../../store/store";
 
 const Navbar = (props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isMenuOpen, setIsMenuOpen } = props;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -25,6 +30,28 @@ const Navbar = (props) => {
   const handleMenuDropdown = (e) => {
     e.stopPropagation();
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+  const handleLogoutClick = () => {
+    setIsLogoutModalOpen(true);
+  };
+
+  const handleCancelLogout = () => {
+    setIsLogoutModalOpen(false);
+  };
+
+  const handleConfirmLogout = () => {
+    dispatch(logout());
+    setIsLoggedIn(false);
+    persistor.purge();
+    navigate("/");
+    toast.success("Anda telah berhasil keluar", {
+      position: "top-right",
+      autoClose: 1000,
+    });
+    setIsLogoutModalOpen(false);
   };
 
   return (
@@ -85,7 +112,35 @@ const Navbar = (props) => {
 
       {/* Navbar dropdown */}
       {isMenuOpen && (
-        <NavbarDropdown setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
+        <NavbarDropdown
+          setIsLoggedIn={setIsLoggedIn}
+          isLoggedIn={isLoggedIn}
+          onLogoutClick={handleLogoutClick}
+        />
+      )}
+
+      {isLogoutModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-xl w-[400px]">
+            <h2 className="text-lg text-black  mb-4">
+              Apakah Anda yakin ingin keluar?
+            </h2>
+            <div className="flex justify-end gap-4">
+              <button
+                className="px-4 py-2 bg-gray-300 cursor-pointer rounded hover:bg-gray-400"
+                onClick={handleCancelLogout}
+              >
+                Batal
+              </button>
+              <button
+                className="px-4 py-2 bg-red-600 cursor-pointer text-white rounded hover:bg-red-700"
+                onClick={handleConfirmLogout}
+              >
+                Keluar
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </nav>
   );

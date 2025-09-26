@@ -41,7 +41,7 @@ export const updateProfile = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || "Update gagal");
+      return rejectWithValue(error.response?.data?.error || "Update gagal");
     }
   }
 );

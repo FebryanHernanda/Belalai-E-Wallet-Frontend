@@ -1,7 +1,11 @@
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { changePassword } from "../../store/authSlice";
 const ChangePassword = () => {
+  const dispatch = useDispatch();
+
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -60,12 +64,30 @@ const ChangePassword = () => {
     }
   };
 
-  const confirmUpdate = () => {
-    setOldPassword("");
-    setNewPassword("");
-    setConfirmPassword("");
-    toast.success("Password berhasil diperbarui!");
-    setShowModal(false);
+  const confirmUpdate = async () => {
+    try {
+      const changePasswordData = new FormData();
+      changePasswordData.append("old_password", oldPassword);
+      changePasswordData.append("new_password", newPassword);
+
+      await dispatch(changePassword(changePasswordData)).unwrap();
+
+      toast.success("Password berhasil diperbarui!", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    } catch (error) {
+      toast.error(error.message || "update password gagal", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    } finally {
+      setShowModal(false);
+
+      setOldPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    }
   };
   const cancelUpdate = () => {
     setShowModal(false);
