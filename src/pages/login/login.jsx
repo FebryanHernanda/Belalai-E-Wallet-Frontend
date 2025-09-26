@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../store/authSlice";
 import { toast } from "react-toastify";
+import { getProfile } from "../../store/userSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ const Login = () => {
         autoClose: 1000,
       });
 
+      dispatch(getProfile());
       setTimeout(() => navigate("/"), 1500);
     } catch (error) {
       toast.error(error || "Login gagal", {
