@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ModalSucces from "../modal/ModalSucces";
 import ModalFailed from "../modal/ModalFailed";
+import ModalEnterPin from "../modal/ModalEnterPin";
 
 function TransferDetail() {
   const [Active, SetActive] = useState(false);
@@ -8,10 +9,13 @@ function TransferDetail() {
     <>
       <main>
         {/* Transfer Berhasil */}
-        {Active && <ModalSucces onClose={() => SetActive(false)} />}
+        {/* {Active && <ModalSucces onClose={() => SetActive(false)} />} */}
 
         {/* transfer Gagal */}
         {/* {Active && <ModalFailed onClose={() => SetActive(false)} />} */}
+
+        {/* Transfer Pin */}
+        {Active && <ModalEnterPin onClose={() => SetActive(false)} />}
 
         {Active && <div className="absolute inset-0 backdrop-brightness-50" />}
         <header className="hidden md:block md:flex gap-5 my-5 ml-14">
