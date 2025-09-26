@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { Link } from "react-router-dom";
 
 ChartJS.register(
   CategoryScale,
@@ -115,20 +116,22 @@ const Dashboard = () => {
         <div className="shadow-md w-full md:w-[70%] justify-between items-center p-4  gap-3 hidden md:flex">
           <div className="font-semibold text-[16px]">Fast Service</div>
           <div className="flex gap-4">
-            <button
+            <Link
               type="button"
               className="bg-[#2948FF] flex h-[45px] p-2.5 items-center justify-center gap-2.5 rounded-[6px] cursor-pointer"
+              to="/top-up"
             >
               <img src="/Logo-Topup.svg" alt="" />
               <span className="text-white">Top Up</span>
-            </button>
-            <button
+            </Link>
+            <Link
               type="button"
               className="bg-[#2948FF] flex h-[45px] p-2.5 items-center justify-center gap-2.5 rounded-[6px] cursor-pointer"
+              to="/transfer"
             >
               <img src="/Send.svg" alt="" />
               <span className="text-white">Transfer</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
