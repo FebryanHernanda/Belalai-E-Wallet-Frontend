@@ -149,7 +149,7 @@ const Dashboard = () => {
                 >
                   <img src="/Plus-TopUp.svg" alt="topup" />
                 </button>
-                <div>TOP</div>
+                <div>Top Up</div>
               </div>
               <div className="flex flex-col items-center gap-2.5">
                 <button
@@ -158,7 +158,7 @@ const Dashboard = () => {
                 >
                   <img src="/Send.svg" alt="transfer" />
                 </button>
-                <div>TOP</div>
+                <div>Transfer</div>
               </div>
             </div>
           </div>
