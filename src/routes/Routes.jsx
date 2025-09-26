@@ -11,6 +11,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import Transfer from "../pages/transfer/Transfer";
 import ChangePin from "../pages/changePin/ChangePin";
 import History from "../pages/history/History";
+import ChangePassword from "../pages/changePassword/ChangePassword";
 
 function MainRoutes() {
   return (
@@ -29,6 +30,7 @@ function MainRoutes() {
           <Route path="profile">
             <Route index element={<Profile />} />
             <Route path="change-pin" element={<ChangePin />} />
+            <Route path="change-password" element={<ChangePassword />} />
           </Route>
           {/* Profile */}
 
