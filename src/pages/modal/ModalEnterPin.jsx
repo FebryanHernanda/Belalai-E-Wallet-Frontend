@@ -1,31 +1,57 @@
 import React, { useState, useRef } from "react";
-import { Link } from "react-router-dom";
-function ModalEnterPin({ onSuccess, onFailed }) {
-  // const [showModal, setShowModal] = useState(false);
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { verifyPin } from "../../store/authSlice";
+import { toast } from "react-toastify";
+import { transferData } from "../../store/transferSlice";
+
+function ModalEnterPin({ setShowModal, receiverData, formData }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const inputRefs = useRef([]);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setShowModal(true);
-  // };
-
   // validasi PIN
-  const handleNext = (e) => {
+  const handleNext = async (e) => {
     e.preventDefault();
     const pin = inputRefs.current.map((input) => input.value).join("");
+
     if (pin.length < 6) {
       setError("Masukkan 6 digit PIN Anda.");
       return;
     }
-    // modal jika succes / berhasil
-    setError("");
-    if (pin === "123456") {
-      onSuccess();
-    } else {
-      onFailed();
+
+    try {
+      const verifyResults = await dispatch(verifyPin({ pin: pin })).unwrap();
+
+      const dataTransfer = {
+        receiver_id: receiverData.userId,
+        receiver_phone: receiverData.phone,
+        amount: Number(formData.amount),
+        notes: formData.notes,
+        pin_sender: pin,
+      };
+
+      if (verifyResults) {
+        const transferResult = await dispatch(
+          transferData(dataTransfer)
+        ).unwrap();
+
+        toast.success(transferResult.message || "Transfer berhasil!", {
+          position: "top-center",
+          autoClose: 1500,
+        });
+
+        navigate("/transfer");
+      }
+    } catch (error) {
+      toast.error(error?.error || "Terjadi kesalahan!", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    } finally {
+      setShowModal(false);
     }
-    // setShowModal(false);
   };
 
   const handleChange = (e, i) => {
@@ -45,9 +71,11 @@ function ModalEnterPin({ onSuccess, onFailed }) {
     }
   };
   return (
-    <div className="absolute inset-0 p-5 flex items-center justify-center z-50">
+    <div className="absolute inset-0 p-5 bg-black/50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl p-6 w-[400px] relative">
-        <h2 className="text-lg font-semibold mb-4 ">TRANSFER TO GHALUH 1</h2>
+        <h2 className="text-lg font-semibold mb-4 ">
+          TRANSFER TO {receiverData.name.toUpperCase()}
+        </h2>
 
         <form onSubmit={handleNext} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
@@ -72,13 +100,20 @@ function ModalEnterPin({ onSuccess, onFailed }) {
           <div className="flex gap-3">
             <button
               type="submit"
+              className="flex-1 p-2 bg-gray-400 text-white rounded-lg cursor-pointer"
+              onClick={() => setShowModal(false)}
+            >
+              Back
+            </button>
+            <button
+              type="submit"
               className="flex-1 p-2 bg-blue-600 text-white rounded-lg cursor-pointer"
             >
               Next
             </button>
           </div>
           <p className="text-center text-sm text-gray-500 text-[17px]">
-            Forgot Your Spirit?
+            Forgot Your Spirit ?{" "}
             <Link to={"/profile/change-pin"}>
               <span className="cursor-pointer text-blue-700">Reset</span>
             </Link>
