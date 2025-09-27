@@ -75,59 +75,59 @@ function register() {
         <div className="flex">
           <section className="lg:bg-cover lg:w-1/2 ">
             <section className="bg-white h-screen lg:rounded-r-3xl">
-              <section className="px-5 lg:px-35 py-20">
+              <section className="px-5 lg:px-35 pt-10">
                 <div className="flex items-center gap-3 mb-2">
                   <img
                     src="./src/assets/icon/Money Wallet.svg"
                     alt="icon"
-                    className="max-w-8"
+                    className="max-w-4"
                   />
-                  <p className="text-blue-500 font-medium text-2xl">E-Wallet</p>
+                  <p className="text-blue-500 font-medium text-sm">E-Wallet</p>
                 </div>
                 {/* header */}
                 <header>
-                  <h1 className="font-normal text-2xl lg:text-4xl">
+                  <h1 className="font-normal text-xl">
                     Start Accessing Banking Needs With All Devices and All
                     Platforms With 30.000+ Users
                   </h1>
-                  <p className="text-gray-500 mt-5">
+                  <p className="text-gray-500">
                     Transfering money is eassier than ever, you can access
                     Zwallet wherever you are. Desktop, laptop, mobile phone? we
                     cover all of that for you!
                   </p>
                 </header>
                 {/* Sign In other */}
-                <section className="flex flex-row lg:flex-col gap-5 mt-8">
-                  <button className="border rounded-4xl w-full h-14 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
+                <section className="flex flex-row lg:flex-col gap-2 mt-4">
+                  <button className="border rounded-4xl w-full h-9 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
                     <img
                       src="./src/assets/icon/flat-color-icons_google.svg"
                       alt=""
                     />
-                    <p className="hidden lg:block lg:text-xl">
+                    <p className="hidden lg:block text-sm">
                       Sign In With Google
                     </p>
                   </button>
-                  <button className="border rounded-4xl w-full h-14 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
+                  <button className="border rounded-4xl w-full h-9 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
                     <img src="./src/assets/icon/fb.svg" alt="" />
-                    <p className="hidden lg:block lg:text-xl">
+                    <p className="hidden lg:block text-sm">
                       Sign In With Facebook
                     </p>
                   </button>
                 </section>
-                <div className="relative text-center my-8">
+                <div className="relative text-center my-4">
                   <hr className="border-t border-gray-300" />
-                  <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-7 text-gray-400">
+                  <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-7 text-gray-400 text-sm">
                     Or
                   </span>
                 </div>
 
                 {/* input user email and pass */}
-                <form onSubmit={submitHhandler} className="mt-3">
+                <form onSubmit={submitHhandler}>
                   <div className="flex flex-col bg-[#ffffff] gap-1">
-                    <label htmlFor="email" className="text-xl">
+                    <label htmlFor="email" className="text-sm">
                       Email
                     </label>
-                    <div className="input-email flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-11">
+                    <div className="input-email flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-8">
                       <img
                         src="./src/assets/icon/Logo-email.svg"
                         alt=""
@@ -139,18 +139,18 @@ function register() {
                         placeholder="Enter Your Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full outline-none"
+                        className="w-full outline-none text-sm"
                       />
                     </div>
-                    <span className="text-red-500 min-h-[1.5rem]">
+                    <span className="text-red-500 min-h-[1.5rem] text-sm">
                       {errorem}
                     </span>
                   </div>
-                  <div className="flex flex-col bg-[#ffffff] gap-1 mt-2">
-                    <label htmlFor="password" className="text-xl">
+                  <div className="flex flex-col bg-[#ffffff] gap-1">
+                    <label htmlFor="password" className="text-sm">
                       Password
                     </label>
-                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-11">
+                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-8">
                       <img
                         src="./src/assets/icon/Password.svg"
                         alt="password"
@@ -160,7 +160,7 @@ function register() {
                         type={isPasswordVisible ? "text" : "password"}
                         id="password"
                         placeholder="Enter Your Password"
-                        className="w-full outline-none"
+                        className="w-full outline-none text-sm"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -175,15 +175,15 @@ function register() {
                         onClick={togglePasswordVisibility}
                       />
                     </div>
-                    <span className="text-red-500 min-h-[1.5rem]">
+                    <span className="text-red-500 min-h-[1.5rem] text-sm">
                       {errorpass}
                     </span>
                   </div>
-                  <div className="flex flex-col bg-[#ffffff] gap-1 mt-2">
-                    <label htmlFor="confirmpassword" className="text-xl">
+                  <div className="flex flex-col bg-[#ffffff] gap-1">
+                    <label htmlFor="confirmpassword" className="text-sm">
                       Confirm Password
                     </label>
-                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-11">
+                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-8">
                       <img
                         src="./src/assets/icon/Password.svg"
                         alt="confirmpassword"
@@ -193,7 +193,7 @@ function register() {
                         type={isConfirmPasswordVisible ? "text" : "password"}
                         id="confirmpassword"
                         placeholder="Enter Your Password Again"
-                        className="w-full outline-none"
+                        className="w-full outline-none text-sm"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                       />
@@ -208,17 +208,17 @@ function register() {
                         onClick={toggleConfirmPasswordVisibility}
                       />
                     </div>
-                    <span className="text-red-500 min-h-[1.5rem]">
+                    <span className="text-red-500 min-h-[1.5rem] text-sm">
                       {errorConfirmpass}
                     </span>
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white h-13 rounded-md cursor-pointer mt-4"
+                    className="w-full bg-blue-600 text-white h-8 rounded-md cursor-pointer text-sm"
                   >
                     Register
                   </button>
-                  <p className="text-center mt-5 text-gray-500">
+                  <p className="text-center mt-3 text-gray-500 text-sm">
                     Have An Account?
                     <span className="text-blue-600 cursor-pointer"> Login</span>
                   </p>
