@@ -147,18 +147,18 @@ const Profile = () => {
           {/* Profile Picture */}
           <div className="flex items-center gap-5">
             {/* Photo Preview */}
-            <div className="w-40 h-40 flex items-center justify-center bg-gray-200">
+            <div className="w-40 h-40 flex items-center justify-center rounded-xl bg-gray-200">
               {preview ? (
                 <img
                   src={preview}
                   alt="Profile Preview"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full rounded-xl object-cover"
                 />
               ) : userData?.profile_picture ? (
                 <img
                   src={`${API_URL}/img/${userData?.profile_picture}`}
                   alt="Profile Picture"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full rounded-xl object-cover"
                 />
               ) : (
                 <User size={100} className="text-gray-400" />
