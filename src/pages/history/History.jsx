@@ -78,7 +78,7 @@ function History() {
                   {/* foto */}
                   <img
                     src={`${API_URL}/img/${data?.profile_picture}`}
-                    alt=""
+                    alt="Photo profile"
                     className="max-w-12"
                   />
                   {/* Konten */}

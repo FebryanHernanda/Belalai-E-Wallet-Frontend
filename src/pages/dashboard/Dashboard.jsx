@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -10,6 +10,10 @@ import {
   Legend,
 } from "chart.js";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getBalance } from "../../store/userSlice";
+import { getHistory } from "../../store/transferSlice";
+import { API_URL } from "../../utils";
 
 ChartJS.register(
   CategoryScale,
@@ -21,11 +25,24 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+
+  const { balance } = useSelector((state) => state.user);
+  const historyData = useSelector((state) => state.transfer.historyData);
+
+  const { transactions } = historyData || {};
+
   const [filter, setFilter] = useState("All");
   const [range, setRange] = useState("7 Days");
   const [openFilter, setOpenFilter] = useState(false);
   const [openRange, setOpenRange] = useState(false);
 
+  useEffect(() => {
+    dispatch(getBalance());
+    dispatch(getHistory());
+  }, [dispatch]);
+
+  /* Dummy Chart */
   const allDatasets = [
     {
       label: "Expense",
@@ -82,6 +99,21 @@ const Dashboard = () => {
       },
     },
   };
+  /* Dummy Chart */
+
+  const income = transactions?.reduce((total, data) => {
+    if (data.transaction_type === "Transfer") {
+      return total + data.original_amount;
+    }
+    return total;
+  }, 0);
+
+  const expense = transactions?.reduce((total, data) => {
+    if (data.transaction_type === "Send") {
+      return total + data.original_amount;
+    }
+    return total;
+  }, 0);
 
   return (
     <section>
@@ -92,12 +124,14 @@ const Dashboard = () => {
             <img src="/balance.svg" alt="" />
             <span>Balance</span>
           </div>
-          <div>Rp.120.000</div>
+          <div>Rp {balance?.toLocaleString("id-ID")}</div>
           <div className="flex flex-wrap gap-7 gap-y-4">
             <div>
               <p>Income</p>
               <div className="flex gap-2">
-                <span className="text-green-600">Rp.200.000</span>
+                <span className="text-green-600">
+                  Rp {income?.toLocaleString("id-ID")}
+                </span>
                 <span className="text-green-600">+2%</span>
                 <img src="/Arrow-up.svg" alt="" />
               </div>
@@ -105,7 +139,9 @@ const Dashboard = () => {
             <div>
               <p>Expense</p>
               <div className="flex gap-2">
-                <span className="text-red-600">Rp.200.000</span>
+                <span className="text-red-600">
+                  Rp {expense?.toLocaleString("id-ID")}
+                </span>
                 <span className="text-red-600">+2%</span>
                 <img src="/Arror-down.svg" alt="" />
               </div>
@@ -253,46 +289,51 @@ const Dashboard = () => {
         <div className="lg:col-span-3 transaction-history flex flex-col">
           <div className="flex flex-row justify-between items-center shadow rounded-t-lg p-4">
             <div className=" font-semibold">Transaction History</div>
-            <button type="button" className="cursor-pointer">
+            <Link type="button" className="cursor-pointer" to="/history">
               See All
-            </button>
+            </Link>
           </div>
 
           {/* List transaksi */}
-          <div className="divide-y divide-gray-200 bg-white rounded-b-lg shadow">
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-4">
-                <img src="/1.svg" alt="" className="w-10 h-10 " />
-                <div className="flex flex-col gap-1">
-                  <div className="font-medium">Floyd Miles</div>
-                  <div className="text-sm text-gray-500">Transfer</div>
-                </div>
-              </div>
-              <div className="text-green-500 font-medium">+Rp50.000</div>
-            </div>
 
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-4">
-                <img src="/1.svg" alt="" className="w-10 h-10" />
-                <div className="flex flex-col gap-1">
-                  <div className="font-medium">Floyd Miles</div>
-                  <div className="text-sm text-gray-500">Send</div>
-                </div>
-              </div>
-              <div className="text-red-500 font-medium">-Rp50.000</div>
-            </div>
+          {transactions?.length > 0 ? (
+            transactions?.map((data, idx) => {
+              return (
+                <div
+                  key={idx}
+                  className="divide-y divide-gray-200 bg-white rounded-b-lg shadow"
+                >
+                  <div className="flex items-center justify-between p-4">
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={`${API_URL}/img/${data?.profile_picture}`}
+                        alt="Photo profile"
+                        className="max-w-12"
+                      />
+                      <div className="flex flex-col gap-1">
+                        <div className="font-medium">{data.contact_name}</div>
+                        <div className="text-sm text-gray-500">
+                          {data.transaction_type}
+                        </div>
+                      </div>
+                    </div>
 
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center gap-4">
-                <img src="/1.svg" alt="" className="w-10 h-10 " />
-                <div className="flex flex-col gap-1">
-                  <div className="font-medium">Floyd Miles</div>
-                  <div className="text-sm text-gray-500">Send</div>
+                    {data.transaction_type === "Transfer" ? (
+                      <p className="text-green-500">
+                        Rp {data.original_amount.toLocaleString("id-ID")}
+                      </p>
+                    ) : (
+                      <p className="text-red-500">
+                        Rp {data.original_amount.toLocaleString("id-ID")}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div className="text-red-500 font-medium">-Rp50.000</div>
-            </div>
-          </div>
+              );
+            })
+          ) : (
+            <p> data ga ada</p>
+          )}
         </div>
       </div>
     </section>
