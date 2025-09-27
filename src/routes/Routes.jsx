@@ -36,9 +36,14 @@ function MainRoutes() {
           </Route>
           {/* Profile */}
 
+          {/* Transfer */}
+          <Route path="transfer">
+            <Route index element={<Transfer />} />
+            <Route path="transfer-detail" element={<TransferDetail />} />
+          </Route>
+          {/* Transfer */}
+
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/transfer" element={<Transfer />} />
-          <Route path="/transfer_detail" element={<TransferDetail />} />
           <Route path="/history" element={<History />} />
           <Route path="/top-up" element={<Topup />} />
         </Route>
