@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import ModalEnterPin from "../modal/ModalEnterPin";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { changePin } from "../../store/authSlice";
