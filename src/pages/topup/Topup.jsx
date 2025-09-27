@@ -106,7 +106,7 @@ function Topup() {
               <img
                 src={`${API_URL}/img/${userData?.profile_picture}`}
                 alt="Photo Profile"
-                className="w-30 h-30"
+                className="w-30 h-30 object-cover rounded-xl"
               />
               <div className="flex flex-col gap-1">
                 <h1 className="lg:font-semibold lg:text-lg">
