@@ -308,7 +308,7 @@ const Dashboard = () => {
                       <img
                         src={`${API_URL}/img/${data?.profile_picture}`}
                         alt="Photo profile"
-                        className="max-w-12"
+                        className="max-w-12 rounded-lg"
                       />
                       <div className="flex flex-col gap-1">
                         <div className="font-medium">{data.contact_name}</div>
@@ -320,11 +320,11 @@ const Dashboard = () => {
 
                     {data.transaction_type === "Transfer" ? (
                       <p className="text-green-500">
-                        Rp {data.original_amount.toLocaleString("id-ID")}
+                        +Rp{data.original_amount.toLocaleString("id-ID")}
                       </p>
                     ) : (
                       <p className="text-red-500">
-                        Rp {data.original_amount.toLocaleString("id-ID")}
+                        -Rp{data.original_amount.toLocaleString("id-ID")}
                       </p>
                     )}
                   </div>
@@ -332,7 +332,9 @@ const Dashboard = () => {
               );
             })
           ) : (
-            <p> data ga ada</p>
+            <p className="text-center font-semibold">
+              You haven’t made any transactions yet.
+            </p>
           )}
         </div>
       </div>

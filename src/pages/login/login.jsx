@@ -63,21 +63,21 @@ const Login = () => {
     if (!isEmailInputValid || !isPasswordInputValid) return;
 
     try {
-      await dispatch(login({ email, password })).unwrap();
+      const loginRes = await dispatch(login({ email, password })).unwrap();
       toast.success("Login Berhasil!", {
         position: "top-center",
         autoClose: 1000,
       });
 
-      dispatch(getProfile());
-
       setTimeout(() => {
-        if (isPinExists) {
+        if (loginRes.data.is_pin_exist) {
           navigate("/profile");
         } else {
           navigate("/login/enter-pin");
         }
       }, 1500);
+
+      dispatch(getProfile());
     } catch (error) {
       toast.error(error || "Login gagal (Username / Password Salah)", {
         position: "top-center",
