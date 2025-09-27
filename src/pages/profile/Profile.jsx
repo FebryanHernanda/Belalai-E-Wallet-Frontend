@@ -9,10 +9,12 @@ import {
   updateProfile,
 } from "../../store/userSlice";
 import { API_URL, phoneNumberPattern } from "../../utils";
+import ModalChangePin from "../modal/ModalChangePin";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const [preview, setPreview] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
@@ -138,136 +140,139 @@ const Profile = () => {
       </div>
 
       {/* Edit Profile Section */}
-      <form className="border-1 flex flex-col gap-5 border-gray-400 p-10">
-        <h1 className="text-xl">Profile Picture</h1>
+      <section className="border-1 flex flex-col gap-5 border-gray-400 p-10">
+        <form>
+          <h1 className="text-xl">Profile Picture</h1>
 
-        {/* Profile Picture */}
-        <div className="flex items-center gap-5">
-          {/* Photo Preview */}
-          <div className="w-40 h-40 flex items-center justify-center bg-gray-200">
-            {preview ? (
-              <img
-                src={preview}
-                alt="Profile Preview"
-                className="w-full h-full object-cover"
-              />
-            ) : userData?.profile_picture ? (
-              <img
-                src={`${API_URL}/img/${userData?.profile_picture}`}
-                alt="Profile Picture"
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <User size={100} className="text-gray-400" />
-            )}
+          {/* Profile Picture */}
+          <div className="flex items-center gap-5">
+            {/* Photo Preview */}
+            <div className="w-40 h-40 flex items-center justify-center bg-gray-200">
+              {preview ? (
+                <img
+                  src={preview}
+                  alt="Profile Preview"
+                  className="w-full h-full object-cover"
+                />
+              ) : userData?.profile_picture ? (
+                <img
+                  src={`${API_URL}/img/${userData?.profile_picture}`}
+                  alt="Profile Picture"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <User size={100} className="text-gray-400" />
+              )}
+            </div>
+            {/* Photo Preview */}
+
+            <div className="flex flex-col gap-3">
+              <label
+                htmlFor="profile_picture"
+                className="flex items-center gap-2 bg-blue-600 cursor-pointer text-white p-3 rounded-lg"
+              >
+                <SquarePen size={20} />
+                <input
+                  type="file"
+                  name="profile_picture"
+                  id="profile_picture"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleInput}
+                />
+                Change Profile
+              </label>
+
+              <button
+                className="text-red-500 cursor-pointer flex gap-2 p-3 border-1 border-red-700 rounded-lg"
+                onClick={handleFileDelete}
+              >
+                <Trash />
+                <span>Delete Profile</span>
+              </button>
+            </div>
           </div>
-          {/* Photo Preview */}
+          {error ? (
+            <span className="text-red-600">{error}</span>
+          ) : (
+            <span className="text-gray-600">
+              The profile picture must be 512 x 512 pixels or less
+            </span>
+          )}
 
+          {/* Profile Picture */}
+
+          {/* Name Field */}
           <div className="flex flex-col gap-3">
-            <label
-              htmlFor="profile_picture"
-              className="flex items-center gap-2 bg-blue-600 cursor-pointer text-white p-3 rounded-lg"
-            >
-              <SquarePen size={20} />
+            <h1 className="text-xl">Full Name</h1>
+            <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
+              <User
+                size={20}
+                className="text-gray-400 group-focus-within:text-gray-700"
+              />
               <input
-                type="file"
-                name="profile_picture"
-                id="profile_picture"
-                accept="image/*"
-                className="hidden"
+                type="text"
+                name="fullName"
+                id="fullName"
+                placeholder="Enter Full Name"
+                className="bg-transparent outline-no  ne flex-1"
+                value={formData.fullName}
                 onChange={handleInput}
               />
-              Change Profile
-            </label>
-
-            <button
-              className="text-red-500 cursor-pointer flex gap-2 p-3 border-1 border-red-700 rounded-lg"
-              onClick={handleFileDelete}
-            >
-              <Trash />
-              <span>Delete Profile</span>
-            </button>
+            </div>
+            {errorMsg.fullName && (
+              <p className="text-sm text-red-500">{errorMsg.fullName}</p>
+            )}
           </div>
-        </div>
-        {error ? (
-          <span className="text-red-600">{error}</span>
-        ) : (
-          <span className="text-gray-600">
-            The profile picture must be 512 x 512 pixels or less
-          </span>
-        )}
+          {/* Name Field */}
 
-        {/* Profile Picture */}
-
-        {/* Name Field */}
-        <div className="flex flex-col gap-3">
-          <h1 className="text-xl">Full Name</h1>
-          <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
-            <User
-              size={20}
-              className="text-gray-400 group-focus-within:text-gray-700"
-            />
-            <input
-              type="text"
-              name="fullName"
-              id="fullName"
-              placeholder="Enter Full Name"
-              className="bg-transparent outline-no  ne flex-1"
-              value={formData.fullName}
-              onChange={handleInput}
-            />
+          {/* Phone Field */}
+          <div className="flex flex-col gap-3">
+            <h1 className="text-xl">Phone</h1>
+            <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
+              <Phone
+                size={20}
+                className="text-gray-400 group-focus-within:text-gray-700"
+              />
+              <input
+                type="tel"
+                name="phone"
+                id="phone"
+                placeholder="Enter Your Number Phone"
+                className="bg-transparent outline-none flex-1"
+                value={formData.phone}
+                onChange={handleInput}
+              />
+            </div>
+            {errorMsg.phone && (
+              <p className="text-sm text-red-500">{errorMsg.phone}</p>
+            )}
           </div>
-          {errorMsg.fullName && (
-            <p className="text-sm text-red-500">{errorMsg.fullName}</p>
-          )}
-        </div>
-        {/* Name Field */}
+          {/* Phone Field */}
 
-        {/* Phone Field */}
-        <div className="flex flex-col gap-3">
-          <h1 className="text-xl">Phone</h1>
-          <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
-            <Phone
-              size={20}
-              className="text-gray-400 group-focus-within:text-gray-700"
-            />
-            <input
-              type="tel"
-              name="phone"
-              id="phone"
-              placeholder="Enter Your Number Phone"
-              className="bg-transparent outline-none flex-1"
-              value={formData.phone}
-              onChange={handleInput}
-            />
+          {/* Email Field */}
+          <div className="flex flex-col gap-3">
+            <h1 className="text-xl">Email</h1>
+            <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
+              <Mail
+                size={20}
+                className="text-gray-400 group-focus-within:text-gray-700"
+              />
+              <input
+                type="text"
+                name="email"
+                id="email"
+                disabled
+                placeholder="Enter Your Email"
+                className="bg-transparent outline-none flex-1 text-gray-500"
+                value={formData.email}
+                onChange={handleInput}
+              />
+            </div>
           </div>
-          {errorMsg.phone && (
-            <p className="text-sm text-red-500">{errorMsg.phone}</p>
-          )}
-        </div>
-        {/* Phone Field */}
-
-        {/* Email Field */}
-        <div className="flex flex-col gap-3">
-          <h1 className="text-xl">Email</h1>
-          <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
-            <Mail
-              size={20}
-              className="text-gray-400 group-focus-within:text-gray-700"
-            />
-            <input
-              type="text"
-              name="email"
-              id="email"
-              disabled
-              placeholder="Enter Your Email"
-              className="bg-transparent outline-none flex-1 text-gray-500"
-              value={formData.email}
-              onChange={handleInput}
-            />
-          </div>
-        </div>
-        {/* Email Field */}
+          {/* Email Field */}
+        </form>
+        {/* Edit Profile Section */}
 
         {/* Change Password Field */}
         <div className="flex flex-col gap-3">
@@ -278,14 +283,18 @@ const Profile = () => {
         </div>
         {/* Change Password Field */}
 
-        {/* Change Password Field */}
+        {/* Change PIN Field */}
         <div className="flex flex-col gap-3">
           <h1 className="text-xl">Pin</h1>
-          <Link className="text-blue-400" to="/profile/change-pin">
+          <button
+            className=" w-full  text-left text-blue-400"
+            to="/profile/change-pin"
+            onClick={() => setShowModal(true)}
+          >
             Change Pin
-          </Link>
+          </button>
         </div>
-        {/* Change Password Field */}
+        {/* Change PIN Field */}
 
         <button
           className="bg-blue-700 p-2 text-white rounded-lg cursor-pointer"
@@ -293,8 +302,15 @@ const Profile = () => {
         >
           Submit
         </button>
-      </form>
-      {/* Edit Profile Section */}
+      </section>
+
+      {showModal && (
+        <ModalChangePin
+          title={"Change PIN"}
+          label={"Change pin"}
+          setShowModal={setShowModal}
+        />
+      )}
     </section>
   );
 };

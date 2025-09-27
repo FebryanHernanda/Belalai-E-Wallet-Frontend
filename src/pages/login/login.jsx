@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/authSlice";
 import { toast } from "react-toastify";
 import { getProfile } from "../../store/userSlice";
@@ -8,6 +8,8 @@ import { getProfile } from "../../store/userSlice";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isPinExists } = useSelector((state) => state.auth);
+
   const [isEmailInvalid, setIsEmailInvalid] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -68,7 +70,14 @@ const Login = () => {
       });
 
       dispatch(getProfile());
-      setTimeout(() => navigate("/"), 1500);
+
+      setTimeout(() => {
+        if (isPinExists) {
+          navigate("/profile");
+        } else {
+          navigate("/login/enter-pin");
+        }
+      }, 1500);
     } catch (error) {
       toast.error(error || "Login gagal (Username / Password Salah)", {
         position: "top-center",
