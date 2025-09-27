@@ -60,7 +60,7 @@ function Topup() {
     setIsModalOpen(true);
   };
 
-  const HandleSubmitTopUp = () => {
+  const HandleSubmitTopUp = async () => {
     const topupData = new FormData();
     topupData.append("amount", formData.amount);
     topupData.append("tax", formData.tax);
@@ -73,7 +73,7 @@ function Topup() {
     };
 
     try {
-      dispatch(topUpAmount(payload));
+      await dispatch(topUpAmount(payload)).unwrap();
 
       toast.success("Top Up Berhasil ! Saldo telah bertambah!", {
         position: "top-center",
