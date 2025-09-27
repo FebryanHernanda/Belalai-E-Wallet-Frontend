@@ -4,6 +4,7 @@ import { API_URL } from "../utils";
 
 const initialState = {
   userData: null,
+  balance: 0,
   loading: false,
   error: null,
 };
@@ -64,6 +65,26 @@ export const deleteAVAProfile = createAsyncThunk(
   }
 );
 
+export const getBalance = createAsyncThunk(
+  "user/getBalance",
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const token = getState().auth.token;
+
+      const response = await axios.get(`${API_URL}/balance`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Gagal mengambil data"
+      );
+    }
+  }
+);
+
 const userSlice = createSlice({
   initialState,
   name: "user",
@@ -105,6 +126,20 @@ const userSlice = createSlice({
         state.userData.profile_picture = null;
       })
       .addCase(deleteAVAProfile.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+
+      /* =========================================== Get Balance user  ========================================== */
+      .addCase(getBalance.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getBalance.fulfilled, (state, action) => {
+        state.loading = false;
+        state.balance = action.payload.data.Balance;
+      })
+      .addCase(getBalance.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
