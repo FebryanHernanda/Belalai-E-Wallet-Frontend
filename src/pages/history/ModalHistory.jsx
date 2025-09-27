@@ -1,34 +1,45 @@
 import React from "react";
+import { API_URL } from "../../utils";
 
 function ModalHistory(props) {
   const { setIsOpen, customer } = props;
   return (
     <>
       <header className="px-5">
-        <h1 className="text-gray-500">DETAIL TRANSACTION GHALUH 1</h1>
+        <h1 className="text-gray-500">DETAIL TRANSACTION</h1>
         <hr className="border-t border-gray-500" />
         <div className="py-5">
-          <img src="../src/assets/icon/galuh.svg" alt="" className="max-w-20" />
+          <img
+            src={`${API_URL}/img/${customer?.profile_picture}`}
+            alt=""
+            className="max-w-20"
+          />
         </div>
       </header>
       {/* pembungkus data user */}
       <div className="px-5 flex flex-col gap-2">
         <div>
           <h1 className="font-medium">Name:</h1>
-          <p>{customer.name}</p>
+          <p>{customer.contact_name}</p>
         </div>
         <div>
           <h1 className="font-medium">Phone:</h1>
-          <p>{customer.phone}</p>
+          <p>{customer.phone_number}</p>
         </div>
         <div>
           <h1 className="font-medium">Status:</h1>
-          <p>{customer.paid ? "Transfer Success" : "Transfer Failed"}</p>
+          <p>{customer.status ? "Transfer Success" : "Transfer Failed"}</p>
         </div>
         <div>
           <h1 className="font-medium">Amount:</h1>
-          <p className="text-red-600">
-            Rp.{customer.amount.toLocaleString("id-ID")}
+          <p
+            className={`font-semibold lg:text-lg ${
+              customer.transaction_type === "Transfer"
+                ? "text-green-500"
+                : "text-red-500"
+            }`}
+          >
+            Rp.{customer.original_amount.toLocaleString("id-ID")}
           </p>
         </div>
       </div>

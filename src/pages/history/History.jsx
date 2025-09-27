@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from "react";
 import Modal from "../../components/modal/Modal";
 import ModalHistory from "./ModalHistory";
+import { useDispatch, useSelector } from "react-redux";
+import { getHistory } from "../../store/transferSlice";
+import { API_URL } from "../../utils";
 
 function History() {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+
+  const historyData = useSelector((state) => state.transfer.historyData);
+
+  const { page, total_pages, transactions } = historyData || {};
+
+  console.log(transactions);
+  useEffect(() => {
+    dispatch(getHistory());
+  }, [dispatch]);
 
   useEffect(() => {
     const checkScreen = () => setIsMobile(window.innerWidth < 768);
@@ -14,14 +27,6 @@ function History() {
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
-
-  const customers = [
-    { name: "Ghaluh 1", phone: "(239) 555-0108", amount: 50000, paid: true },
-    { name: "Ghaluh 2", phone: "(239) 555-0123", amount: 75000, paid: false },
-    { name: "Ghaluh 3", phone: "(239) 555-0456", amount: 100000, paid: true },
-    { name: "Ghaluh 4", phone: "(239) 555-0789", amount: 25000, paid: false },
-    { name: "Ghaluh 5", phone: "(239) 555-0789", amount: 25000, paid: true },
-  ];
 
   const handleClick = (customer) => {
     if (isMobile) {
@@ -61,49 +66,57 @@ function History() {
           </section>
           {/* History user */}
           <section className="mx-5 md:mx-10 mt-5 space-y-4">
-            {customers.map((customer, index) => (
-              <div
-                key={index}
-                className={`flex items-center p-4 rounded cursor-pointer lg:cursor-default ${
-                  customer.paid ? "bg-gray-100" : "bg-white"
-                }`}
-                onClick={() => handleClick(customer)}
-              >
-                {/* foto */}
-                <img
-                  src="../src/assets/icon/galuh.svg"
-                  alt=""
-                  className="max-w-12"
-                />
-                {/* Konten */}
-                <div className="lg:flex-1 lg:grid lg:grid-cols-3 lg:gap-10 md:flex md:gap-20 px-4 ">
-                  <p className="font-medium md:font-normal md:pl-10 lg:text-xl">
-                    {customer.name}
-                  </p>
-                  <p className="text-sm text-gray-600 lg:text-xl">
-                    {customer.phone}
-                  </p>
-                  <div>
-                    <p
-                      className={`font-semibold lg:text-lg ${
-                        customer.paid ? "text-green-500" : "text-red-500"
-                      }`}
-                    >
-                      Rp.{customer.amount.toLocaleString("id-ID")}
+            {transactions?.length > 0 ? (
+              transactions?.map((data, index) => (
+                <div
+                  key={index}
+                  className={`flex items-center p-4 rounded cursor-pointer lg:cursor-default ${
+                    data.paid ? "bg-gray-100" : "bg-white"
+                  }`}
+                  onClick={() => handleClick(data)}
+                >
+                  {/* foto */}
+                  <img
+                    src={`${API_URL}/img/${data?.profile_picture}`}
+                    alt=""
+                    className="max-w-12"
+                  />
+                  {/* Konten */}
+                  <div className="lg:flex-1 lg:grid lg:grid-cols-3 lg:gap-10 md:flex md:gap-20 px-4 ">
+                    <p className="font-medium md:font-normal md:pl-10 lg:text-xl">
+                      {data.contact_name}
                     </p>
+                    <p className="text-sm text-gray-600 lg:text-xl">
+                      {data.phone_number}
+                    </p>
+                    <div>
+                      <p
+                        className={`font-semibold lg:text-lg ${
+                          data.transaction_type === "Transfer"
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }`}
+                      >
+                        Rp.{data.original_amount.toLocaleString("id-ID")}
+                      </p>
+                    </div>
                   </div>
+                  <img
+                    src="../src/assets/icon/delete.svg"
+                    alt=""
+                    className="hidden md:block md:w-6 cursor-pointer"
+                  />
                 </div>
-                <img
-                  src="../src/assets/icon/delete.svg"
-                  alt=""
-                  className="hidden md:block md:w-6 cursor-pointer"
-                />
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="text-center font-semibold">
+                You haven’t made any transactions yet.
+              </p>
+            )}
           </section>
           <div className="hidden lg:mx-10 my-10 lg:flex justify-between">
             <div>
-              <p>Show 5 History of 100 History</p>
+              <p>{`Show ${page} History of ${total_pages} History`}</p>
             </div>
             <div>
               <div id="button_options" className="flex justify-center gap-5">

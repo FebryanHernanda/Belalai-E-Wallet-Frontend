@@ -13,11 +13,13 @@ import storage from "redux-persist/lib/storage";
 
 import authReducers from "./authSlice";
 import userReducers from "./userSlice";
+import transferReducers from "./transferSlice";
 
 // combine all reducers
 const rootReducer = combineReducers({
   auth: authReducers,
   user: userReducers,
+  transfer: transferReducers,
 });
 
 // persist configuration
