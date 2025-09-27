@@ -5,6 +5,7 @@ import { API_URL } from "../utils";
 const initialState = {
   isAuthenticated: false,
   token: "",
+  isPinExists: false,
   loading: false,
   error: null,
 };
@@ -87,6 +88,28 @@ export const changePassword = createAsyncThunk(
   }
 );
 
+export const createPin = createAsyncThunk(
+  "auth/createPin",
+  async (createPin, { getState, rejectWithValue }) => {
+    try {
+      const token = getState().auth.token;
+
+      const response = await axios.patch(
+        `${API_URL}/auth/update-pin`,
+        createPin,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data?.error || "Buat PIN gagal");
+    }
+  }
+);
+
 const authSlice = createSlice({
   initialState,
   name: "auth",
@@ -115,6 +138,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isAuthenticated = true;
         state.token = action.payload.data.token;
+        state.isPinExists = action.payload.data.is_pin_exist;
         state.loading = false;
         state.error = null;
       })
@@ -137,7 +161,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      /* =========================================== Logout =========================================== */
+      /* =========================================== Change Password =========================================== */
       .addCase(changePassword.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -146,6 +170,19 @@ const authSlice = createSlice({
         state.loading = false;
       })
       .addCase(changePassword.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      /* =========================================== Create Pin =========================================== */
+      .addCase(createPin.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(createPin.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(createPin.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
