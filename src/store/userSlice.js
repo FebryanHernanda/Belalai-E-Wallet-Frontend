@@ -99,6 +99,7 @@ const userSlice = createSlice({
       .addCase(getProfile.fulfilled, (state, action) => {
         state.userData = action.payload.data;
         state.loading = false;
+        state.error = null;
       })
       .addCase(getProfile.rejected, (state, action) => {
         state.loading = false;
@@ -111,6 +112,7 @@ const userSlice = createSlice({
       })
       .addCase(updateProfile.fulfilled, (state) => {
         state.loading = false;
+        state.error = null;
       })
       .addCase(updateProfile.rejected, (state, action) => {
         state.loading = false;
@@ -124,6 +126,7 @@ const userSlice = createSlice({
       .addCase(deleteAVAProfile.fulfilled, (state) => {
         state.loading = false;
         state.userData.profile_picture = null;
+        state.error = null;
       })
       .addCase(deleteAVAProfile.rejected, (state, action) => {
         state.loading = false;
@@ -138,6 +141,7 @@ const userSlice = createSlice({
       .addCase(getBalance.fulfilled, (state, action) => {
         state.loading = false;
         state.balance = action.payload.data.Balance;
+        state.error = null;
       })
       .addCase(getBalance.rejected, (state, action) => {
         state.loading = false;
