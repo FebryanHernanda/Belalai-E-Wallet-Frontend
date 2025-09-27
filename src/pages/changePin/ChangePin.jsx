@@ -1,9 +1,17 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import ModalEnterPin from "../modal/ModalEnterPin";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { changePin } from "../../store/authSlice";
 
 const ChangePin = () => {
   const inputRefs = useRef([]);
   const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { oldPin } = location.state;
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -24,7 +32,7 @@ const ChangePin = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const pin = inputRefs.current.map((input) => input.value).join("");
 
@@ -34,7 +42,26 @@ const ChangePin = () => {
     }
 
     setError("");
-    console.log("PIN:", pin);
+
+    try {
+      const pinData = new FormData();
+      pinData.append("old_pin", oldPin);
+      pinData.append("new_pin", pin);
+
+      await dispatch(changePin(pinData)).unwrap();
+
+      toast.success("Berhasil merubah PIN!", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+
+      navigate("/profile");
+    } catch (error) {
+      toast.error(error.message || "Gagal merubah PIN!", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    }
   };
 
   return (
@@ -71,14 +98,13 @@ const ChangePin = () => {
             <div className="text-red-500 text-sm text-center">{error}</div>
           )}
 
-          <Link to={"/profile"}>
-            <button
-              type="submit"
-              className="flex justify-center items-center text-white rounded-md bg-[#2948FF] w-full h-11 cursor-pointer mt-5"
-            >
-              Submit
-            </button>
-          </Link>
+          <button
+            type="submit"
+            className="flex justify-center items-center text-white rounded-md bg-[#2948FF] w-full h-11 cursor-pointer mt-5"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
         </form>
       </div>
     </section>
