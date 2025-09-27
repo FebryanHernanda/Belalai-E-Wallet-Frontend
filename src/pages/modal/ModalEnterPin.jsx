@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
-function ModalEnterPin() {
+import { Link } from "react-router-dom";
+function ModalEnterPin({ onSuccess, onFailed }) {
   // const [showModal, setShowModal] = useState(false);
   const [error, setError] = useState("");
   const inputRefs = useRef([]);
@@ -17,7 +18,13 @@ function ModalEnterPin() {
       setError("Masukkan 6 digit PIN Anda.");
       return;
     }
+    // modal jika succes / berhasil
     setError("");
+    if (pin === "123456") {
+      onSuccess();
+    } else {
+      onFailed();
+    }
     // setShowModal(false);
   };
 
@@ -38,7 +45,7 @@ function ModalEnterPin() {
     }
   };
   return (
-    <div className="absolute inset-0 p-5 bg-black/50 flex items-center justify-center z-50">
+    <div className="absolute inset-0 p-5 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl p-6 w-[400px] relative">
         <h2 className="text-lg font-semibold mb-4 ">TRANSFER TO GHALUH 1</h2>
 
@@ -65,13 +72,16 @@ function ModalEnterPin() {
           <div className="flex gap-3">
             <button
               type="submit"
-              className="flex-1 p-2 bg-blue-600 text-white rounded-lg"
+              className="flex-1 p-2 bg-blue-600 text-white rounded-lg cursor-pointer"
             >
               Next
             </button>
           </div>
           <p className="text-center text-sm text-gray-500 text-[17px]">
-            Forgot Your Spirit? <a href="/reset">Reset</a>
+            Forgot Your Spirit?
+            <Link to={"/profile/change-pin"}>
+              <span className="cursor-pointer text-blue-700">Reset</span>
+            </Link>
           </p>
         </form>
       </div>

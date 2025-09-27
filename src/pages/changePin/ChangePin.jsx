@@ -71,12 +71,14 @@ const ChangePin = () => {
             <div className="text-red-500 text-sm text-center">{error}</div>
           )}
 
-          <button
-            type="submit"
-            className="flex justify-center items-center text-white rounded-md bg-[#2948FF] w-full h-11 cursor-pointer mt-5"
-          >
-            Submit
-          </button>
+          <Link to={"/profile"}>
+            <button
+              type="submit"
+              className="flex justify-center items-center text-white rounded-md bg-[#2948FF] w-full h-11 cursor-pointer mt-5"
+            >
+              Submit
+            </button>
+          </Link>
         </form>
       </div>
     </section>

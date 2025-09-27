@@ -5,8 +5,20 @@ import ModalEnterPin from "../modal/ModalEnterPin";
 
 function TransferDetail() {
   const [Active, SetActive] = useState(false);
+  const [step, setStep] = useState("");
   return (
     <>
+      {/* Modal */}
+      {step === "enterPin" && (
+        <ModalEnterPin
+          onSuccess={() => setStep("success")}
+          onFailed={() => setStep("failed")}
+          onClose={() => setStep("")}
+        />
+      )}
+      {step === "success" && <ModalSucces onClose={() => setStep("")} />}
+      {step === "failed" && <ModalFailed onClose={() => setStep("")} />}
+
       <main>
         {/* Transfer Berhasil */}
         {/* {Active && <ModalSucces onClose={() => SetActive(false)} />} */}
@@ -15,9 +27,16 @@ function TransferDetail() {
         {/* {Active && <ModalFailed onClose={() => SetActive(false)} />} */}
 
         {/* Transfer Pin */}
-        {Active && <ModalEnterPin onClose={() => SetActive(false)} />}
+        {/* {Active && <ModalEnterPin onClose={() => SetActive(false)} />} */}
 
-        {Active && <div className="absolute inset-0 backdrop-brightness-50" />}
+        {/* {Active && <div className="absolute inset-0 backdrop-brightness-50" />}
+         */}
+
+        {/* latar belakang untuk modal jika aktif */}
+        {["enterPin", "success", "failed"].includes(step) && (
+          <div className="absolute inset-0 backdrop-brightness-60 z-4" />
+        )}
+
         <header className="hidden md:block md:flex gap-5 my-5 ml-14">
           <img src="../src/assets/icon/send.svg" alt="" />
           <p className="font-semibold text-xl">Transfer Money</p>
@@ -115,7 +134,7 @@ function TransferDetail() {
           </article>
           <button
             className="bg-blue-700 text-white rounded-lg w-full mt-10 min-h-14 cursor-pointer"
-            onClick={() => SetActive((prev) => !prev)}
+            onClick={() => setStep("enterPin")}
           >
             Submit & Transfer
           </button>

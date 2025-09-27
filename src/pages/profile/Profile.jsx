@@ -212,8 +212,8 @@ const Profile = () => {
               name="fullName"
               id="fullName"
               placeholder="Enter Full Name"
-              className="bg-transparent outline-none flex-1"
-              value={formData.fullName ?? ""}
+              className="bg-transparent outline-no  ne flex-1"
+              value={formData.fullName}
               onChange={handleInput}
             />
           </div>
@@ -237,7 +237,7 @@ const Profile = () => {
               id="phone"
               placeholder="Enter Your Number Phone"
               className="bg-transparent outline-none flex-1"
-              value={formData.phone ?? ""}
+              value={formData.phone}
               onChange={handleInput}
             />
           </div>
@@ -262,7 +262,7 @@ const Profile = () => {
               disabled
               placeholder="Enter Your Email"
               className="bg-transparent outline-none flex-1 text-gray-500"
-              value={formData.email ?? ""}
+              value={formData.email}
               onChange={handleInput}
             />
           </div>

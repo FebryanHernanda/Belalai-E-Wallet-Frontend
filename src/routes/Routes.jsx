@@ -13,6 +13,7 @@ import ChangePin from "../pages/changePin/ChangePin";
 import History from "../pages/history/History";
 import ChangePassword from "../pages/changePassword/ChangePassword";
 import Topup from "../pages/topup/Topup";
+import TransferDetail from "../pages/transfer-detail/TransferDetail";
 
 function MainRoutes() {
   return (
@@ -37,6 +38,7 @@ function MainRoutes() {
 
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/transfer" element={<Transfer />} />
+          <Route path="/transfer_detail" element={<TransferDetail />} />
           <Route path="/history" element={<History />} />
           <Route path="/top-up" element={<Topup />} />
         </Route>

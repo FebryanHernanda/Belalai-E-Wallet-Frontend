@@ -100,18 +100,18 @@ function Register() {
         <div className="flex">
           <section className="lg:bg-cover lg:w-1/2 ">
             <section className="bg-white h-screen lg:rounded-r-3xl">
-              <section className="px-5 lg:px-35 py-20">
+              <section className="px-5 lg:px-40 pt-25">
                 <div className="flex items-center gap-3 mb-2">
                   <img
                     src="./src/assets/icon/Money Wallet.svg"
                     alt="icon"
-                    className="max-w-8"
+                    className="max-w-7"
                   />
-                  <p className="text-blue-500 font-medium text-2xl">E-Wallet</p>
+                  <p className="text-blue-500 font-medium text-xl">E-Wallet</p>
                 </div>
                 {/* header */}
                 <header>
-                  <h1 className="font-normal text-2xl lg:text-4xl">
+                  <h1 className="font-normal text-2xl">
                     Start Accessing Banking Needs With All Devices and All
                     Platforms With 30.000+ Users
                   </h1>
@@ -123,18 +123,18 @@ function Register() {
                 </header>
                 {/* Sign In other */}
                 <section className="flex flex-row lg:flex-col gap-5 mt-8">
-                  <button className="border rounded-4xl w-full h-14 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
+                  <button className="border rounded-4xl w-full h-10 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
                     <img
                       src="./src/assets/icon/flat-color-icons_google.svg"
                       alt=""
                     />
-                    <p className="hidden lg:block lg:text-xl">
+                    <p className="hidden lg:block lg:text-md">
                       Sign In With Google
                     </p>
                   </button>
-                  <button className="border rounded-4xl w-full h-14 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
+                  <button className="border rounded-4xl w-full h-10 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
                     <img src="./src/assets/icon/fb.svg" alt="" />
-                    <p className="hidden lg:block lg:text-xl">
+                    <p className="hidden lg:block lg:text-md">
                       Sign In With Facebook
                     </p>
                   </button>
@@ -147,9 +147,9 @@ function Register() {
                 </div>
 
                 {/* input user email and pass */}
-                <form onSubmit={submitHandler} className="mt-3">
+                <form onSubmit={submitHandler}>
                   <div className="flex flex-col bg-[#ffffff] gap-1">
-                    <label htmlFor="email" className="text-xl">
+                    <label htmlFor="email">
                       Email
                     </label>
                     <div className="input-email flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-11">
@@ -171,8 +171,8 @@ function Register() {
                       {errorem}
                     </span>
                   </div>
-                  <div className="flex flex-col bg-[#ffffff] gap-1 mt-2">
-                    <label htmlFor="password" className="text-xl">
+                  <div className="flex flex-col bg-[#ffffff] gap-1">
+                    <label htmlFor="password" className="">
                       Password
                     </label>
                     <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-11">
@@ -204,8 +204,8 @@ function Register() {
                       {errorpass}
                     </span>
                   </div>
-                  <div className="flex flex-col bg-[#ffffff] gap-1 mt-2">
-                    <label htmlFor="confirmpassword" className="text-xl">
+                  <div className="flex flex-col bg-[#ffffff] gap-1 mt-1">
+                    <label htmlFor="confirmpassword" className="">
                       Confirm Password
                     </label>
                     <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-11">
@@ -239,11 +239,11 @@ function Register() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white h-13 rounded-md cursor-pointer mt-4"
+                    className="w-full bg-blue-600 text-white h-11 rounded-md cursor-pointer mt-1"
                   >
                     Register
                   </button>
-                  <p className="text-center mt-5 text-gray-500">
+                  <p className="text-center mt-3 text-gray-500">
                     Have An Account ?{" "}
                     <Link className="text-blue-600 cursor-pointer" to="/login">
                       Login

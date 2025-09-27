@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function ModalFailed({onClose}) {
   return (
     <>
       <div className="flex justify-center">
-        <div className="bg-white z-2 mx-5 px-5 py-5 rounded-lg mt-[100px] lg:w-150 lg:pb-10 absolute">
+        <div className="bg-white z-20 mx-5 px-5 py-5 rounded-lg mt-[100px] lg:w-150 lg:pb-10 absolute">
           {/* header */}
           <header>
             <h1 className="text-gray-600 font-semibold mb-2">
@@ -35,11 +36,15 @@ function ModalFailed({onClose}) {
             >
               <p className="text-white font-semibold">Try Again</p>
             </button>
+            <Link to={"/dashboard"}>
+            
+            
             <button
               className="border border-blue-700 rounded-lg w-full flex justify-center items-center gap-5 h-15 cursor-pointer"
             >
               <p className="text-blue-700 font-semibold">Back To Dashboard</p>
             </button>
+            </Link>
           </div>
         </div>
       </div>
