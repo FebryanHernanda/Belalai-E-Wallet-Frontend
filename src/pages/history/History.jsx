@@ -4,6 +4,7 @@ import ModalHistory from "./ModalHistory";
 import { useDispatch, useSelector } from "react-redux";
 import { getHistory } from "../../store/transferSlice";
 import { API_URL } from "../../utils";
+import ModalDelete from "../modal/ModalDelete";
 
 function History() {
   const dispatch = useDispatch();
@@ -11,12 +12,13 @@ function History() {
 
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [Active, SetActive] = useState(false);
 
   const historyData = useSelector((state) => state.transfer.historyData);
 
   const { page, total_pages, transactions } = historyData || {};
 
-  console.log(transactions);
+  // console.log(transactions);
   useEffect(() => {
     dispatch(getHistory());
   }, [dispatch]);
@@ -38,6 +40,7 @@ function History() {
   return (
     <>
       <main>
+      
         <div className="hidden  md:flex gap-5 ml-10 mt-10 cursor-pointer">
           <img src="../src/assets/icon/history.svg" alt="" />
           <p className="font-bold text-md">History Transaction</p>
@@ -71,7 +74,7 @@ function History() {
                 <div
                   key={index}
                   className={`flex items-center p-4 rounded cursor-pointer lg:cursor-default ${
-                    data.paid ? "bg-gray-100" : "bg-white"
+                    data.status === "success" ? "bg-gray-100" : "bg-white"
                   }`}
                   onClick={() => handleClick(data)}
                 >
@@ -92,7 +95,7 @@ function History() {
                     <div>
                       <p
                         className={`font-semibold lg:text-lg ${
-                          data.transaction_type === "Transfer"
+                          data.status === "success"
                             ? "text-green-500"
                             : "text-red-500"
                         }`}
@@ -104,8 +107,10 @@ function History() {
                   <img
                     src="../src/assets/icon/delete.svg"
                     alt=""
-                    className="hidden md:block md:w-6 cursor-pointer"
+                    className="hidden md:block md:w-6 cursor-pointer "
+                    onClick={() => SetActive((prev) => !prev)}
                   />
+                    {Active && <ModalDelete transactionID={data.id} onClose={() => SetActive(false)} />}
                 </div>
               ))
             ) : (
