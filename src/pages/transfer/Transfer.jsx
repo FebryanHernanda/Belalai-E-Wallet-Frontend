@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import { useState } from "react";
 
@@ -83,14 +84,16 @@ const Transfer = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {[1, 2, 3].map((_, index) => (
                 <tr key={index}>
-                  <td className="px-6 py-4 whitespace-nowrap w-20">
-                    <img
-                      src="/Ex-Profile.svg"
-                      className="h-10 w-10 object-cover"
-                    />
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-[200px]">
-                    Ghaluh
+                  <Link to={"/transfer_detail"}>
+                    <td className="px-6 py-4 whitespace-nowrap w-20">
+                      <img
+                        src="/Ex-Profile.svg"
+                        className="h-10 w-10 object-cover cursor-pointer"
+                      />
+                    </td>
+                  </Link>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-[200px]  cursor-pointer">
+                    <Link to={"/transfer_detail"}>Ghaluh</Link>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-[150px]">
                     (239) 555-0108

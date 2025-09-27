@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function ModalSucces({onClose}) {
+function ModalSucces({ onClose }) {
   return (
     <>
       <div className="flex justify-center">
-        <div className="bg-white z-2 mx-5 px-5 py-5 rounded-lg mt-[100px] lg:w-150 lg:pb-10 absolute">
+        <div className="bg-white z-20 mx-5 px-5 py-5 rounded-lg mt-[100px] lg:w-150 lg:pb-10 absolute">
           {/* header */}
           <header>
             <h1 className="text-gray-600 font-semibold mb-2">
@@ -29,15 +30,13 @@ function ModalSucces({onClose}) {
             </p>
           </section>
           <div className="mt-5 flex flex-col gap-5">
-            <button
-              className="bg-blue-700 rounded-lg w-full flex justify-center items-center gap-5 h-15 cursor-pointer"
-               onClick={onClose}
-            >
-              <p className="text-white font-semibold">Done</p>
-            </button>
-            <button
-              className="border border-blue-700 rounded-lg w-full flex justify-center items-center gap-5 h-15 cursor-pointer"
-            >
+            <Link to={"/transfer"}>
+              <button className="bg-blue-700 rounded-lg w-full flex justify-center items-center gap-5 h-15 cursor-pointer">
+                <p className="text-white font-semibold">Done</p>
+              </button>
+            </Link>
+            <button className="border border-blue-700 rounded-lg w-full flex justify-center items-center gap-5 h-15 cursor-pointer"
+             onClick={onClose}>
               <p className="text-blue-700 font-semibold">Transfer Again</p>
             </button>
           </div>
