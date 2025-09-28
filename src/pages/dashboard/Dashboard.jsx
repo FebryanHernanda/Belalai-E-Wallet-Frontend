@@ -16,6 +16,7 @@ import { getHistory } from "../../store/transferSlice";
 import { API_URL } from "../../utils";
 
 import axios from "axios";
+import getPaymentMethods from "../../utils/getPaymentMethods";
 
 ChartJS.register(
   CategoryScale,
@@ -70,7 +71,6 @@ const Dashboard = () => {
           data: { data: resultChart },
         } = response;
 
-        console.log(resultChart);
         setChart(resultChart);
       } catch (error) {
         console.log(error);
@@ -299,7 +299,7 @@ const Dashboard = () => {
         {/* Transaction History */}
         <div className="lg:col-span-3 transaction-history flex flex-col">
           <div className="flex flex-row justify-between items-center shadow rounded-t-lg p-4">
-            <div className=" font-semibold">Transaction History</div>
+            <div className="font-semibold">Transaction History</div>
             <Link type="button" className="cursor-pointer" to="/history">
               See All
             </Link>
@@ -307,7 +307,7 @@ const Dashboard = () => {
 
           {/* List transaksi */}
 
-          <div className="flex flex-col max-h-[400px] overflow-y-scroll shadow rounded-b-lg">
+          <div className="flex flex-col gap-5 p-2 min-h-100  max-h-[400px] overflow-y-scroll shadow rounded-b-lg">
             {transactions?.length > 0 ? (
               transactions?.map((data, idx) => {
                 return (
@@ -317,11 +317,19 @@ const Dashboard = () => {
                   >
                     <div className="flex items-center justify-between p-4">
                       <div className="flex items-center gap-4">
-                        <img
-                          src={`${API_URL}/img/${data?.profile_picture}`}
-                          alt="Photo profile"
-                          className="max-w-12 rounded-lg"
-                        />
+                        {data.transaction_type === "Topup" ? (
+                          <img
+                            src={getPaymentMethods(data?.contact_name)}
+                            alt="Payment Picture"
+                            className="max-w-12 rounded-xl"
+                          />
+                        ) : (
+                          <img
+                            src={`${API_URL}/img/${data?.profile_picture}`}
+                            alt="Photo profile"
+                            className="max-w-12 rounded-xl"
+                          />
+                        )}
                         <div className="flex flex-col gap-1">
                           <div className="font-medium">{data.contact_name}</div>
                           <div className="text-sm text-gray-500">
@@ -329,8 +337,11 @@ const Dashboard = () => {
                           </div>
                         </div>
                       </div>
-
                       {data.transaction_type === "Transfer" ? (
+                        <p className="text-green-500">
+                          +Rp{data.original_amount.toLocaleString("id-ID")}
+                        </p>
+                      ) : data.transaction_type === "Topup" ? (
                         <p className="text-green-500">
                           +Rp{data.original_amount.toLocaleString("id-ID")}
                         </p>
@@ -344,7 +355,7 @@ const Dashboard = () => {
                 );
               })
             ) : (
-              <p className="text-center font-semibold">
+              <p className="text-center">
                 You haven’t made any transactions yet.
               </p>
             )}
