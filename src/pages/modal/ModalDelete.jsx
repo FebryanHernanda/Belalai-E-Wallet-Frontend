@@ -1,32 +1,27 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { API_URL } from "../../utils";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { getHistory } from "../../store/transferSlice";
+import {
+  deleteHistory,
+  deleteTopupHistory,
+  getHistory,
+} from "../../store/transferSlice";
 
-function ModalDelete({ transactionID, onClose }) {
+function ModalDelete({ historyData, onClose }) {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token);
 
-  const handleDelete = async (transactionID) => {
+  const handleDelete = async (historyData) => {
     try {
-      const res = await fetch(`${API_URL}/transaction/${transactionID}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const data = await res.json();
-      if (res.ok) {
-        dispatch(getHistory());
-        toast.success("Berhasil Menghapus histori");
+      if (historyData.transaction_type === "Topup") {
+        dispatch(deleteTopupHistory(historyData.id));
       } else {
-        console.error("Delete failed:", data?.message);
-        toast.error("Gagal Menghapus histori");
+        dispatch(deleteHistory(historyData.id));
       }
-    } catch (err) {
-      console.log(err);
+
+      dispatch(getHistory());
+      toast.success("Berhasil Menghapus histori", { autoClose: 1500 });
+    } catch (error) {
+      console.log(error);
+      toast.error("Gagal Menghapus histori", { autoClose: 1500 });
     }
   };
   return (
@@ -46,7 +41,7 @@ function ModalDelete({ transactionID, onClose }) {
             <button
               className="px-4 py-2 bg-red-600 cursor-pointer text-white rounded hover:bg-red-700"
               onClick={() => {
-                handleDelete(transactionID), onClose();
+                handleDelete(historyData), onClose();
               }}
             >
               Hapus
