@@ -18,12 +18,12 @@ function ModalHistory(props) {
   const handleDelete = async (historyData) => {
     try {
       if (historyData.transaction_type === "Topup") {
-        dispatch(deleteTopupHistory(historyData.id));
+        await dispatch(deleteTopupHistory(historyData.id));
       } else {
-        dispatch(deleteHistory(historyData.id));
+        await dispatch(deleteHistory(historyData.id));
       }
 
-      dispatch(getHistory());
+      await dispatch(getHistory());
       toast.success("Berhasil Menghapus histori", { autoClose: 1500 });
       setIsOpen((prev) => !prev);
     } catch (error) {

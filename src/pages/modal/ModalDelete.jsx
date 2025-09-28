@@ -12,12 +12,12 @@ function ModalDelete({ historyData, onClose }) {
   const handleDelete = async (historyData) => {
     try {
       if (historyData.transaction_type === "Topup") {
-        dispatch(deleteTopupHistory(historyData.id));
+        await dispatch(deleteTopupHistory(historyData.id));
       } else {
-        dispatch(deleteHistory(historyData.id));
+        await dispatch(deleteHistory(historyData.id));
       }
+      await dispatch(getHistory());
 
-      dispatch(getHistory());
       toast.success("Berhasil Menghapus histori", { autoClose: 1500 });
     } catch (error) {
       console.log(error);
