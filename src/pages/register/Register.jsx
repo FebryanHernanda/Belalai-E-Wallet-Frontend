@@ -100,14 +100,14 @@ function Register() {
         <div className="flex">
           <section className="lg:bg-cover lg:w-1/2 ">
             <section className="bg-white h-screen lg:rounded-r-3xl">
-              <section className="px-5 lg:px-40 pt-10">
-                <div className="flex items-center gap-3 mb-2">
+              <section className="px-5 lg:px-15 pt-5">
+                <div className="flex items-center gap-2">
                   <img
                     src="/belalai-wallet.png"
                     alt="icon"
-                    className="max-w-5"
+                    className="max-w-4"
                   />
-                  <p className="text-blue-500 font-medium">E-Wallet</p>
+                  <p className="text-blue-500 font-medium text-sm">E-Wallet</p>
                 </div>
                 {/* header */}
                 <header>
@@ -115,7 +115,7 @@ function Register() {
                     Start Accessing Banking Needs With All Devices and All
                     Platforms With 30.000+ Users
                   </h1>
-                  <p className="text-gray-500 mt-2">
+                  <p className="text-gray-500 mt-1 text-sm">
                     Transfering money is eassier than ever, you can access
                     Zwallet wherever you are. Desktop, laptop, mobile phone? we
                     cover all of that for you!
@@ -128,20 +128,20 @@ function Register() {
                       src="./src/assets/icon/flat-color-icons_google.svg"
                       alt=""
                     />
-                    <p className="hidden lg:block lg:text-md">
+                    <p className="hidden lg:block lg:text-sm">
                       Sign In With Google
                     </p>
                   </button>
                   <button className="border rounded-4xl w-full h-9 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
                     <img src="./src/assets/icon/fb.svg" alt="" />
-                    <p className="hidden lg:block lg:text-md">
+                    <p className="hidden lg:block lg:text-sm">
                       Sign In With Facebook
                     </p>
                   </button>
                 </section>
                 <div className="relative text-center my-4">
                   <hr className="border-t border-gray-300" />
-                  <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-7 text-gray-400">
+                  <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-7 text-gray-400 text-sm">
                     Or
                   </span>
                 </div>
@@ -150,7 +150,7 @@ function Register() {
                 <form onSubmit={submitHandler}>
                   <div className="flex flex-col bg-[#ffffff] gap-1">
                     <label htmlFor="email">Email</label>
-                    <div className="input-email flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-10">
+                    <div className="input-email flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-9">
                       <img
                         src="./src/assets/icon/Logo-email.svg"
                         alt=""
@@ -162,10 +162,10 @@ function Register() {
                         placeholder="Enter Your Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full outline-none"
+                        className="w-full outline-none text-sm"
                       />
                     </div>
-                    <span className="text-red-500 min-h-[1.5rem]">
+                    <span className="text-red-500 min-h-[1.5rem] text-sm">
                       {errorem}
                     </span>
                   </div>
@@ -173,7 +173,7 @@ function Register() {
                     <label htmlFor="password" className="">
                       Password
                     </label>
-                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-10">
+                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-9">
                       <img
                         src="./src/assets/icon/Password.svg"
                         alt="password"
@@ -183,7 +183,7 @@ function Register() {
                         type={isPasswordVisible ? "text" : "password"}
                         id="password"
                         placeholder="Enter Your Password"
-                        className="w-full outline-none"
+                        className="w-full outline-none text-sm"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -198,15 +198,15 @@ function Register() {
                         onClick={togglePasswordVisibility}
                       />
                     </div>
-                    <span className="text-red-500 min-h-[1.5rem]">
+                    <span className="text-red-500 min-h-[1.5rem] text-sm">
                       {errorpass}
                     </span>
                   </div>
-                  <div className="flex flex-col bg-[#ffffff] gap-1 mt-1">
+                  <div className="flex flex-col bg-[#ffffff] gap-1">
                     <label htmlFor="confirmpassword" className="">
                       Confirm Password
                     </label>
-                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-10">
+                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-9">
                       <img
                         src="./src/assets/icon/Password.svg"
                         alt="confirmpassword"
@@ -216,7 +216,7 @@ function Register() {
                         type={isConfirmPasswordVisible ? "text" : "password"}
                         id="confirmpassword"
                         placeholder="Enter Your Password Again"
-                        className="w-full outline-none"
+                        className="w-full outline-none text-sm"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                       />
@@ -231,7 +231,7 @@ function Register() {
                         onClick={toggleConfirmPasswordVisibility}
                       />
                     </div>
-                    <span className="text-red-500 min-h-[1rem]">
+                    <span className="text-red-500 min-h-[1.5rem] text-sm">
                       {errorConfirmpass}
                     </span>
                   </div>
@@ -241,7 +241,7 @@ function Register() {
                   >
                     Register
                   </button>
-                  <p className="text-center mt-3 text-gray-500">
+                  <p className="text-center mt-3 text-gray-500 text-sm">
                     Have An Account ?{" "}
                     <Link className="text-blue-600 cursor-pointer" to="/login">
                       Login

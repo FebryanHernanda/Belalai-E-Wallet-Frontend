@@ -287,7 +287,7 @@ const Profile = () => {
         <div className="flex flex-col gap-3">
           <h1 className="text-xl">Pin</h1>
           <button
-            className=" w-full  text-left text-blue-400"
+            className=" w-full  text-left text-blue-400 cursor-pointer"
             to="/profile/change-pin"
             onClick={() => setShowModal(true)}
           >

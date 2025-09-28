@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState} from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { createPin } from "../../store/authSlice";
@@ -8,8 +8,28 @@ const EnterPin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // State untuk menyimpan digit PIN
+  const [pinValues, setPinValues] = useState(["", "", "", "", "", ""]);
+  // State untuk menentukan apakah digit di-mask atau tidak
+  const [isMasked, setIsMasked] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+
   const inputRefs = useRef([]);
   const [error, setError] = useState("");
+
+  // menyimpan ID timeout masking per digit PIN
+  const maskingTimeouts = useRef([]);
+
+  // Fokus ke input pertama
+  // useEffect(() => {
+  //   inputRefs.current[0]?.focus();
+  // }, []);
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -18,6 +38,28 @@ const EnterPin = () => {
       e.target.value = "";
       return;
     }
+    // Update nilai PIN pada posisi yang diketik
+    const newPin = [...pinValues];
+    newPin[index] = value;
+    setPinValues(newPin);
+
+    const newMask = [...isMasked];
+    newMask[index] = false;
+    setIsMasked(newMask);
+
+    // Hapus timeout sebelumnya agar tidak bentrok
+    if (maskingTimeouts.current[index]) {
+      clearTimeout(maskingTimeouts.current[index]);
+    }
+
+    // Timer untuk masking
+    maskingTimeouts.current[index] = setTimeout(() => {
+      setIsMasked((prevMask) => {
+        const updated = [...prevMask];
+        updated[index] = true;
+        return updated;
+      });
+    }, 300);
 
     if (value && index < inputRefs.current.length - 1) {
       inputRefs.current[index + 1].focus();
@@ -32,7 +74,8 @@ const EnterPin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const pin = inputRefs.current.map((input) => input.value).join("");
+    // const pin = inputRefs.current.map((input) => input.value).join("");
+    const pin = pinValues.join("");
 
     if (pin.length < 6) {
       setError("PIN tidak boleh kosong, harus 6 digit!");
@@ -91,6 +134,7 @@ const EnterPin = () => {
                     ref={(el) => (inputRefs.current[i] = el)}
                     onChange={(e) => handleChange(e, i)}
                     onKeyDown={(e) => handleKeyDown(e, i)}
+                    value={isMasked[i] && pinValues[i] ? "*" : pinValues[i]}
                   />
                 ))}
               </div>
