@@ -1,0 +1,130 @@
+import {
+  BanknoteArrowUp,
+  History,
+  LifeBuoy,
+  LogOut,
+  Send,
+  UserRoundPen,
+} from "lucide-react";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { logout } from "../../store/authSlice";
+import { persistor } from "../../store/store";
+import { useState } from "react";
+
+const Sidebar = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+  const baseClass =
+    "flex gap-5 cursor-pointer items-center p-2 rounded-xl hover:bg-blue-600 hover:text-white";
+  const activeClass = "bg-blue-600 text-white";
+
+  const openModal = () => setIsLogoutModalOpen(true);
+  const closeModal = () => setIsLogoutModalOpen(false);
+
+  const confirmLogout = () => {
+    dispatch(logout());
+    persistor.purge();
+    toast.success("Anda telah berhasil keluar", {
+      position: "top-right",
+      autoClose: 1000,
+    });
+    navigate("/");
+    closeModal();
+  };
+
+  return (
+    <>
+      <aside className="hidden lg:flex lg:w-1/5 min-h-screen border-r border-gray-300">
+        <nav className="flex flex-col gap-2 p-5 w-full">
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${baseClass} ${activeClass}` : baseClass
+            }
+            to="/dashboard"
+          >
+            <LifeBuoy size={28} />
+            <h1 className="font-light">Dashboard</h1>
+          </NavLink>
+
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${baseClass} ${activeClass}` : baseClass
+            }
+            to="/transfer"
+          >
+            <Send size={28} />
+            <h1 className="font-light">Transfer</h1>
+          </NavLink>
+
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${baseClass} ${activeClass}` : baseClass
+            }
+            to="/history"
+          >
+            <History size={28} />
+            <h1 className="font-light">History</h1>
+          </NavLink>
+
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${baseClass} ${activeClass}` : baseClass
+            }
+            to="/top-up"
+          >
+            <BanknoteArrowUp size={28} />
+            <h1 className="font-light">Top Up</h1>
+          </NavLink>
+
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${baseClass} ${activeClass}` : baseClass
+            }
+            to="/profile"
+          >
+            <UserRoundPen size={28} />
+            <h1 className="font-light">Profile</h1>
+          </NavLink>
+
+          <button
+            className="flex gap-5 cursor-pointer text-red-600 items-center p-3 rounded-xl hover:bg-blue-500 hover:text-white"
+            onClick={openModal}
+          >
+            <LogOut className="rotate-180" />
+            <h3>Keluar</h3>
+          </button>
+        </nav>
+      </aside>
+
+      {isLogoutModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-xl w-[400px]">
+            <h2 className="text-lg text-black mb-4">
+              Apakah Anda yakin ingin keluar?
+            </h2>
+            <div className="flex justify-end gap-4">
+              <button
+                className="px-4 py-2 bg-gray-400 rounded hover:bg-gray-500"
+                onClick={closeModal}
+              >
+                Batal
+              </button>
+              <button
+                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                onClick={confirmLogout}
+              >
+                Keluar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Sidebar;
