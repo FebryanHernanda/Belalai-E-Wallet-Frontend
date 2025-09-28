@@ -153,13 +153,13 @@ function History() {
                     <img
                       src={getPaymentMethods(data?.contact_name)}
                       alt="Payment Picture"
-                      className="w-15 h-15 rounded-xl"
+                      className="w-15 h-15 object-cover rounded-xl"
                     />
                   ) : (
                     <img
                       src={`${API_URL}/img/${data?.profile_picture}`}
                       alt="Photo profile"
-                      className="w-15 h-15 rounded-xl"
+                      className="w-15 h-15 object-cover rounded-xl"
                     />
                   )}
 
@@ -203,7 +203,7 @@ function History() {
           </section>
           <div className="hidden lg:mx-10 my-10 lg:flex justify-between">
             <div>
-              <p>{`Show ${page} History of ${totalPage} History`}</p>
+              <p>{`Show ${page} History of ${totalPage || "1"} Page`}</p>
             </div>
             <div className="pagination flex justify-center items-center gap-2 mt-4">
               <button
@@ -260,7 +260,7 @@ function History() {
 
         {Active && (
           <ModalDelete
-            transactionID={selectedCustomer.id}
+            historyData={selectedCustomer}
             onClose={() => SetActive(false)}
           />
         )}
