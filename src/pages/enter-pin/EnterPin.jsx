@@ -111,7 +111,7 @@ const EnterPin = () => {
         <div className="left-container w-[100%]  lg:w-[50%] flex justify-center items-center bg-[#ffffff] sm:rounded-tr-[30px] sm:rounded-br-[30px]">
           <div className="py-12 px-16 flex gap-3.5 flex-col">
             <div className="logo flex flecx-row items-center gap-3.5">
-              <img src="/Logo-Money-Wallet.png" alt="" />
+              <img src="/belalai-wallet.png" alt="" className="max-w-8" />
               <div className="text-[#2948FF]">E-Wallet</div>
             </div>
             <div>
@@ -151,12 +151,6 @@ const EnterPin = () => {
               </button>
             </form>
 
-            <div className="text-center">
-              Forgot Your Pin?
-              <Link to="/register" className="text-blue-500">
-                Reset
-              </Link>
-            </div>
           </div>
         </div>
         <div className="right-container max-sm:hidden flex items-center min-h-screen bg-[#2948FF] lg:w-[50%] ">
