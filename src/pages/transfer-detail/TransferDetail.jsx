@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import ModalSucces from "../modal/ModalSucces";
-import ModalFailed from "../modal/ModalFailed";
 import ModalEnterPin from "../modal/ModalEnterPin";
 import { useLocation } from "react-router-dom";
 import { API_URL } from "../../utils";
+import formatAmountField from "../../utils/formatAmount";
 
 function TransferDetail() {
   const location = useLocation();
@@ -28,7 +27,8 @@ function TransferDetail() {
     const { name, value } = e.target;
 
     if (name === "amount") {
-      setFormData((prev) => ({ ...prev, amount: value }));
+      let rawValue = value.replace(/\D/g, "");
+      setFormData((prev) => ({ ...prev, amount: rawValue }));
       setError("");
 
       if (Number(value) < 0) {
@@ -42,7 +42,7 @@ function TransferDetail() {
   const handleTransfer = (e) => {
     e.preventDefault();
 
-    if (formData.amount === 0) {
+    if (!Number(formData.amount)) {
       setError("Amount tidak boleh kosong");
       return;
     }
@@ -142,7 +142,7 @@ function TransferDetail() {
                   id="amount"
                   placeholder="Enter Nominal Transfer"
                   className="w-full outline-none"
-                  value={formData.amount}
+                  value={formatAmountField(formData.amount)}
                   onChange={handleInputChange}
                 />
               </div>
