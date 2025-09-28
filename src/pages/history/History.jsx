@@ -153,7 +153,7 @@ function History() {
                     <img
                       src={getPaymentMethods(data?.contact_name)}
                       alt="Payment Picture"
-                      className="w-15 h-15 object-cover rounded-xl"
+                      className="w-15 h-15  rounded-xl"
                     />
                   ) : (
                     <img
