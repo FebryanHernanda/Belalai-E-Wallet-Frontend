@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { resetPassword, clearRecoveryState } from "../../store/authSlice";
+import { resetPassword, clearRecoveryState } from "../../store/recoverySlice";
 
 const ResetPassword = () => {
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error, success } = useSelector((state) => state.auth);
+  const { loading, error, success } = useSelector((state) => state.recovery);
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -68,10 +68,9 @@ const ResetPassword = () => {
       );
 
       if (resetPassword.fulfilled.match(resultAction)) {
-        toast.success(
-          resultAction.payload.message || "Password berhasil diubah!",
-          { autoClose: 1500 }
-        );
+        toast.success(resultAction.payload.msg || "Password berhasil diubah!", {
+          autoClose: 1500,
+        });
         setTimeout(() => navigate("/login"), 1500);
       } else {
         toast.error(resultAction.payload || "Gagal mengubah password");
