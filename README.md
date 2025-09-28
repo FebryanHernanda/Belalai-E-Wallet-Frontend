@@ -53,13 +53,14 @@ $ npm run dev
 
 ## 💻 DEMO
 
-<img src="/demo/landing_page.png"  align="left" width="370px">
+<div align="center">
 
-<img src="/demo/dashboard.png"  align="right" width="370px">
+<img src="/demo/landing_page.png" loading="lazy" width="370px">
+<img src="/demo/dashboard.png" loading="lazy" width="370px"> </br>
+<img src="/demo/profile.png" loading="lazy" width="370px">
+<img src="/demo/top-up.png" loading="lazy" width="370px">
 
-<img src="/demo/profile.png"  align="left" width="370px">
-
-<img src="/demo/top-up.png"  align="right" width="370px">
+</div>
 
 ## 📄 LICENSE
 
