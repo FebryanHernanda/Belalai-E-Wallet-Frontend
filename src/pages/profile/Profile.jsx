@@ -141,7 +141,7 @@ const Profile = () => {
 
       {/* Edit Profile Section */}
       <section className="border-1 flex flex-col gap-5 border-gray-400 p-10">
-        <form>
+        <form className="flex flex-col gap-5">
           <h1 className="text-xl">Profile Picture</h1>
 
           {/* Profile Picture */}
