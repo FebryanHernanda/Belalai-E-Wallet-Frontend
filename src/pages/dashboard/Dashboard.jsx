@@ -307,46 +307,48 @@ const Dashboard = () => {
 
           {/* List transaksi */}
 
-          {transactions?.length > 0 ? (
-            transactions?.map((data, idx) => {
-              return (
-                <div
-                  key={idx}
-                  className="divide-y divide-gray-200 bg-white rounded-b-lg shadow"
-                >
-                  <div className="flex items-center justify-between p-4">
-                    <div className="flex items-center gap-4">
-                      <img
-                        src={`${API_URL}/img/${data?.profile_picture}`}
-                        alt="Photo profile"
-                        className="max-w-12 rounded-lg"
-                      />
-                      <div className="flex flex-col gap-1">
-                        <div className="font-medium">{data.contact_name}</div>
-                        <div className="text-sm text-gray-500">
-                          {data.transaction_type}
+          <div className="flex flex-col max-h-[400px] overflow-y-scroll shadow rounded-b-lg">
+            {transactions?.length > 0 ? (
+              transactions?.map((data, idx) => {
+                return (
+                  <div
+                    key={idx}
+                    className="divide-y divide-gray-200 bg-white rounded-b-lg shadow"
+                  >
+                    <div className="flex items-center justify-between p-4">
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={`${API_URL}/img/${data?.profile_picture}`}
+                          alt="Photo profile"
+                          className="max-w-12 rounded-lg"
+                        />
+                        <div className="flex flex-col gap-1">
+                          <div className="font-medium">{data.contact_name}</div>
+                          <div className="text-sm text-gray-500">
+                            {data.transaction_type}
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {data.transaction_type === "Transfer" ? (
-                      <p className="text-green-500">
-                        +Rp{data.original_amount.toLocaleString("id-ID")}
-                      </p>
-                    ) : (
-                      <p className="text-red-500">
-                        -Rp{data.original_amount.toLocaleString("id-ID")}
-                      </p>
-                    )}
+                      {data.transaction_type === "Transfer" ? (
+                        <p className="text-green-500">
+                          +Rp{data.original_amount.toLocaleString("id-ID")}
+                        </p>
+                      ) : (
+                        <p className="text-red-500">
+                          -Rp{data.original_amount.toLocaleString("id-ID")}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                </div>
-              );
-            })
-          ) : (
-            <p className="text-center font-semibold">
-              You haven’t made any transactions yet.
-            </p>
-          )}
+                );
+              })
+            ) : (
+              <p className="text-center font-semibold">
+                You haven’t made any transactions yet.
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </section>
