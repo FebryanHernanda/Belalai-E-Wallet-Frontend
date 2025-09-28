@@ -11,15 +11,20 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { logout } from "../../store/authSlice";
 import { persistor } from "../../store/store";
+import { useState } from "react";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const baseClass =
     "flex gap-5 cursor-pointer items-center p-2 rounded-xl hover:bg-blue-600 hover:text-white";
 
   const activeClass = "bg-blue-600 text-white";
+
+  const openModal = () => setIsLogoutModalOpen(true);
+  const closeModal = () => setIsLogoutModalOpen(false);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -32,9 +37,12 @@ const Sidebar = () => {
     persistor.purge();
 
     navigate("/");
+    closeModal();
   };
 
   return (
+    <>
+    
     <aside className="hidden lg:flex lg:w-1/5 min-h-screen border-r-1 border-gray-300">
       <nav className="flex flex-col gap-2 p-5 w-full">
         <NavLink
@@ -84,13 +92,37 @@ const Sidebar = () => {
         </NavLink>
         <button
           className="flex gap-5 cursor-pointer text-red-600 items-center p-3 rounded-xl hover:bg-blue-500 hover:text-white"
-          onClick={handleLogout}
+          onClick={openModal}
         >
           <LogOut className="rotate-180" />
           <h3>Keluar</h3>
         </button>
       </nav>
     </aside>
+    {isLogoutModalOpen && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-xl w-[400px]">
+            <h2 className="text-lg text-black mb-4">
+              Apakah Anda yakin ingin keluar?
+            </h2>
+            <div className="flex justify-end gap-4">
+              <button
+                className="px-4 py-2 bg-gray-400 rounded hover:bg-gray-500"
+                onClick={closeModal}
+              >
+                Batal
+              </button>
+              <button
+                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                onClick={handleLogout}
+              >
+                Keluar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
