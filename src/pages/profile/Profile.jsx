@@ -142,12 +142,12 @@ const Profile = () => {
       {/* Edit Profile Section */}
       <section className="border-1 flex flex-col gap-5 border-gray-400 p-10">
         <form>
-          <h1 className="text-xl">Profile Picture</h1>
+          <h1 className="text-xl mb-3">Profile Picture</h1>
 
           {/* Profile Picture */}
           <div className="flex items-center gap-5">
             {/* Photo Preview */}
-            <div className="w-40 h-40 flex items-center justify-center rounded-xl bg-gray-200">
+            <div className="w-40 h-40 flex items-center justify-center rounded-xl bg-gray-200 mb-4 shadow-lg shadow-gray-500/100 ">
               {preview ? (
                 <img
                   src={preview}
@@ -203,7 +203,7 @@ const Profile = () => {
           {/* Profile Picture */}
 
           {/* Name Field */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 mt-3">
             <h1 className="text-xl">Full Name</h1>
             <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
               <User
@@ -215,7 +215,7 @@ const Profile = () => {
                 name="fullName"
                 id="fullName"
                 placeholder="Enter Full Name"
-                className="bg-transparent outline-no  ne flex-1"
+                className="bg-transparent outline-none flex-1"
                 value={formData.fullName}
                 onChange={handleInput}
               />
@@ -227,7 +227,7 @@ const Profile = () => {
           {/* Name Field */}
 
           {/* Phone Field */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 mt-2">
             <h1 className="text-xl">Phone</h1>
             <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
               <Phone
@@ -251,7 +251,7 @@ const Profile = () => {
           {/* Phone Field */}
 
           {/* Email Field */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 mt-2">
             <h1 className="text-xl">Email</h1>
             <div className="group flex items-center gap-2 bg-gray-50 border border-gray-300 p-2 rounded-lg focus-within:border-gray-500 focus-within:ring-1 focus-within:ring-gray-500">
               <Mail

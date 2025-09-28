@@ -160,7 +160,7 @@ const Dashboard = () => {
     <section>
       <div className="bagian-top lg:pt-8 px-6 flex flex-col md:flex-row gap-8">
         {/* Card kiri */}
-        <div className="shadow-md w-full md:w-[30%]  flex-col gap-3 p-6 hidden md:flex">
+        <div className="border border-gray-300 rounded-lg w-full md:w-[30%]  flex-col gap-3 p-6 hidden md:flex">
           <div className="flex gap-2.5">
             <img src="/balance.svg" alt="" />
             <span>Balance</span>
@@ -190,7 +190,7 @@ const Dashboard = () => {
           </div>
         </div>
         {/* Fast Service (desktop only) */}
-        <div className="shadow-md w-full md:w-[70%] justify-between items-center p-4  gap-3 hidden md:flex">
+        <div className="border border-gray-300 rounded-lg w-full md:w-[70%] justify-between items-center p-4  gap-3 hidden md:flex">
           <div className="font-semibold text-[16px]">Fast Service</div>
           <div className="flex gap-4">
             <Link
@@ -260,7 +260,7 @@ const Dashboard = () => {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-10 gap-6 py-8 px-6 w-full">
         {/* Chart Section */}
-        <div className="lg:col-span-7 chart p-4 rounded-2xl shadow-md w-full">
+        <div className="lg:col-span-7 chart p-4 rounded-2xl border border-gray-300 rounded-lg w-full">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold text-gray-800">
               Financial Chart
@@ -268,24 +268,41 @@ const Dashboard = () => {
 
             <div className="flex gap-2">
               {/* Range Dropdown */}
-              <div className="relative">
+              <div className="relative inline-block w-48">
                 <select
                   value={range}
                   onChange={handleDropDownRange}
-                  className="bg-gray-200 p-1.5 rounded-md"
+                  className="appearance-none w-full bg-white border border-gray-300 hover:border-blue-400 focus:border-blue-500 text-gray-700 py-2 pl-4 pr-10 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
                 >
                   <option value="seven_days">7 Days</option>
                   <option value="five_weeks">5 Weeks</option>
                   <option value="twelve_months">12 Months</option>
                 </select>
+
+                {/* Dropdown arrow icon */}
+                <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-gray-500">
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
               </div>
 
               {/* Filter Dropdown */}
-              <div className="relative">
+              <div className="relative inline-block">
                 <select
                   value={filter}
                   onChange={handleDropDownFilter}
-                  className="bg-gray-200 p-1.5 rounded-md"
+                  className="appearance-none w-full bg-white border border-gray-300 hover:border-blue-400 focus:border-blue-500 text-gray-700 py-2 pl-4 pr-10 rounded-lg shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
                 >
                   <option value="All">All</option>
                   <option value="Income">Income</option>
@@ -298,7 +315,7 @@ const Dashboard = () => {
         </div>
         {/* Transaction History */}
         <div className="lg:col-span-3 transaction-history flex flex-col">
-          <div className="flex flex-row justify-between items-center shadow rounded-t-lg p-4">
+          <div className="flex flex-row justify-between items-center border border-gray-300 rounded-lg rounded-t-lg p-4">
             <div className="font-semibold">Transaction History</div>
             <Link type="button" className="cursor-pointer" to="/history">
               See All
@@ -307,13 +324,13 @@ const Dashboard = () => {
 
           {/* List transaksi */}
 
-          <div className="flex flex-col gap-5 p-2 min-h-100  max-h-[400px] overflow-y-scroll shadow rounded-b-lg">
+          <div className="flex flex-col gap-5 p-2 min-h-100  max-h-[400px] overflow-y-scroll border border-gray-300 rounded-lg rounded-b-lg">
             {transactions?.length > 0 ? (
               transactions?.map((data, idx) => {
                 return (
                   <div
                     key={idx}
-                    className="divide-y divide-gray-200 bg-white rounded-b-lg shadow"
+                    className="divide-y divide-gray-200 bg-white rounded-b-lg"
                   >
                     <div className="flex items-center justify-between p-4">
                       <div className="flex items-center gap-4">
