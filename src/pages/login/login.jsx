@@ -202,6 +202,13 @@ const Login = () => {
                 Register
               </Link>
             </div>
+            <div className="text-center text-gray-500 ">
+              Forgot password?
+              <Link to="/forgot-password" className="text-blue-500">
+                {" "}
+                Reset Password
+              </Link>
+            </div>
           </div>
         </div>
         <div className="right-container max-sm:hidden flex items-center min-h-screen bg-[#2948FF] lg:w-[50%] ">
