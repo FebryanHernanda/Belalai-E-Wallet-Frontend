@@ -4,10 +4,10 @@ import ModalDelete from "../modal/ModalDelete";
 
 function ModalHistory(props) {
   const { setIsOpen, customer } = props;
-    const [Active, SetActive] = useState(false);
+  const [Active, SetActive] = useState(false);
   return (
     <>
-            {Active && <ModalDelete onClose={() => SetActive(false)} />}
+      {Active && <ModalDelete onClose={() => SetActive(false)} />}
       <header className="px-5">
         <h1 className="text-gray-500">DETAIL TRANSACTION</h1>
         <hr className="border-t border-gray-500" />
@@ -47,8 +47,10 @@ function ModalHistory(props) {
         </div>
       </div>
       <div className="px-5 mt-5 flex flex-col gap-5">
-        <button className="border border-red-600 rounded-lg w-full flex justify-center items-center gap-5 h-10 cursor-pointer"
-         onClick={() => SetActive((prev) => !prev)}>
+        <button
+          className="border border-red-600 rounded-lg w-full flex justify-center items-center gap-5 h-10 cursor-pointer"
+          onClick={() => SetActive((prev) => !prev)}
+        >
           <img src="../src/assets/icon/delete.svg" alt="" />
           <p className="text-red-600 font-medium">Delete</p>
         </button>
