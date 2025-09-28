@@ -15,6 +15,7 @@ import authReducers from "./authSlice";
 import userReducers from "./userSlice";
 import transferReducers from "./transferSlice";
 import topupReducers from "./topupSlice";
+import recoveryReducer from "./recoverySlice";
 
 // combine all reducers
 const rootReducer = combineReducers({
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   user: userReducers,
   transfer: transferReducers,
   topup: topupReducers,
+  recovery: recoveryReducer,
 });
 
 // persist configuration
