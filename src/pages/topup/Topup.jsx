@@ -4,6 +4,7 @@ import { getPaymentMethod, topUpAmount } from "../../store/topupSlice";
 import getPaymentMethods from "../../utils/getPaymentMethods";
 import { API_URL } from "../../utils";
 import { toast } from "react-toastify";
+import formatAmountField from "../../utils/formatAmount";
 
 function Topup() {
   const dispatch = useDispatch();
@@ -20,12 +21,15 @@ function Topup() {
   });
 
   const handleAmountChange = (e) => {
-    const value = Number(e.target.value);
+    const value = e.target.value;
 
-    setFormData((prev) => ({ ...prev, amount: value }));
+    let rawValue = value.replace(/\D/g, "");
+    const numericValue = parseInt(rawValue || "0", 10);
+
+    setFormData((prev) => ({ ...prev, amount: rawValue }));
     setError("");
 
-    if (value < 0) {
+    if (numericValue < 0) {
       setError("Total Amount tidak boleh minus atau negatif");
     }
   };
@@ -37,7 +41,7 @@ function Topup() {
     }));
   };
 
-  const subTotal = formData.amount + formData.tax;
+  const subTotal = Number(formData.amount) + formData.tax;
 
   useEffect(() => {
     dispatch(getPaymentMethod());
@@ -46,7 +50,7 @@ function Topup() {
   const handleSubmitValidation = (e) => {
     e.preventDefault();
 
-    if (formData.amount === 0) {
+    if (!Number(formData.amount)) {
       setError("Amount tidak boleh kosong");
       return;
     }
@@ -67,7 +71,7 @@ function Topup() {
     topupData.append("payment_id", formData.paymentID);
 
     const payload = {
-      amount: formData.amount,
+      amount: Number(formData.amount),
       tax: formData.tax,
       payment_id: formData.paymentID,
     };
@@ -136,12 +140,11 @@ function Topup() {
                   className="w-4 h-3.5"
                 />
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Enter Nominal Transfer"
                   className="w-full outline-none"
-                  defaultValue={formData.amount}
+                  value={formatAmountField(formData.amount)}
                   onChange={handleAmountChange}
-                  min="0"
                 />
               </div>
             </div>
@@ -184,7 +187,7 @@ function Topup() {
             <div className="flex justify-between text-lg">
               <p className="lg:font-medium">Order</p>
               <p className="font-semibold">
-                Rp {formData.amount.toLocaleString("id-ID")}
+                Rp {Number(formData.amount).toLocaleString("id-ID")}
               </p>
             </div>
             <div className="flex justify-between text-lg">
@@ -225,7 +228,7 @@ function Topup() {
               Apakah Anda yakin ingin melakukan Top Up saldo sebesar
               <span className="text-blue-700 font-semibold">
                 {" "}
-                Rp {formData.amount.toLocaleString("id-ID")}
+                Rp {Number(formData.amount).toLocaleString("id-ID")}
               </span>
             </h2>
             <div className="flex justify-end gap-4">
