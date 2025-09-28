@@ -4,6 +4,7 @@ import ModalHistory from "./ModalHistory";
 import { useDispatch, useSelector } from "react-redux";
 import { getHistory } from "../../store/transferSlice";
 import { API_URL } from "../../utils";
+import ModalDelete from "../modal/ModalDelete";
 
 function History() {
   const dispatch = useDispatch();
@@ -11,12 +12,12 @@ function History() {
 
   const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [Active, SetActive] = useState(false);
 
   const historyData = useSelector((state) => state.transfer.historyData);
 
   const { page, total_pages, transactions } = historyData || {};
 
-  console.log(transactions);
   useEffect(() => {
     dispatch(getHistory());
   }, [dispatch]);
@@ -71,7 +72,7 @@ function History() {
                 <div
                   key={index}
                   className={`flex items-center p-4 rounded cursor-pointer lg:cursor-default ${
-                    data.paid ? "bg-gray-100" : "bg-white"
+                    data.id % 2 == 0 ? "bg-gray-100" : "bg-white"
                   }`}
                   onClick={() => handleClick(data)}
                 >
@@ -90,22 +91,29 @@ function History() {
                       {data.phone_number}
                     </p>
                     <div>
-                      <p
-                        className={`font-semibold lg:text-lg ${
-                          data.transaction_type === "Transfer"
-                            ? "text-green-500"
-                            : "text-red-500"
-                        }`}
-                      >
-                        Rp.{data.original_amount.toLocaleString("id-ID")}
-                      </p>
+                      {data.transaction_type === "Transfer" ? (
+                        <p className="text-green-500">
+                          +Rp{data.original_amount.toLocaleString("id-ID")}
+                        </p>
+                      ) : (
+                        <p className="text-red-500">
+                          -Rp{data.original_amount.toLocaleString("id-ID")}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <img
                     src="../src/assets/icon/delete.svg"
                     alt=""
-                    className="hidden md:block md:w-6 cursor-pointer"
+                    className="hidden md:block md:w-6 cursor-pointer "
+                    onClick={() => SetActive((prev) => !prev)}
                   />
+                  {Active && (
+                    <ModalDelete
+                      transactionID={data.id}
+                      onClose={() => SetActive(false)}
+                    />
+                  )}
                 </div>
               ))
             ) : (

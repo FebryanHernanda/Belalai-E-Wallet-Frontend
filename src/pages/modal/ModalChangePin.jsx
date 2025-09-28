@@ -1,11 +1,10 @@
 import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { verifyPin } from "../../store/authSlice";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { transferData } from "../../store/transferSlice";
 
-function ModalEnterPin({ setShowModal, receiverData, formData }) {
+function ModalChangePin({ title, label, setShowModal }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState("");
@@ -22,36 +21,27 @@ function ModalEnterPin({ setShowModal, receiverData, formData }) {
     }
 
     try {
-      const verifyResults = await dispatch(verifyPin({ pin: pin })).unwrap();
+      await dispatch(verifyPin({ pin: pin })).unwrap();
 
-      const dataTransfer = {
-        receiver_id: receiverData.userId,
-        receiver_phone: receiverData.phone,
-        amount: Number(formData.amount),
-        notes: formData.notes,
-        pin_sender: pin,
-      };
-
-      if (verifyResults) {
-        const transferResult = await dispatch(
-          transferData(dataTransfer)
-        ).unwrap();
-
-        toast.success(transferResult.message || "Transfer berhasil!", {
-          position: "top-center",
-          autoClose: 1500,
-        });
-
-        navigate("/transfer");
-      }
-    } catch (error) {
-      toast.error(error?.error || "Terjadi kesalahan!", {
+      toast.success("PIN Benar!", {
         position: "top-center",
         autoClose: 1000,
       });
-    } finally {
-      setShowModal(false);
+
+      navigate("/profile/change-pin", {
+        replace: true,
+        state: {
+          oldPin: pin,
+        },
+      });
+    } catch (error) {
+      toast.error(error.message || "PIN Salah!", {
+        position: "top-center",
+        autoClose: 1000,
+      });
     }
+
+    setShowModal(false);
   };
 
   const handleChange = (e, i) => {
@@ -70,17 +60,16 @@ function ModalEnterPin({ setShowModal, receiverData, formData }) {
       inputRefs.current[i - 1].focus();
     }
   };
+
   return (
-    <div className="absolute inset-0 p-5 bg-black/50 flex items-center justify-center z-50">
+    <div className="absolute inset-0 bg-black/50  p-5 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl p-6 w-[400px] relative">
-        <h2 className="text-lg font-semibold mb-4 ">
-          TRANSFER TO {receiverData.name.toUpperCase()}
-        </h2>
+        <h2 className="text-lg font-semibold mb-4 ">{title}</h2>
 
         <form onSubmit={handleNext} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <h1 className="text-[29px] ">Enter Your Pin 👋</h1>
-            <p>Enter Your Pin For Transaction</p>
+            <p>Enter Your Pin For {label}</p>
           </div>
           <div className="flex justify-center gap-3 mt-15 mb-15">
             {[...Array(6)].map((_, i) => (
@@ -124,4 +113,4 @@ function ModalEnterPin({ setShowModal, receiverData, formData }) {
   );
 }
 
-export default ModalEnterPin;
+export default ModalChangePin;

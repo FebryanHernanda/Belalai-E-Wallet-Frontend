@@ -2,46 +2,69 @@ import React, { useState } from "react";
 import ModalSucces from "../modal/ModalSucces";
 import ModalFailed from "../modal/ModalFailed";
 import ModalEnterPin from "../modal/ModalEnterPin";
+import { useLocation } from "react-router-dom";
+import { API_URL } from "../../utils";
 
 function TransferDetail() {
-  const [Active, SetActive] = useState(false);
-  const [step, setStep] = useState("");
+  const location = useLocation();
+  const { userId, name, phone, photo } = location.state;
+
+  const receiverData = {
+    userId,
+    name,
+    phone,
+    photo,
+  };
+
+  const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState("");
+
+  const [formData, setFormData] = useState({
+    amount: 0,
+    notes: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "amount") {
+      setFormData((prev) => ({ ...prev, amount: value }));
+      setError("");
+
+      if (Number(value) < 0) {
+        setError("Total Amount tidak boleh minus atau negatif");
+      }
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleTransfer = (e) => {
+    e.preventDefault();
+
+    if (formData.amount === 0) {
+      setError("Amount tidak boleh kosong");
+      return;
+    }
+    setShowModal(true);
+  };
+
   return (
     <>
-      {/* Modal */}
-      {step === "enterPin" && (
+      {showModal && (
         <ModalEnterPin
-          onSuccess={() => setStep("success")}
-          onFailed={() => setStep("failed")}
-          onClose={() => setStep("")}
+          setShowModal={setShowModal}
+          receiverData={receiverData}
+          formData={formData}
         />
       )}
-      {step === "success" && <ModalSucces onClose={() => setStep("")} />}
-      {step === "failed" && <ModalFailed onClose={() => setStep("")} />}
 
       <main>
-        {/* Transfer Berhasil */}
-        {/* {Active && <ModalSucces onClose={() => SetActive(false)} />} */}
-
-        {/* transfer Gagal */}
-        {/* {Active && <ModalFailed onClose={() => SetActive(false)} />} */}
-
-        {/* Transfer Pin */}
-        {/* {Active && <ModalEnterPin onClose={() => SetActive(false)} />} */}
-
-        {/* {Active && <div className="absolute inset-0 backdrop-brightness-50" />}
-         */}
-
-        {/* latar belakang untuk modal jika aktif */}
-        {["enterPin", "success", "failed"].includes(step) && (
-          <div className="absolute inset-0 backdrop-brightness-60 z-4" />
-        )}
-
-        <header className="hidden md:block md:flex gap-5 my-5 ml-14">
+        <header className="hidden  md:flex gap-5 my-5 ml-14">
           <img src="../src/assets/icon/send.svg" alt="" />
           <p className="font-semibold text-xl">Transfer Money</p>
         </header>
-        <section className="hidden lg:block lg:flex lg:flex-col items-start ml-14">
+        <section className="hidden  lg:flex lg:flex-col items-start ml-14">
           {/* Stepper */}
           <article
             id="card-step"
@@ -86,10 +109,14 @@ function TransferDetail() {
           {/* content 1 (card user) */}
           <article className="bg-gray-200 p-4 md:p-6 flex justify-between">
             <div className="flex gap-5">
-              <img src="../src/assets/icon/galuh.svg" alt="" />
+              <img
+                src={`${API_URL}/img/${photo}`}
+                alt="profile picture"
+                className="w-30 h-30 rounded-lg object-cover"
+              />
               <div className="flex flex-col gap-1">
-                <h1 className="lg:font-semibold lg:text-lg">Ghaluh 1</h1>
-                <p>(239) 555-0108</p>
+                <h1 className="lg:font-semibold lg:text-lg">{name}</h1>
+                <p>{phone}</p>
                 <img src="../src/assets/icon/verified.svg" alt="" />
               </div>
             </div>
@@ -111,11 +138,15 @@ function TransferDetail() {
                 />
                 <input
                   type="text"
-                  id="email"
+                  name="amount"
+                  id="amount"
                   placeholder="Enter Nominal Transfer"
                   className="w-full outline-none"
+                  value={formData.amount}
+                  onChange={handleInputChange}
                 />
               </div>
+              {error && <p className="text-red-500 text-sm">{error}</p>}
             </div>
           </article>
           <article className="mt-5 flex flex-col gap-4">
@@ -125,16 +156,18 @@ function TransferDetail() {
               something
             </p>
             <textarea
-              name="userComment"
+              name="notes"
               rows="10"
               cols="70"
               className="border border-gray-400 rounded-md w-full p-2"
               placeholder="Enter Some Notes"
+              value={formData.notes}
+              onChange={handleInputChange}
             ></textarea>
           </article>
           <button
             className="bg-blue-700 text-white rounded-lg w-full mt-10 min-h-14 cursor-pointer"
-            onClick={() => setStep("enterPin")}
+            onClick={handleTransfer}
           >
             Submit & Transfer
           </button>

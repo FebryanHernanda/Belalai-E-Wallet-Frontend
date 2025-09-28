@@ -1,7 +1,13 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { createPin } from "../../store/authSlice";
+import { toast } from "react-toastify";
 
 const EnterPin = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const inputRefs = useRef([]);
   const [error, setError] = useState("");
 
@@ -24,7 +30,7 @@ const EnterPin = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const pin = inputRefs.current.map((input) => input.value).join("");
 
@@ -34,7 +40,26 @@ const EnterPin = () => {
     }
 
     setError("");
-    console.log("PIN:", pin);
+
+    try {
+      const formData = new FormData();
+      formData.append("pin", pin);
+
+      await dispatch(createPin(formData)).unwrap();
+      toast.success("Pin Berhasil dibuat!", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+
+      setTimeout(() => {
+        navigate("/profile");
+      }, 1500);
+    } catch (error) {
+      toast.error(error.message || "Pin Gagal dibuat !", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    }
   };
 
   return (

@@ -64,6 +64,30 @@ function MainRoutes() {
           </Route>
           {/* Profile */}
 
+          {/* Transfer */}
+          <Route>
+            <Route path="transfer">
+              <Route
+                index
+                element={
+                  <PrivateRoute>
+                    <Transfer />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="transfer-detail"
+                element={
+                  <PrivateRoute>
+                    <TransferDetail />
+                  </PrivateRoute>
+                }
+              />
+            </Route>
+          </Route>
+
+          {/* Transfer */}
+
           <Route
             path="/dashboard"
             element={
