@@ -120,7 +120,7 @@ function Topup() {
                 <img
                   src="../src/assets/icon/verified.svg"
                   alt="Verified icon"
-                  className="w-20"
+                  className="w-30"
                 />
               </div>
             </div>

@@ -45,6 +45,48 @@ export const getHistory = createAsyncThunk(
   }
 );
 
+export const deleteHistory = createAsyncThunk(
+  "transfer/delete/history",
+  async (transactionID, { getState, rejectWithValue }) => {
+    try {
+      const token = getState().auth.token;
+
+      const response = await axios.delete(
+        `${API_URL}/transaction/${transactionID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Gagal menghapus data");
+    }
+  }
+);
+
+export const deleteTopupHistory = createAsyncThunk(
+  "transfer/delete/topup",
+  async (transactionID, { getState, rejectWithValue }) => {
+    try {
+      const token = getState().auth.token;
+
+      const response = await axios.delete(
+        `${API_URL}/transaction/topup/${transactionID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Gagal menghapus data");
+    }
+  }
+);
+
 export const transferData = createAsyncThunk(
   "transfer/transferData",
   async (formData, { getState, rejectWithValue }) => {
@@ -109,6 +151,34 @@ const transferSlice = createSlice({
         state.error = null;
       })
       .addCase(transferData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      /* =========================================== Delete Transfer Data  =========================================== */
+      .addCase(deleteHistory.pending, (state) => {
+        builder;
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteHistory.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(deleteHistory.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      /* =========================================== Delete TopUp Data  =========================================== */
+      .addCase(deleteTopupHistory.pending, (state) => {
+        builder;
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteTopupHistory.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(deleteTopupHistory.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
