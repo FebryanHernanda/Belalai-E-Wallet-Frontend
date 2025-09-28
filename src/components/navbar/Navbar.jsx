@@ -1,4 +1,4 @@
-import navbarIcon from "/src/assets/icon/wallet-icon.png";
+// import navbarIcon from "/src/assets/icon/wallet-icon.png";
 import avatarBase from "/src/assets/icon/avatar-base.png";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -63,7 +63,7 @@ const Navbar = (props) => {
         className="flex items-center justify-between gap-5 cursor-pointer"
         to="/"
       >
-        <img src={navbarIcon} alt="E-Wallet icon" className="w-10" />
+        <img src="/belalai-wallet.png" alt="E-Wallet icon" className="w-10" />
         <h1 className="text-xl">E-Wallet</h1>
       </Link>
 

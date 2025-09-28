@@ -93,7 +93,7 @@ const Login = () => {
           <div className="p-10 lg:py-12 lg:px-16 flex gap-3.5 flex-col lg:w-3xl">
             <div className="logo flex flecx-row  items-center gap-3.5">
               <img
-                src="/Logo-Money-Wallet.png"
+                src="/belalai-wallet.png"
                 alt="E-wallet icon"
                 className="max-w-8"
               />
