@@ -15,6 +15,8 @@ import { getBalance } from "../../store/userSlice";
 import { getHistory } from "../../store/transferSlice";
 import { API_URL } from "../../utils";
 
+import axios from "axios";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -29,30 +31,64 @@ const Dashboard = () => {
 
   const { balance } = useSelector((state) => state.user);
   const historyData = useSelector((state) => state.transfer.historyData);
+  const authState = useSelector((state) => state.auth);
 
   const { transactions } = historyData || {};
 
   const [filter, setFilter] = useState("All");
-  const [range, setRange] = useState("7 Days");
-  const [openFilter, setOpenFilter] = useState(false);
-  const [openRange, setOpenRange] = useState(false);
+  const [range, setRange] = useState("seven_days");
+  const [chart, setChart] = useState({});
+
+  // set option range chart to state (on change)
+  const handleDropDownRange = (event) => {
+    const newValue = event.target.value;
+    setRange(newValue);
+  };
+
+  // set option filter chart to state (on change)
+  const handleDropDownFilter = (event) => {
+    const newValue = event.target.value;
+    setFilter(newValue);
+  };
 
   useEffect(() => {
     dispatch(getBalance());
     dispatch(getHistory());
   }, [dispatch]);
 
-  /* Dummy Chart */
+  useEffect(() => {
+    (async function () {
+      try {
+        const response = await axios.get(`${API_URL}/chart/${range}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authState.token}`,
+          },
+        });
+
+        const {
+          data: { data: resultChart },
+        } = response;
+
+        console.log(resultChart);
+        setChart(resultChart);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [range, filter]);
+
+  // option chart JS
   const allDatasets = [
     {
       label: "Expense",
-      data: [20000, 55000, 70000, 35000, 5000, 50000, 50000],
+      data: chart.expense_data,
       backgroundColor: "#ff3d3d",
       borderRadius: 8,
     },
     {
       label: "Income",
-      data: [80000, 78000, 85000, 30000, 25000, 75000, 5000],
+      data: chart.income_data,
       backgroundColor: "#3868fd",
       borderRadius: 8,
     },
@@ -63,8 +99,13 @@ const Dashboard = () => {
       ? allDatasets
       : allDatasets.filter((d) => d.label === filter);
 
+  const allDataValues = allDatasets.flatMap((dataset) => dataset.data);
+  let maxDataValue = Math.max(0, ...allDataValues);
+  const stepSize = 50000;
+  const maxScale = Math.ceil((maxDataValue * 1.1) / stepSize) * stepSize;
+
   const data = {
-    labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
+    labels: chart.labels,
     datasets: filteredDatasets,
   };
 
@@ -83,9 +124,9 @@ const Dashboard = () => {
       y: {
         beginAtZero: true,
         min: 0,
-        max: 100000,
+        max: maxScale,
         ticks: {
-          stepSize: 25000,
+          stepSize: stepSize,
           callback: (value) => `Rp${value.toLocaleString()}`,
         },
         grid: {
@@ -99,7 +140,7 @@ const Dashboard = () => {
       },
     },
   };
-  /* Dummy Chart */
+  // option chart js
 
   const income = transactions?.reduce((total, data) => {
     if (data.transaction_type === "Transfer") {
@@ -228,58 +269,28 @@ const Dashboard = () => {
             <div className="flex gap-2">
               {/* Range Dropdown */}
               <div className="relative">
-                <button
-                  onClick={() => setOpenRange(!openRange)}
-                  className="border rounded-lg px-3 py-1 text-sm bg-white hover:bg-gray-100"
+                <select
+                  value={range}
+                  onChange={handleDropDownRange}
+                  className="bg-gray-200 p-1.5 rounded-md"
                 >
-                  {range}
-                </button>
-                {openRange && (
-                  <div className="absolute right-0 mt-1 w-28 bg-white border rounded-lg shadow-lg z-10">
-                    {["7 Days", "30 Days"].map((r) => (
-                      <div
-                        key={r}
-                        onClick={() => {
-                          setRange(r);
-                          setOpenRange(false);
-                        }}
-                        className={`px-3 py-2 text-sm cursor-pointer hover:bg-gray-100 ${
-                          range === r ? "bg-gray-200 font-medium" : ""
-                        }`}
-                      >
-                        {r}
-                      </div>
-                    ))}
-                  </div>
-                )}
+                  <option value="seven_days">7 Days</option>
+                  <option value="five_weeks">5 Weeks</option>
+                  <option value="twelve_months">12 Months</option>
+                </select>
               </div>
 
               {/* Filter Dropdown */}
               <div className="relative">
-                <button
-                  onClick={() => setOpenFilter(!openFilter)}
-                  className="border rounded-lg px-3 py-1 text-sm bg-white hover:bg-gray-100"
+                <select
+                  value={filter}
+                  onChange={handleDropDownFilter}
+                  className="bg-gray-200 p-1.5 rounded-md"
                 >
-                  {filter}
-                </button>
-                {openFilter && (
-                  <div className="absolute right-0 mt-1 w-28 bg-white border rounded-lg shadow-lg z-10">
-                    {["All", "Income", "Expense"].map((f) => (
-                      <div
-                        key={f}
-                        onClick={() => {
-                          setFilter(f);
-                          setOpenFilter(false);
-                        }}
-                        className={`px-3 py-2 text-sm cursor-pointer hover:bg-gray-100 ${
-                          filter === f ? "bg-gray-200 font-medium" : ""
-                        }`}
-                      >
-                        {f}
-                      </div>
-                    ))}
-                  </div>
-                )}
+                  <option value="All">All</option>
+                  <option value="Income">Income</option>
+                  <option value="Expense">Expense</option>
+                </select>
               </div>
             </div>
           </div>
