@@ -117,7 +117,11 @@ function TransferDetail() {
               <div className="flex flex-col gap-1">
                 <h1 className="lg:font-semibold lg:text-lg">{name}</h1>
                 <p>{phone}</p>
-                <img src="../src/assets/icon/verified.svg" alt="" />
+                <img
+                  src="../src/assets/icon/verified.svg"
+                  alt=""
+                  className="w-30"
+                />
               </div>
             </div>
             <img src="../src/assets/icon/Star.svg" alt="" className="lg:w-8" />
