@@ -93,7 +93,7 @@ const Login = () => {
           <div className="p-10 lg:py-12 lg:px-16 flex gap-3.5 flex-col lg:w-3xl">
             <div className="logo flex flecx-row  items-center gap-3.5">
               <img
-                src="/Logo-Money-Wallet.png"
+                src="/belalai-wallet.png"
                 alt="E-wallet icon"
                 className="max-w-8"
               />
@@ -200,6 +200,13 @@ const Login = () => {
               <Link to="/register" className="text-blue-500">
                 {" "}
                 Register
+              </Link>
+            </div>
+            <div className="text-center text-gray-500 ">
+              Forgot password?
+              <Link to="/forgot-password" className="text-blue-500">
+                {" "}
+                Reset Password
               </Link>
             </div>
           </div>

@@ -33,7 +33,7 @@ export const getHistory = createAsyncThunk(
     try {
       const token = getState().auth.token;
 
-      const response = await axios.get(`${API_URL}/transaction/history`, {
+      const response = await axios.get(`${API_URL}/transaction/history/all`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

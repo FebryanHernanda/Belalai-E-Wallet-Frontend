@@ -103,7 +103,7 @@ function Register() {
               <section className="px-5 lg:px-15 pt-5">
                 <div className="flex items-center gap-2">
                   <img
-                    src="./src/assets/icon/Money Wallet.svg"
+                    src="/belalai-wallet.png"
                     alt="icon"
                     className="max-w-4"
                   />

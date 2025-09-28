@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Register from "../pages/register/Register";
 import Login from "../pages/login/login";
 import EnterPin from "../pages/enter-pin/EnterPin";
@@ -14,8 +14,15 @@ import History from "../pages/history/History";
 import ChangePassword from "../pages/changePassword/ChangePassword";
 import Topup from "../pages/topup/Topup";
 import TransferDetail from "../pages/transfer-detail/TransferDetail";
+import { useSelector } from "react-redux";
 
 function MainRoutes() {
+  const PrivateRoute = ({ children }) => {
+    const auth = useSelector((state) => state.auth);
+    if (!auth.token) return <Navigate to="/login" replace />;
+    return children;
+  };
+
   return (
     <>
       {/* Routes */}
@@ -30,28 +37,110 @@ function MainRoutes() {
         <Route element={<MainLayout />}>
           {/* Profile */}
           <Route path="profile">
-            <Route index element={<Profile />} />
-            <Route path="change-pin" element={<ChangePin />} />
-            <Route path="change-password" element={<ChangePassword />} />
+            <Route
+              index
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="change-pin"
+              element={
+                <PrivateRoute>
+                  <ChangePin />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="change-password"
+              element={
+                <PrivateRoute>
+                  <ChangePassword />
+                </PrivateRoute>
+              }
+            />
           </Route>
           {/* Profile */}
 
           {/* Transfer */}
-          <Route path="transfer">
-            <Route index element={<Transfer />} />
-            <Route path="transfer-detail" element={<TransferDetail />} />
+          <Route>
+            <Route path="transfer">
+              <Route
+                index
+                element={
+                  <PrivateRoute>
+                    <Transfer />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="transfer-detail"
+                element={
+                  <PrivateRoute>
+                    <TransferDetail />
+                  </PrivateRoute>
+                }
+              />
+            </Route>
           </Route>
+
           {/* Transfer */}
 
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/top-up" element={<Topup />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/transfer"
+            element={
+              <PrivateRoute>
+                <Transfer />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/transfer_detail"
+            element={
+              <PrivateRoute>
+                <TransferDetail />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/history"
+            element={
+              <PrivateRoute>
+                <History />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/top-up"
+            element={
+              <PrivateRoute>
+                <Topup />
+              </PrivateRoute>
+            }
+          />
         </Route>
         {/* Main Layouts */}
 
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
-        <Route path="/login/enter-pin" element={<EnterPin />} />
+        <Route
+          path="/login/enter-pin"
+          element={
+            <PrivateRoute>
+              <EnterPin />
+            </PrivateRoute>
+          }
+        />
         <Route path="/register" element={<Register />} />
         {/* Auth Routes */}
       </Routes>
