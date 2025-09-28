@@ -11,10 +11,26 @@ function ModalEnterPin({ setShowModal, receiverData, formData }) {
   const [error, setError] = useState("");
   const inputRefs = useRef([]);
 
+  // State untuk menyimpan digit PIN
+  const [pinValues, setPinValues] = useState(["", "", "", "", "", ""]);
+  // State untuk menentukan apakah digit di-mask atau tidak
+  const [isMasked, setIsMasked] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+
+  // menyimpan ID timeout masking per digit PIN
+  const maskingTimeouts = useRef([]);
+
   // validasi PIN
   const handleNext = async (e) => {
     e.preventDefault();
-    const pin = inputRefs.current.map((input) => input.value).join("");
+    // const pin = inputRefs.current.map((input) => input.value).join("");
+        const pin = pinValues.join("");
 
     if (pin.length < 6) {
       setError("Masukkan 6 digit PIN Anda.");
@@ -29,7 +45,7 @@ function ModalEnterPin({ setShowModal, receiverData, formData }) {
         receiver_phone: receiverData.phone,
         amount: Number(formData.amount),
         notes: formData.notes,
-        pin_sender: pin,
+        pin_sender: pin
       };
 
       if (verifyResults) {
@@ -54,14 +70,37 @@ function ModalEnterPin({ setShowModal, receiverData, formData }) {
     }
   };
 
-  const handleChange = (e, i) => {
+  const handleChange = (e, index) => {
     const value = e.target.value;
     if (!/^[0-9]?$/.test(value)) {
       e.target.value = "";
       return;
     }
-    if (value && i < inputRefs.current.length - 1) {
-      inputRefs.current[i + 1].focus();
+
+    // Update nilai PIN pada posisi yang diketik
+    const newPin = [...pinValues];
+    newPin[index] = value;
+    setPinValues(newPin);
+
+    const newMask = [...isMasked];
+    newMask[index] = false;
+    setIsMasked(newMask);
+
+    // Hapus timeout sebelumnya agar tidak bentrok
+    if (maskingTimeouts.current[index]) {
+      clearTimeout(maskingTimeouts.current[index]);
+    }
+
+    // Timer untuk masking
+    maskingTimeouts.current[index] = setTimeout(() => {
+      setIsMasked((prevMask) => {
+        const updated = [...prevMask];
+        updated[index] = true;
+        return updated;
+      });
+    }, 300);
+    if (value && index < inputRefs.current.length - 1) {
+      inputRefs.current[index + 1].focus();
     }
   };
 
@@ -93,6 +132,7 @@ function ModalEnterPin({ setShowModal, receiverData, formData }) {
                 className="w-10 h-12 border-b-2 text-center text-2xl outline-none"
                 onChange={(e) => handleChange(e, i)}
                 onKeyDown={(e) => handleKeyDown(e, i)}
+                 value={isMasked[i] && pinValues[i] ? "*" : pinValues[i]}
               />
             ))}
           </div>
