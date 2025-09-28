@@ -3,7 +3,7 @@ import Register from "../pages/register/Register";
 import Login from "../pages/login/login";
 import EnterPin from "../pages/enter-pin/EnterPin";
 import LandingLayout from "../layouts/LandingLayout";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import LandingPage from "../pages/landing-page/LandingPage";
 import MainLayout from "../layouts/MainLayout";
 import Profile from "../pages/profile/Profile";
@@ -17,9 +17,34 @@ import TransferDetail from "../pages/transfer-detail/TransferDetail";
 import { useSelector } from "react-redux";
 
 function MainRoutes() {
+  const isTokenExpired = (token) => {
+    if (!token) return true;
+
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      const currentTime = Date.now() / 1000;
+      return payload.exp < currentTime;
+    } catch {
+      return true;
+    }
+  };
+
   const PrivateRoute = ({ children }) => {
     const auth = useSelector((state) => state.auth);
-    if (!auth.token) return <Navigate to="/login" replace />;
+    // Jika tidak ada token atau token expired, redirect ke login
+    if (!auth.token || isTokenExpired(auth.token)) {
+      console.log("masuk fungsi token expired");
+      if (auth.token && isTokenExpired(auth.token)) {
+        toast.dismiss();
+        toast.error("Sesi Anda telah berakhir. Silakan login kembali.", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      }
+
+      return <Navigate to="/login" />;
+    }
+
     return children;
   };
 
@@ -31,7 +56,6 @@ function MainRoutes() {
         <Route element={<LandingLayout />}>
           <Route path="/" element={<LandingPage />} />
         </Route>
-        {/* Landing Layouts */}
 
         {/* Main Layouts */}
         <Route element={<MainLayout />}>
@@ -62,7 +86,6 @@ function MainRoutes() {
               }
             />
           </Route>
-          {/* Profile */}
 
           {/* Transfer */}
           <Route>
@@ -85,8 +108,6 @@ function MainRoutes() {
               />
             </Route>
           </Route>
-
-          {/* Transfer */}
 
           <Route
             path="/dashboard"
@@ -129,7 +150,6 @@ function MainRoutes() {
             }
           />
         </Route>
-        {/* Main Layouts */}
 
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
@@ -142,9 +162,7 @@ function MainRoutes() {
           }
         />
         <Route path="/register" element={<Register />} />
-        {/* Auth Routes */}
       </Routes>
-      {/* Routes */}
       <ToastContainer />
     </>
   );
