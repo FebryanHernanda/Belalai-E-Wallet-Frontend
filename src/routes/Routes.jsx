@@ -14,6 +14,10 @@ import History from "../pages/history/History";
 import ChangePassword from "../pages/changePassword/ChangePassword";
 import Topup from "../pages/topup/Topup";
 import TransferDetail from "../pages/transfer-detail/TransferDetail";
+import ForgotPassword from "../pages/forgot-password/Forgot_password";
+import ResetPassword from "../pages/resetPassword/ResetPassword";
+import ResetPin from "../pages/resetPin/ResetPin";
+import ForgotPin from "../pages/forgot-pin/ForgotPin";
 import { useSelector } from "react-redux";
 
 function MainRoutes() {
@@ -56,7 +60,6 @@ function MainRoutes() {
         <Route element={<LandingLayout />}>
           <Route path="/" element={<LandingPage />} />
         </Route>
-
         {/* Main Layouts */}
         <Route element={<MainLayout />}>
           {/* Profile */}
@@ -150,7 +153,6 @@ function MainRoutes() {
             }
           />
         </Route>
-
         {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
         <Route
@@ -162,6 +164,12 @@ function MainRoutes() {
           }
         />
         <Route path="/register" element={<Register />} />
+
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+
+        <Route path="/forgot-pin" element={<ForgotPin />} />
+        <Route path="/reset-pin" element={<ResetPin />} />
       </Routes>
       <ToastContainer />
     </>
