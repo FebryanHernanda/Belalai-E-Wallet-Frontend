@@ -103,7 +103,7 @@ function Register() {
               <section className="px-5 lg:px-40 pt-10">
                 <div className="flex items-center gap-3 mb-2">
                   <img
-                    src="./src/assets/icon/Money Wallet.svg"
+                    src="/belalai-wallet.png"
                     alt="icon"
                     className="max-w-5"
                   />
@@ -149,9 +149,7 @@ function Register() {
                 {/* input user email and pass */}
                 <form onSubmit={submitHandler}>
                   <div className="flex flex-col bg-[#ffffff] gap-1">
-                    <label htmlFor="email">
-                      Email
-                    </label>
+                    <label htmlFor="email">Email</label>
                     <div className="input-email flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-10">
                       <img
                         src="./src/assets/icon/Logo-email.svg"

@@ -1,5 +1,5 @@
 import { Mail, Phone } from "lucide-react";
-import footerIcon from "/src/assets/icon/wallet-icon.png";
+// import footerIcon from "/src/assets/icon/wallet-icon.png";
 import facebookIcon from "/src/assets/icon/social-media/facebook.png";
 import twitterIcon from "/src/assets/icon/social-media/twitter.png";
 import instagramIcon from "/src/assets/icon/social-media/instagram.png";
@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="flex flex-col gap-10 pb-10 lg:flex-row lg:justify-between">
         {/* E-wallet Section */}
         <section className="flex flex-wrap lg:flex-row items-center lg:w-1/3  gap-5">
-          <img src={footerIcon} alt="E-wallet icon" className="w-15" />
+          <img src="/belalai-wallet.png" alt="E-wallet icon" className="w-15" />
           <h1 className="text-3xl text-white">E-Wallet</h1>
           <p className="text-white text-xl font-light">
             Clarity gives you the blocks and components you need to create a
