@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { forgotPassword, clearRecoveryState } from "../../store/recoverySlice";
-import { toast, ToastContainer } from "react-toastify";
+import { forgotPIN, clearRecoveryState } from "../../store/recoverySlice";
 
-const ForgotPassword = () => {
+const ForgotPIN = () => {
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.recovery);
+  const { loading, error, success } = useSelector((state) => state.recovery);
 
   const [email, setEmail] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
@@ -27,13 +26,10 @@ const ForgotPassword = () => {
 
     setErrorEmail("");
 
-    dispatch(forgotPassword({ email }))
+    dispatch(forgotPIN({ email }))
       .unwrap()
-      .then(() => {
-        toast.success("Link reset password sudah dikirim ke email anda");
-      })
       .finally(() => {
-        setTimeout(() => dispatch(clearRecoveryState()), 1000);
+        setTimeout(() => dispatch(clearRecoveryState()), 4000);
       });
   };
 
@@ -50,10 +46,10 @@ const ForgotPassword = () => {
             <p className="text-blue-500 font-medium text-2xl">E-Wallet</p>
           </header>
 
-          <h1 className="text-2xl lg:text-4xl">Forgot Password 👋</h1>
+          <h1 className="text-2xl lg:text-4xl">Forgot PIN 👋</h1>
           <p className="text-gray-500 lg:text-lg">
-            Masukkan email yang terdaftar, kami akan kirimkan link reset
-            password.
+            Masukkan email yang terdaftar, kami akan kirimkan PIN baru ke email
+            Anda.
           </p>
 
           <form onSubmit={submitHandler} className="flex flex-col gap-4 mt-4">
@@ -80,30 +76,20 @@ const ForgotPassword = () => {
               {errorEmail || error}
             </span>
 
+            {success && <p className="text-green-500 text-sm">{success}</p>}
+
             <button
               type="submit"
               disabled={loading}
               className="w-full bg-blue-600 text-white h-12 rounded-lg font-semibold mt-4 hover:bg-blue-700 transition disabled:opacity-50"
             >
-              {loading ? "Mengirim..." : "Kirim Link Reset"}
+              {loading ? "Mengirim..." : "Kirim PIN Baru"}
             </button>
           </form>
         </div>
       </div>
-      {/* Toast Container */}
-      <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </main>
   );
 };
 
-export default ForgotPassword;
+export default ForgotPIN;
