@@ -20,7 +20,7 @@ export const forgotPassword = createAsyncThunk(
       return rejectWithValue(
         error.response?.data?.err ||
           error.response?.data?.msg ||
-          "Gagal mengirim link reset password"
+          "Email tidak terdaftar pada aplikasi ini"
       );
     }
   }
@@ -57,7 +57,7 @@ export const forgotPIN = createAsyncThunk(
       return rejectWithValue(
         error.response?.data?.err ||
           error.response?.data?.msg ||
-          "Gagal mengirim PIN baru"
+          "Email tidak terdaftar pada aplikasi ini"
       );
     }
   }
