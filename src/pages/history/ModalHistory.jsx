@@ -90,7 +90,7 @@ function ModalHistory(props) {
           className="border border-red-600 rounded-lg w-full flex justify-center items-center gap-5 h-10 cursor-pointer"
           onClick={() => handleDelete(customer)}
         >
-          <img src="/public/icon/delete.svg" alt="" />
+          <img src="/icon/delete.svg" alt="" />
           <p className="text-red-600 font-medium">Delete</p>
         </button>
         <button
