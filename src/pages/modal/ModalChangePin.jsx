@@ -140,8 +140,8 @@ function ModalChangePin({ title, label, setShowModal }) {
             </button>
           </div>
           <p className="text-center text-sm text-gray-500 text-[17px]">
-            Forgot Your Spirit ?{" "}
-            <Link to={"/profile/change-pin"}>
+            Forgot Your Pin ?{" "}
+            <Link to={"/forgot-pin"}>
               <span className="cursor-pointer text-blue-700">Reset</span>
             </Link>
           </p>
