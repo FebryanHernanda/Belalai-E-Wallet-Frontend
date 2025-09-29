@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { forgotPassword, clearRecoveryState } from "../../store/recoverySlice";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const ForgotPassword = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,9 @@ const ForgotPassword = () => {
     dispatch(forgotPassword({ email }))
       .unwrap()
       .then(() => {
-        toast.success("Link reset password sudah dikirim ke email anda");
+        toast.success("Link reset password sudah dikirim ke email anda", {
+          autoClose: 1000,
+        });
       })
       .finally(() => {
         setTimeout(() => dispatch(clearRecoveryState()), 1000);
@@ -90,18 +92,6 @@ const ForgotPassword = () => {
           </form>
         </div>
       </div>
-      {/* Toast Container */}
-      <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </main>
   );
 };
