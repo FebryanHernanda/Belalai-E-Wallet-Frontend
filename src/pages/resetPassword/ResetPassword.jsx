@@ -87,7 +87,7 @@ const ResetPassword = () => {
         <div className="flex flex-col gap-6">
           <header className="flex items-center gap-3 mb-2 border-b pb-4">
             <img
-              src="/Logo-Money-Wallet.png"
+              src="/belalai-wallet.png"
               alt="E-wallet icon"
               className="max-w-8"
             />
