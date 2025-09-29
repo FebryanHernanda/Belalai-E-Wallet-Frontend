@@ -220,7 +220,7 @@ const Dashboard = () => {
             <div className="flex flex-col gap-2">
               <div className="text-sm text-gray-600">Balance</div>
               <div className="text-xl font-semibold">
-                Rp {income?.toLocaleString("id-ID")}
+                Rp {balance?.toLocaleString("id-ID")}
               </div>
             </div>
             <div className="flex gap-8">
