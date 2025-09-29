@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { forgotPIN, clearRecoveryState } from "../../store/recoverySlice";
+import { toast } from "react-toastify";
 
 const ForgotPIN = () => {
   const dispatch = useDispatch();
-  const { loading, error, success } = useSelector((state) => state.recovery);
+  const { loading, error } = useSelector((state) => state.recovery);
 
   const [email, setEmail] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
@@ -28,6 +29,11 @@ const ForgotPIN = () => {
 
     dispatch(forgotPIN({ email }))
       .unwrap()
+      .then(() => {
+        toast.success("Link reset password sudah dikirim ke email anda", {
+          autoClose: 1000,
+        });
+      })
       .finally(() => {
         setTimeout(() => dispatch(clearRecoveryState()), 4000);
       });
@@ -75,8 +81,6 @@ const ForgotPIN = () => {
             <span className="text-red-500 text-sm min-h-[1.5rem]">
               {errorEmail || error}
             </span>
-
-            {success && <p className="text-green-500 text-sm">{success}</p>}
 
             <button
               type="submit"
