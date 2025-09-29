@@ -30,7 +30,7 @@ function ModalEnterPin({ setShowModal, receiverData, formData }) {
   const handleNext = async (e) => {
     e.preventDefault();
     // const pin = inputRefs.current.map((input) => input.value).join("");
-        const pin = pinValues.join("");
+    const pin = pinValues.join("");
 
     if (pin.length < 6) {
       setError("Masukkan 6 digit PIN Anda.");
@@ -45,7 +45,7 @@ function ModalEnterPin({ setShowModal, receiverData, formData }) {
         receiver_phone: receiverData.phone,
         amount: Number(formData.amount),
         notes: formData.notes,
-        pin_sender: pin
+        pin_sender: pin,
       };
 
       if (verifyResults) {
@@ -132,7 +132,7 @@ function ModalEnterPin({ setShowModal, receiverData, formData }) {
                 className="w-10 h-12 border-b-2 text-center text-2xl outline-none"
                 onChange={(e) => handleChange(e, i)}
                 onKeyDown={(e) => handleKeyDown(e, i)}
-                 value={isMasked[i] && pinValues[i] ? "*" : pinValues[i]}
+                value={isMasked[i] && pinValues[i] ? "*" : pinValues[i]}
               />
             ))}
           </div>
@@ -153,7 +153,7 @@ function ModalEnterPin({ setShowModal, receiverData, formData }) {
             </button>
           </div>
           <p className="text-center text-sm text-gray-500 text-[17px]">
-            Forgot Your Spirit ?{" "}
+            Forgot Your Pin ?{" "}
             <Link to={"/profile/change-pin"}>
               <span className="cursor-pointer text-blue-700">Reset</span>
             </Link>
