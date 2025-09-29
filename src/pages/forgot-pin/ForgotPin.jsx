@@ -45,7 +45,7 @@ const ForgotPIN = () => {
         <div className="flex flex-col gap-5">
           <header className="flex items-center gap-3 mb-4">
             <img
-              src="/public/icon/Money Wallet.svg"
+              src="/belalai-wallet.pmg"
               alt="icon"
               className="w-8"
             />
