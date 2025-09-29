@@ -95,7 +95,7 @@ function History() {
     <>
       <main>
         <div className="hidden  md:flex gap-5 ml-10 mt-10 cursor-pointer">
-          <img src="/public/icon/history.svg" alt="" />
+          <img src="/icon/history.svg" alt="" />
           <p className="font-bold text-md">History Transaction</p>
         </div>
         <div className="md:border md:border-gray-300 md:mx-10 md:mt-10">
@@ -188,7 +188,7 @@ function History() {
                     </div>
                   </div>
                   <img
-                    src="/public/icon/delete.svg"
+                    src="/icon/delete.svg"
                     alt=""
                     className="hidden md:block md:w-6 cursor-pointer "
                     onClick={() => handleDelete(data)}

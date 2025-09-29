@@ -1,9 +1,9 @@
 import { Mail, Phone } from "lucide-react";
 // import footerIcon from "/src/assets/icon/wallet-icon.png";
-import facebookIcon from "/public/icon/social-media/facebook.png";
-import twitterIcon from "/public/icon/social-media/twitter.png";
-import instagramIcon from "/public/icon/social-media/instagram.png";
-import githubIcon from "/public/icon/social-media/github.png";
+import facebookIcon from "/icon/social-media/facebook.png";
+import twitterIcon from "/icon/social-media/twitter.png";
+import instagramIcon from "/icon/social-media/instagram.png";
+import githubIcon from "/icon/social-media/github.png";
 
 const Footer = () => {
   return (

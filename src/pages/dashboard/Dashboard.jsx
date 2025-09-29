@@ -223,21 +223,23 @@ const Dashboard = () => {
             </div>
             <div className="flex gap-8">
               <div className="flex flex-col items-center gap-2.5">
-                <button
+                <Link
                   type="button"
                   className="bg-blue-500 h-12 w-12 rounded-full flex items-center justify-center shadow-md cursor-pointer"
+                  to="/top-up"
                 >
                   <img src="/Plus-TopUp.svg" alt="topup" />
-                </button>
+                </Link>
                 <div>Top Up</div>
               </div>
               <div className="flex flex-col items-center gap-2.5">
-                <button
+                <Link
                   type="button"
                   className="bg-blue-500 h-12 w-12 rounded-full flex items-center justify-center shadow-md cursor-pointer"
+                  to="/transfer"
                 >
                   <img src="/Send.svg" alt="transfer" />
-                </button>
+                </Link>
                 <div>Transfer</div>
               </div>
             </div>

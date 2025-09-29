@@ -1,5 +1,5 @@
 // import navbarIcon from "/src/assets/icon/wallet-icon.png";
-import avatarBase from "/public/icon/avatar-base.png";
+import avatarBase from "/icon/avatar-base.png";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import NavbarDropdown from "./NavbarDropdown";
