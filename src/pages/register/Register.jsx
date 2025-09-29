@@ -96,10 +96,10 @@ function Register() {
   };
   return (
     <>
-      <section className="bg-[#2948FF]  min-h-screen ">
+      <section className="bg-[#2948FF] min-h-screen ">
         <div className="flex">
           <section className="lg:bg-cover md:w-1/2 ">
-            <section className="bg-white h-screen lg:rounded-r-3xl">
+            <section className="flex items-center min-h-screen bg-white lg:rounded-r-3xl">
               <section className="px-5 h-full flex justify-center flex-col lg:px-40">
                 <div className="flex items-center gap-2">
                   <img
