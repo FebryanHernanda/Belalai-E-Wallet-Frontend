@@ -71,7 +71,7 @@ const ResetPassword = () => {
         toast.success(resultAction.payload.msg || "Password berhasil diubah!", {
           autoClose: 1500,
         });
-        setTimeout(() => navigate("/login"), 1500);
+        setTimeout(() => navigate("/profile"), 1500);
       } else {
         toast.error(resultAction.payload || "Gagal mengubah password");
       }
