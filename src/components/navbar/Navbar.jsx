@@ -64,7 +64,7 @@ const Navbar = (props) => {
         to="/"
       >
         <img src="/belalai-wallet.png" alt="E-Wallet icon" className="w-10" />
-        <h1 className="text-xl">E-Wallet</h1>
+        <h1 className="text-xl">Russel Pay</h1>
       </Link>
 
       {isLoggedIn ? (

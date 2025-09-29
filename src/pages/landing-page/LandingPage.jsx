@@ -8,7 +8,7 @@ function LandingPage() {
           {/* H1 - Judul paling atas */}
           <h1 className="text-white text-4xl lg:text-[60px] font-medium md:text-center mb-10">
             Experience the Future of Digital <br className="lg:block hidden" />
-            Payments with e-wallet
+            Payments with Russel Pay
           </h1>
 
           {/* Container: Gambar & Konten */}
@@ -126,14 +126,14 @@ function LandingPage() {
           </div>
           <div className="text-center px-5 mt-10 flex flex-col gap-5 lg:w-1/2">
             <h2 className="text-blue-700 text-xl font-bold lg:text-left">
-              WELCOME TO E-WALLET
+              WELCOME TO RUSSEL PAY
             </h2>
             <h1 className="font-medium text-3xl lg:text-left">
               Your All-in-One Digital Payment Solution
             </h1>
             <p className="text-gray-500 lg:text-left">
               Say goodbye to cash and hello to the future of payments! With
-              e-wallet, you have the power of secure, fast, and convenient
+              Russel Pay, you have the power of secure, fast, and convenient
               digital transactions right at your fingertips. Whether you're
               shopping, dining out, or sending money to loved ones, we've got
               you covered.
@@ -210,7 +210,7 @@ function LandingPage() {
               What Our Users Are Saying
             </h1>
             <p className="text-center text-gray-500">
-              Ready to experience the future of payments? Download e-wallet now
+              Ready to experience the future of payments? Download Russel Pay now
               and enjoy a world of convenience at your fingertips.
             </p>
           </article>
@@ -245,7 +245,7 @@ function LandingPage() {
                 className="mx-auto block"
               />
               <p className="text-white text-center lg:px-10">
-                I've been using the e-wallet for over two years now, and I'm
+                I've been using the Russel Pay for over two years now, and I'm
                 very satisfied with the <br /> ease of use. This has completely
                 changed the way I shop and conduct financial <br />{" "}
                 transactions.
@@ -273,7 +273,7 @@ function LandingPage() {
                 App
               </h1>
               <p className="text-gray-500">
-                Ready to experience the future of payments? Download e-wallet
+                Ready to experience the future of payments? Download Russel Pay
                 now
                 <br className="lg:block hidden" /> and enjoy a world of
                 convenience at your fingertips.

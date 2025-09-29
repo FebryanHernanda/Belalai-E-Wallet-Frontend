@@ -98,7 +98,7 @@ const Login = () => {
                 className="max-w-8"
               />
               <div className="text-[#2948FF] text-2xl font-medium">
-                E-Wallet
+                Russel Pay
               </div>
             </div>
             <div className="flex flex-col gap-1.5">

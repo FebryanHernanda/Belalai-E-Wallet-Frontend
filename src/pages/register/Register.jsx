@@ -107,7 +107,7 @@ function Register() {
                     alt="icon"
                     className="max-w-10"
                   />
-                  <p className="text-blue-500 font-medium text-xl">E-Wallet</p>
+                  <p className="text-blue-500 font-medium text-xl">Russel Pay</p>
                 </div>
                 {/* header */}
                 <header>

@@ -49,7 +49,7 @@ const ForgotPassword = () => {
               alt="icon"
               className="w-8"
             />
-            <p className="text-blue-500 font-medium text-2xl">E-Wallet</p>
+            <p className="text-blue-500 font-medium text-2xl">Russel Pay</p>
           </header>
 
           <h1 className="text-2xl lg:text-4xl">Forgot Password 👋</h1>
