@@ -44,11 +44,7 @@ const ForgotPIN = () => {
       <div className="w-full max-w-md bg-white p-8 rounded-3xl shadow-lg mx-4">
         <div className="flex flex-col gap-5">
           <header className="flex items-center gap-3 mb-4">
-            <img
-              src="/belalai-wallet.png"
-              alt="icon"
-              className="w-8"
-            />
+            <img src="/belalai-wallet.png" alt="icon" className="w-8" />
             <p className="text-blue-500 font-medium text-2xl">Russel Pay</p>
           </header>
 
@@ -64,7 +60,7 @@ const ForgotPIN = () => {
             </label>
             <div className="flex items-center border border-gray-300 bg-gray-50 rounded-lg px-3 h-12 gap-3">
               <img
-                src="/public/icon/Logo-email.svg"
+                src="/icon/Logo-email.svg"
                 alt="email-icon"
                 className="w-6 h-6"
               />
