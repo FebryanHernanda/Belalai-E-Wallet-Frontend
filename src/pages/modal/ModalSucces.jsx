@@ -17,7 +17,7 @@ function ModalSucces({ onClose }) {
           <section>
             <div className="flex justify-center">
               <img
-                src="../src/assets/icon/modalSucces.svg"
+                src="/icon/modalSucces.svg"
                 alt=""
                 className=""
               />

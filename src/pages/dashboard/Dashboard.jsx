@@ -158,9 +158,9 @@ const Dashboard = () => {
 
   return (
     <section>
-      <div className="bagian-top lg:pt-8 px-6 flex flex-col md:flex-row gap-8">
+      <div className="bagian-top md:pt-8 px-6 flex flex-col md:flex-row gap-8">
         {/* Card kiri */}
-        <div className="border border-gray-300 rounded-lg w-full md:w-[30%]  flex-col gap-3 p-6 hidden md:flex">
+        <div className="border border-gray-300 rounded-lg w-full md:w-[30%] flex-col gap-3 p-6 hidden md:flex">
           <div className="flex gap-2.5">
             <img src="/balance.svg" alt="" />
             <span>Balance</span>

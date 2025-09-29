@@ -61,7 +61,7 @@ function TransferDetail() {
 
       <main>
         <header className="hidden  md:flex gap-5 my-5 ml-14">
-          <img src="../src/assets/icon/send.svg" alt="" />
+          <img src="/icon/send.svg" alt="" />
           <p className="font-semibold text-xl">Transfer Money</p>
         </header>
         <section className="hidden  lg:flex lg:flex-col items-start ml-14">
@@ -73,7 +73,7 @@ function TransferDetail() {
             {/* Step 1 */}
             <div className="text-center flex items-center gap-2">
               <img
-                src="../src/assets/icon/one.svg"
+                src="/icon/one.svg"
                 alt="Step 1 icon"
                 className="lg:w-8"
               />
@@ -85,7 +85,7 @@ function TransferDetail() {
 
             {/* Step 2 - Active */}
             <div className="text-center flex items-center gap-2">
-              <img src="../src/assets/icon/two.svg" alt="" className="lg:w-8" />
+              <img src="/icon/two.svg" alt="" className="lg:w-8" />
               <div className="text-md text-blue-700">Set Nominal</div>
             </div>
 
@@ -95,7 +95,7 @@ function TransferDetail() {
             {/* Step 3 - Pending */}
             <div className="text-center flex items-center gap-2">
               <img
-                src="../src/assets/icon/three.svg"
+                src="/icon/three.svg"
                 alt=""
                 className="lg:w-8"
               />
@@ -118,13 +118,13 @@ function TransferDetail() {
                 <h1 className="lg:font-semibold lg:text-lg">{name}</h1>
                 <p>{phone}</p>
                 <img
-                  src="../src/assets/icon/verified.svg"
+                  src="/icon/verified.svg"
                   alt=""
                   className="w-30"
                 />
               </div>
             </div>
-            <img src="../src/assets/icon/Star.svg" alt="" className="lg:w-8" />
+            <img src="/icon/Star.svg" alt="" className="lg:w-8" />
           </article>
           {/* content 2 */}
           <article className="mt-5 flex flex-col gap-3">
@@ -136,7 +136,7 @@ function TransferDetail() {
             <div className="flex flex-col bg-[#ffffff] gap-1">
               <div className="input-email flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-11 lg:h-15">
                 <img
-                  src="../src/assets/icon/money.svg"
+                  src="/icon/money.svg"
                   alt=""
                   className="w-4 h-3.5"
                 />

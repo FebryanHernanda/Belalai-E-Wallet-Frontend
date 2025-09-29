@@ -96,7 +96,7 @@ function Topup() {
   return (
     <>
       <div className="hidden md:flex gap-5 ml-14 mt-10">
-        <img src="../src/assets/icon/Upload.svg" alt="" />
+        <img src="/icon/Upload.svg" alt="" />
         <p className="text-xl font-semibold">Top Up Account</p>
       </div>
       <div className="lg:flex gap-10">
@@ -118,7 +118,7 @@ function Topup() {
                 </h1>
                 <p>{userData.phone}</p>
                 <img
-                  src="../src/assets/icon/verified.svg"
+                  src="/icon/verified.svg"
                   alt="Verified icon"
                   className="w-30"
                 />
@@ -135,7 +135,7 @@ function Topup() {
             <div className="flex flex-col bg-[#ffffff] gap-1">
               <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-11 lg:h-15">
                 <img
-                  src="../src/assets/icon/money.svg"
+                  src="/icon/money.svg"
                   alt=""
                   className="w-4 h-3.5"
                 />

@@ -74,7 +74,7 @@ const ResetPin = () => {
           <div className="flex flex-col gap-5">
             <div className="logo flex flex-row items-center gap-3.5">
               <img src="/Logo-Money-Wallet.png" alt="" />
-              <div className="text-[#2948FF] font-bold">E-Wallet</div>
+              <div className="text-[#2948FF] font-bold">Russel Pay</div>
             </div>
             <div>
               <h1>Enter Your PIN 👋</h1>

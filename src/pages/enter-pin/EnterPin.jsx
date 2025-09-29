@@ -112,7 +112,7 @@ const EnterPin = () => {
           <div className="py-12 px-16 flex gap-3.5 flex-col">
             <div className="logo flex flecx-row items-center gap-3.5">
               <img src="/belalai-wallet.png" alt="" className="max-w-8" />
-              <div className="text-[#2948FF]">E-Wallet</div>
+              <div className="text-[#2948FF]">Russel Pay</div>
             </div>
             <div>
               <h1>Enter Your Pin 👋</h1>

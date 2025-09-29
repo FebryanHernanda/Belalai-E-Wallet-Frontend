@@ -1,9 +1,9 @@
 import { Mail, Phone } from "lucide-react";
 // import footerIcon from "/src/assets/icon/wallet-icon.png";
-import facebookIcon from "/src/assets/icon/social-media/facebook.png";
-import twitterIcon from "/src/assets/icon/social-media/twitter.png";
-import instagramIcon from "/src/assets/icon/social-media/instagram.png";
-import githubIcon from "/src/assets/icon/social-media/github.png";
+import facebookIcon from "/public/icon/social-media/facebook.png";
+import twitterIcon from "/public/icon/social-media/twitter.png";
+import instagramIcon from "/public/icon/social-media/instagram.png";
+import githubIcon from "/public/icon/social-media/github.png";
 
 const Footer = () => {
   return (
@@ -12,7 +12,7 @@ const Footer = () => {
         {/* E-wallet Section */}
         <section className="flex flex-wrap lg:flex-row items-center lg:w-1/3  gap-5">
           <img src="/belalai-wallet.png" alt="E-wallet icon" className="w-15" />
-          <h1 className="text-3xl text-white">E-Wallet</h1>
+          <h1 className="text-3xl text-white">Russel Pay</h1>
           <p className="text-white text-xl font-light">
             Clarity gives you the blocks and components you need to create a
             truly professional website.

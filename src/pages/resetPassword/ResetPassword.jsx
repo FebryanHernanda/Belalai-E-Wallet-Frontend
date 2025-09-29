@@ -91,7 +91,7 @@ const ResetPassword = () => {
               alt="E-wallet icon"
               className="max-w-8"
             />
-            <p className="text-blue-600 font-bold text-2xl">E-Wallet</p>
+            <p className="text-blue-600 font-bold text-2xl">Russel Pay</p>
           </header>
           <p className="text-2xl lg:text-4xl">Set New Password</p>
           <p className="text-gray-500">
