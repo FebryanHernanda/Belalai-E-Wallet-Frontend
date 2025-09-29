@@ -123,10 +123,10 @@ const Transfer = () => {
                   <td className="px-6 py-4 text-center">{user.phone}</td>
                   <td className="px-6 py-4 text-center flex items-center justify-center">
                     <button className="w-20 h-20 p-2 rounded-[5px]">
-                      <img src="/Start.svg" alt="Favorite" />
+                      <img src="/Start.svg" alt="Favorite" className="mx-auto" />
                     </button>
                   </td>
-                  <td className="px-6 py-4 text-center ">
+                  <td className="px-6 py-4 text-center">
                     <Link
                       to="transfer-detail"
                       state={{
@@ -136,7 +136,7 @@ const Transfer = () => {
                         photo: user.profile_picture,
                       }}
                     >
-                      <Send size={30} className="text-blue-700 " />
+                      <Send size={30} className="text-blue-700 mx-auto" />
                     </Link>
                   </td>
                 </tr>

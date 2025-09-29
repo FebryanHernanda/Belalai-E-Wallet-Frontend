@@ -1,8 +1,8 @@
-import BRILogo from "/src/assets/icon/bri.svg";
-import BCALogo from "/src/assets/icon/bca.svg";
-import DANALogo from "/src/assets/icon/dana.svg";
-import GopayLogo from "/src/assets/icon/gopay.svg";
-import OVOLogo from "/src/assets/icon/ovo.svg";
+import BRILogo from "/public/icon/bri.svg";
+import BCALogo from "/public/icon/bca.svg";
+import DANALogo from "/public/icon/dana.svg";
+import GopayLogo from "/public/icon/gopay.svg";
+import OVOLogo from "/public/icon/ovo.svg";
 
 /* Provider Icon Data */
 const providerLogo = {

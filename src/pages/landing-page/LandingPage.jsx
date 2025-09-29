@@ -23,11 +23,11 @@ function LandingPage() {
               {/* Tombol */}
               <div className="flex gap-5 justify-center lg:justify-start">
                 <button className="flex items-center justify-center gap-3 bg-white w-full py-4 rounded-xl cursor-pointer">
-                  <img src="../src/assets/icon/gplay.svg" alt="Play Store" />
+                  <img src="/icon/gplay.svg" alt="Play Store" />
                   <p className="text-blue-500 font-semibold">Play Store</p>
                 </button>
                 <button className="flex items-center justify-center gap-3 border border-white w-full py-4 rounded-xl cursor-pointer">
-                  <img src="../src/assets/icon/appstore.svg" alt="App Store" />
+                  <img src="/icon/appstore.svg" alt="App Store" />
                   <p className="text-white font-semibold">App Store</p>
                 </button>
               </div>
@@ -36,7 +36,7 @@ function LandingPage() {
               <div>
                 <div className="flex items-center gap-4 justify-center lg:justify-start">
                   <p className="text-white text-3xl lg:text-[50px]">4.6M</p>
-                  <img src="../src/assets/icon/user.svg" alt="Users" />
+                  <img src="/icon/user.svg" alt="Users" />
                 </div>
                 <p className="text-white mt-2">
                   Around the world, we already have over 4.6M happy users
@@ -46,12 +46,12 @@ function LandingPage() {
             {/* LEFT: Gambar */}
             <section className="flex-1 relative max-w-lg mx-auto">
               <img
-                src="../src/assets/icon/Mobile - Dashboard V2.svg"
+                src="/icon/Mobile - Dashboard V2.svg"
                 alt="Dashboard V2"
                 className="w-full"
               />
               <img
-                src="../src/assets/icon/Mobile - Dashboard V1.svg"
+                src="/icon/Mobile - Dashboard V1.svg"
                 alt="Dashboard V1"
                 className="absolute bottom-0 -right-10 w-4/5"
               />
@@ -64,7 +64,7 @@ function LandingPage() {
           {/* Item 1 */}
           <div className="flex flex-col lg:flex-row gap-4 items-center lg:items-center">
             <img
-              src="../src/assets/icon/headset.svg"
+              src="/icon/headset.svg"
               alt="24/7 Support"
               className="w-12 h-12"
             />
@@ -80,7 +80,7 @@ function LandingPage() {
           {/* Item 2 */}
           <div className="flex flex-col lg:flex-row gap-4 items-center lg:items-center">
             <img
-              src="../src/assets/icon/check.svg"
+              src="/icon/check.svg"
               alt="Data Privacy"
               className="w-12 h-12"
             />
@@ -96,7 +96,7 @@ function LandingPage() {
           {/* Item 3 */}
           <div className="flex flex-col lg:flex-row gap-4 items-center lg:items-center">
             <img
-              src="../src/assets/icon/download.svg"
+              src="/icon/download.svg"
               alt="Easy Download"
               className="w-12 h-12"
             />
@@ -114,12 +114,12 @@ function LandingPage() {
         <section className="mt-25 lg:flex lg:flex-row-reverse lg:px-30 lg:my-30">
           <div className="flex justify-center items-center relative lg:w-1/2">
             <img
-              src="../src/assets/icon/Mobile - Dashboard V2.svg"
+              src="/icon/Mobile - Dashboard V2.svg"
               alt=""
               className="w-50 lg:w-80 absolute -bottom-4.5 lg:-bottom-7"
             />
             <img
-              src="../src/assets/icon/canvas.svg"
+              src="/icon/canvas.svg"
               alt=""
               className="lg:w-155"
             />
@@ -148,7 +148,7 @@ function LandingPage() {
           <div className="bg-gray-100 pb-30 lg:pb-10 lg:flex lg:px-30">
             <div className="flex justify-center mt-15 lg:mt-0 lg:w-1/2">
               <img
-                src="../src/assets/icon/notebook.svg"
+                src="/icon/notebook.svg"
                 alt="notebook"
                 className="lg:w-140 "
               />
@@ -164,15 +164,15 @@ function LandingPage() {
               </p>
               <div className="flex flex-col gap-3">
                 <div className="flex gap-3 text-green-500 font-bold">
-                  <img src="../src/assets/icon/checkgreen.svg" alt="" />
+                  <img src="/icon/checkgreen.svg" alt="" />
                   <p>Small Fee</p>
                 </div>
                 <div className="flex gap-3 text-green-500 font-bold">
-                  <img src="../src/assets/icon/checkgreen.svg" alt="" />
+                  <img src="/icon/checkgreen.svg" alt="" />
                   <p>Data Secured</p>
                 </div>
                 <div className="flex gap-3 text-green-500 font-bold">
-                  <img src="../src/assets/icon/checkgreen.svg" alt="" />
+                  <img src="/icon/checkgreen.svg" alt="" />
                   <p>User Friendly</p>
                 </div>
                 <button className="w-full bg-blue-700 text-white min-h-12 rounded-lg mt-5 lg:w-40 cursor-pointer">
@@ -195,12 +195,12 @@ function LandingPage() {
             </p>
           </div>
           <div className="flex flex-col justify-center items-center mb-15 lg:flex-row lg:gap-5">
-            <img src="../src/assets/icon/microsoft.svg" alt="" />
-            <img src="../src/assets/icon/dropbox.svg" alt="" />
-            <img src="../src/assets/icon/h&m.svg" alt="" />
-            <img src="../src/assets/icon/airbnb.svg" alt="" />
-            <img src="../src/assets/icon/canon.svg" alt="" />
-            <img src="../src/assets/icon/dell.svg" alt="" />
+            <img src="/icon/microsoft.svg" alt="" />
+            <img src="/icon/dropbox.svg" alt="" />
+            <img src="/icon/h&m.svg" alt="" />
+            <img src="/icon/airbnb.svg" alt="" />
+            <img src="/icon/canon.svg" alt="" />
+            <img src="/icon/dell.svg" alt="" />
           </div>
         </section>
         {/* content 5 */}
@@ -219,11 +219,11 @@ function LandingPage() {
           <article className="mt-10 px-5 lg:px-30 lg:flex lg:justify-center relative">
             {/* Arrow kiri */}
             <button className="hidden lg:block cursor-pointer">
-              <img src="../src/assets/icon/left.svg" alt="" className="absolute lg:left-35"/>
+              <img src="/icon/left.svg" alt="" className="absolute lg:left-35"/>
             </button>
             <div className="bg-blue-700 lg:w-fit rounded-lg px-5 py-10 flex flex-col gap-3">
               <img
-                src="../src/assets/icon/profilejames.svg"
+                src="/icon/profilejames.svg"
                 alt=""
                 className="mx-auto block"
               />
@@ -232,15 +232,15 @@ function LandingPage() {
               </p>
               {/* star */}
               <div className="flex gap-3 justify-center">
-                <img src="../src/assets/icon/bintang.svg" alt="" />
-                <img src="../src/assets/icon/bintang.svg" alt="" />
-                <img src="../src/assets/icon/bintang.svg" alt="" />
-                <img src="../src/assets/icon/bintang.svg" alt="" />
-                <img src="../src/assets/icon/bintang.svg" alt="" />
+                <img src="/icon/bintang.svg" alt="" />
+                <img src="/icon/bintang.svg" alt="" />
+                <img src="/icon/bintang.svg" alt="" />
+                <img src="/icon/bintang.svg" alt="" />
+                <img src="/icon/bintang.svg" alt="" />
                 <p className="text-white text-lg">5.0</p>
               </div>
               <img
-                src="../src/assets/icon/petik.svg"
+                src="/icon/petik.svg"
                 alt=""
                 className="mx-auto block"
               />
@@ -254,7 +254,7 @@ function LandingPage() {
 
             {/* Arrow kanan */}
             <button className="hidden lg:block cursor-pointer">
-              <img src="../src/assets/icon/right.svg" alt="Next" className="absolute right-35" />
+              <img src="/icon/right.svg" alt="Next" className="absolute right-35" />
             </button>
           </article>
           <div className="flex items-center justify-center gap-3 mt-8 lg:hidden">
@@ -280,23 +280,23 @@ function LandingPage() {
               </p>
               <div className="flex gap-5 justify-center lg:flex-row">
                 <button className="flex gap-5 bg-blue-700 w-full p-5 rounded-xl cursor-pointer">
-                  <img src="../src/assets/icon/gplay.svg" alt="" />
+                  <img src="/icon/gplay.svg" alt="" />
                   <p className="text-white">Play store</p>
                 </button>
                 <button className="flex gap-5 border border-blue-700 p-5 w-full rounded-xl cursor-pointer ">
-                  <img src="../src/assets/icon/appstoreblue.svg" alt="" />
+                  <img src="/icon/appstoreblue.svg" alt="" />
                   <p className="text-blue-700">Apps Store</p>
                 </button>
               </div>
             </div>
             <div className="lg:flex-1 relative  lg:max-w-md mx-auto lg:mx-0">
               <img
-                src="../src/assets/icon/Mobile - Dashboard V2.svg"
+                src="/icon/Mobile - Dashboard V2.svg"
                 alt="Dashboard V2"
                 className="w-full"
               />
               <img
-                src="../src/assets/icon/Mobile - Dashboard V1.svg"
+                src="/icon/Mobile - Dashboard V1.svg"
                 alt="Dashboard V1"
                 className="absolute bottom-0 -right-15 w-4/5"
               />

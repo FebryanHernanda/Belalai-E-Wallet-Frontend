@@ -96,52 +96,52 @@ function Register() {
   };
   return (
     <>
-      <section className="bg-[#2948FF] min-h-screen ">
+      <section className="bg-[#2948FF]  min-h-screen ">
         <div className="flex">
-          <section className="lg:bg-cover lg:w-1/2 ">
+          <section className="lg:bg-cover md:w-1/2 ">
             <section className="bg-white h-screen lg:rounded-r-3xl">
-              <section className="px-5 lg:px-15 pt-5">
+              <section className="px-5 h-full flex justify-center flex-col lg:px-40">
                 <div className="flex items-center gap-2">
                   <img
                     src="/belalai-wallet.png"
                     alt="icon"
-                    className="max-w-4"
+                    className="max-w-10"
                   />
-                  <p className="text-blue-500 font-medium text-sm">E-Wallet</p>
+                  <p className="text-blue-500 font-medium text-xl">E-Wallet</p>
                 </div>
                 {/* header */}
                 <header>
-                  <h1 className="font-normal text-xl">
+                  <h1 className="font-normal text-4xl">
                     Start Accessing Banking Needs With All Devices and All
                     Platforms With 30.000+ Users
                   </h1>
-                  <p className="text-gray-500 mt-1 text-sm">
+                  <p className="text-gray-500 mt-2">
                     Transfering money is eassier than ever, you can access
                     Zwallet wherever you are. Desktop, laptop, mobile phone? we
                     cover all of that for you!
                   </p>
                 </header>
                 {/* Sign In other */}
-                <section className="flex flex-row lg:flex-col gap-3 mt-5">
-                  <button className="border rounded-4xl w-full h-9 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
+                <section className="flex flex-row lg:flex-col gap-5 mt-5">
+                  <button className="border rounded-4xl w-full h-11 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
                     <img
-                      src="./src/assets/icon/flat-color-icons_google.svg"
+                      src="/icon/flat-color-icons_google.svg"
                       alt=""
                     />
-                    <p className="hidden lg:block lg:text-sm">
+                    <p className="hidden lg:block">
                       Sign In With Google
                     </p>
                   </button>
-                  <button className="border rounded-4xl w-full h-9 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
-                    <img src="./src/assets/icon/fb.svg" alt="" />
-                    <p className="hidden lg:block lg:text-sm">
+                  <button className="border rounded-4xl w-full h-11 border-gray-300 cursor-pointer flex items-center justify-center gap-5">
+                    <img src="/icon/fb.svg" alt="" />
+                    <p className="hidden lg:block">
                       Sign In With Facebook
                     </p>
                   </button>
                 </section>
-                <div className="relative text-center my-4">
+                <div className="relative text-center my-5">
                   <hr className="border-t border-gray-300" />
-                  <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-7 text-gray-400 text-sm">
+                  <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white px-7 text-gray-400">
                     Or
                   </span>
                 </div>
@@ -150,9 +150,9 @@ function Register() {
                 <form onSubmit={submitHandler}>
                   <div className="flex flex-col bg-[#ffffff] gap-1">
                     <label htmlFor="email">Email</label>
-                    <div className="input-email flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-9">
+                    <div className="input-email flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-11">
                       <img
-                        src="./src/assets/icon/Logo-email.svg"
+                        src="/icon/Logo-email.svg"
                         alt=""
                         className="w-4 h-3.5"
                       />
@@ -162,7 +162,7 @@ function Register() {
                         placeholder="Enter Your Email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full outline-none text-sm"
+                        className="w-full outline-none"
                       />
                     </div>
                     <span className="text-red-500 min-h-[1.5rem] text-sm">
@@ -173,9 +173,9 @@ function Register() {
                     <label htmlFor="password" className="">
                       Password
                     </label>
-                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-9">
+                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-1.5 w-full gap-3 h-11">
                       <img
-                        src="./src/assets/icon/Password.svg"
+                        src="/icon/Password.svg"
                         alt="password"
                         className="w-4 h-3.5"
                       />
@@ -183,15 +183,15 @@ function Register() {
                         type={isPasswordVisible ? "text" : "password"}
                         id="password"
                         placeholder="Enter Your Password"
-                        className="w-full outline-none text-sm"
+                        className="w-full outline-none"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
                       <img
                         src={
                           isPasswordVisible
-                            ? "./src/assets/icon/eyesOpen.svg"
-                            : "./src/assets/icon/EyeClose.svg"
+                            ? "/icon/eyesOpen.svg"
+                            : "/icon/EyeClose.svg"
                         }
                         alt=""
                         className="w-20 h-3.5 cursor-pointer"
@@ -206,9 +206,9 @@ function Register() {
                     <label htmlFor="confirmpassword" className="">
                       Confirm Password
                     </label>
-                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-9">
+                    <div className="flex items-center border border-t border-gray-300 bg-gray-50 rounded-[8px] py-1.5 px-2.5 w-full gap-3 h-11">
                       <img
-                        src="./src/assets/icon/Password.svg"
+                        src="/icon/Password.svg"
                         alt="confirmpassword"
                         className="w-4 h-3.5"
                       />
@@ -216,15 +216,15 @@ function Register() {
                         type={isConfirmPasswordVisible ? "text" : "password"}
                         id="confirmpassword"
                         placeholder="Enter Your Password Again"
-                        className="w-full outline-none text-sm"
+                        className="w-full outline-none"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                       />
                       <img
                         src={
                           isConfirmPasswordVisible
-                            ? "./src/assets/icon/eyesOpen.svg"
-                            : "./src/assets/icon/EyeClose.svg"
+                            ? "/icon/eyesOpen.svg"
+                            : "/icon/EyeClose.svg"
                         }
                         alt=""
                         className="w-20 h-3.5 cursor-pointer"
@@ -237,11 +237,11 @@ function Register() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white h-10 rounded-md cursor-pointer mt-1"
+                    className="w-full bg-blue-600 text-white h-10 rounded-md cursor-pointer mt-2"
                   >
                     Register
                   </button>
-                  <p className="text-center mt-3 text-gray-500 text-sm">
+                  <p className="text-center mt-2 text-gray-500">
                     Have An Account ?{" "}
                     <Link className="text-blue-600 cursor-pointer" to="/login">
                       Login
@@ -252,9 +252,9 @@ function Register() {
             </section>
           </section>
           {/* right side image */}
-          <section className="lg:w-1/2 flex justify-center items-center">
+          <section className="md:w-1/2 flex justify-center items-center">
             <img
-              src="./src/assets/icon/background.svg"
+              src="/icon/background.svg"
               alt="Background image"
               className="hidden md:block"
             />
